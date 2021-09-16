@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link href="../css/bootstrap.css" rel="stylesheet"/>
+    <link href="../css/login.css" rel="stylesheet"/>
+    
+    <link href="../css/header.css" rel="stylesheet"/>
+    <link href="../css/footer.css" rel="stylesheet"/>
+
+</head>
+<body>
+
+
+<div class="es-wrap">
+
+    <header class="header">
+        <div class="relative h-con">
+            <div class="logo-con absolute">
+                <a href="#" class="logo relative" id="logo">
+                    <img src="../img/logo-green1.png">
+                </a>
+            </div>
+            <div class="slogan">
+                <div class="slogan-t"></div>
+                <div class="slogan-t"></div>
+            </div>
+            <div class="header-search">
+                <form action="#" method="get" id="searchForm">
+                    <div class="header-search-input-wrap">
+                        <input type="text" class="js-header-search header-search-input" placeholder="搜索课程" value="" name="q">
+                        <span class="header-search-icon"></span>
+                    </div>
+                </form>
+            </div>
+
+            <div class="main-width relative main-width-q">
+                <nav class="float-right">
+                    <ul class="nav-list">
+                        <li><a href="home.html" class="active">首页</a></li>
+                        <li class="relative">
+                            <a class=" nav-course" href="course1.html">全部课程</a>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="q-btn-con bg-icon" onclick="headerToggle()"></div>
+
+            </div>
+        </div>
+    </header>        
+    <div id="content-container" class="container">
+        <div class="es-section login-section">
+<div class="logon-tab clearfix">
+  <a class="active">登录帐号</a>
+  <a href="register.html">注册帐号</a>
+</div>
+<div class="login-main js-login-main">
+  <form id="login-form" class="form-vertical" method="post" action="/login_check">
+
+              
+    <div class="form-group mbl">
+      <label class="control-label" for="login_username">帐号</label>
+      <div class="controls">
+        <input class="form-control input-lg" id="login_username" type="text" name="_username" value="" required
+          placeholder='邮箱/手机/用户名'/>
+        <div class="help-block"></div>
+      </div>
+    </div>
+    <div class="form-group mbl">
+      <label class="control-label" for="login_password">密码</label>
+      <div class="controls">
+        <input class="form-control input-lg" id="login_password" type="password" name="_password" required placeholder='密码'/>
+      </div>
+    </div>
+
+    
+    <div class="form-group mbl">
+      <div class="controls">
+        <input type="checkbox" name="_remember_me" checked="checked"> 记住密码
+      </div>
+    </div>
+    <div class="form-group mbl">
+      <button type="button" class="btn btn-primary btn-lg btn-block js-btn-login">登录</button>
+    </div>
+
+    <input type="hidden" name="_target_path" value="/">
+    <input type="hidden" name="_csrf_token" value="ydJyFtsx2iimTyzf4iQUT8gNTJJfIBH7wQ2JsfFDo7M">
+  </form>
+
+  <div class="mbl">
+    <a class="link-primary" href="/password/reset">找回密码</a>
+    <span class="color-gray mhs">|</span>
+    <span class="color-gray">还没有注册帐号？</span>
+    <a class="link-primary" href="/register?goto=/">立即注册</a>
+  </div>
+
+          <div class="social-login">
+        <span>
+                        
+  <a href="/login/bind/qq?_target_path=/&amp;inviteCode=" class="social-icon social-qq">
+  <i class="es-icon es-icon-qq"></i>
+</a>
+
+  <a href="/login/bind/weixinweb?_target_path=/&amp;inviteCode=" class="social-icon social-weixin">
+  <i class="es-icon es-icon-weixin"></i>
+</a>
+
+
+
+        </span>
+      <div class="line"></div>
+    </div>
+      </div>
+
+  </div>
+
+  </div>
+
+      
+
+    <div class="sgg_bot">
+        <div class="sgg_bot1">
+            <div class="sgg_bot1topbig">
+                <div class="sgg_bot1top">
+                    <div class="sgg_bottopimg"><img src="../img/bot1.png" />业界大牛亲自授课</div>
+                    <div class="sgg_bottopimg"><img src="../img/bot2.png" />前沿技术实时更新</div>
+                    <div class="sgg_bottopimg sgg_bottopimg3"><img src="../img/bot3.png" />足不出户学编程</div>
+                </div>
+            </div>
+            <div class="sgg_botcenter">
+                <div class="sgg_botleft">
+                    <ul>
+                        <li><b>新手入门</b></li>
+                        <li><a href="register.html">新用户注册</a></li>
+                        <li><a href="login.html">用户登录</a></li>
+                        <li><a href="#">找回密码</a></li>
+                    </ul>
+                    <ul>
+                        <li><b>关于我们</b></li>
+                        <li><a href="#" target="_blank">名师团队</a></li>
+                        <li><a href="#" target="_blank">视频下载</a></li>
+                        <li><a href="#" target="_blank">合作企业</a></li>
+                    </ul>
+                    <ul>
+                        <li><b>联系我们</b></li>
+                        <li><a href="#" target="_blank">工作机会</a></li>
+                        <li><a href="#" target="_blank">招贤纳师</a></li>
+                        <li><a href="#" target="_blank">联系方式</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sgg_botbotbg">
+        <div class="sgg_botbot">
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>在线课程</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <script src="../js/jquery-3.3.1.js"></script>
+    <script>
+        $(function () {
+            $(".clearfix a").each(function (index,el) {
+                $(this).attr("href","crouse.html");
+            })
+        })
+    </script>
+</head>
+<body>
+<!-- 页面头部部分 -->
+<header>
+    <nav>
+        <!-- logo部分 -->
+        <div class="logo">
+            <img src="../images/img_22.png" width="180px" height="42px">
+        </div>
+        <!-- 导航栏部分 -->
+        <div class="navbar">
+            <ul>
+                <li><a href="#">首页</a></li>
+                <li><a href="course1.html">全部课程</a></li>
+<!--                <li><a href="#">职业规划</a></li>-->
+            </ul>
+        </div>
+        <!-- 个人中心部分 -->
+        <div class="personal">
+            <a href="information.html">个人中心<img src="../images/title-3.png"></a>
+            <a href="register.html">注册</a>
+            <span> / </span>
+            <a href="login.html">登录</a>
+        </div>
+        <!-- 搜索框部分 -->
+        <div class="search">
+            <form action="">
+                <input type="text" placeholder="请输入关键词" >
+                <!-- placeholder 占位符 内容输入自动清除默认值 -->
+                <input type="submit" value="" >
+            </form>
+        </div>
+    </nav>
+</header>
+<!-- bannar部分 -->
+<div class="bannar">
+    <div class="bannar-in container">
+        <!-- 左侧导航栏 -->
+        <div class="slidebar">
+            <ul>
+                <li><a href="#">python<span>></span> </a></li>
+                <li><a href="#">大数据<span>></span> </a></li>
+                <li><a href="#">Linux<span>></span> </a></li>
+                <li><a href="#">区块链<span>></span> </a></li>
+                <li><a href="#">Java<span>></span> </a></li>
+                <li><a href="#">H5前端<span>></span> </a></li>
+                <li><a href="#">数据库<span>></span> </a></li>
+                <li><a href="#">Android<span>></span> </a></li>
+                <li><a href="#">直播课<span>></span> </a></li>
+            </ul>
+        </div>
+        <!-- 小课表部分 -->
+        <dl class="timetable">
+            <dt>我的课程表</dt>
+            <dd>
+                继续学习 30天搞定Java
+                <p>正在学习-内存</p>
+            </dd>
+            <dd>
+                继续学习 Vue新特性
+                <p>正在学习-类的演示</p>
+            </dd>
+            <dd>
+                继续学习 SSM高级整合
+                <p>正在学习-引入jar包</p>
+            </dd>
+            <dd><a href="#">全部课程</a></dd>
+        </dl>
+
+    </div>
+</div>
+
+<div class="recom-products container">
+    <div class="recom-hd">  <!-- 头部 -->
+        <h4>热门课程</h4>
+        <a href="#">查看全部</a>
+    </div>
+    <div class="recom-bd clearfix">  <!-- 热门课程主体部分 -->
+        <ul>
+            <li>
+                <a href="crouse.html"><img src="../images/course01.jpg" width="237px" height="157px">
+                    <h5>30天搞定Java核心技术</h5><br>
+                    <p><span>免费</span>  •  1125人在学习</p></a>
+            </li>
+            <li>
+                <a href="#"><img src="../images/course02.jpg" width="237px" height="157px">
+                    <h5>103集实战教学入门必备</h5><br>
+                    <p><span>免费</span>  •  115人在学习</p></a>
+            </li>
+            <li>
+                <a href="#"><img src="../images/course03.jpg" width="237px" height="157px">
+                    <h5>前端必备技术0基础到精通</h5><br>
+                    <p><span>免费</span>  •  825人在学习</p></a>
+            </li>
+            <li>
+                <a href="#"><img src="../images/course04.jpg" width="237px" height="157px">
+                    <h5>SpringMVC企业级开发能力</h5><br>
+                    <p><span>免费</span>  •  119人在学习</p></a>
+            </li>
+            <li>
+                <a href="#"><img src="../images/course05.jpg" width="237px" height="157px">
+                    <h5>基于Spring4.x源码级讲授</h5><br>
+                    <p><span>免费</span>  •  324人在学习</p></a>
+            </li>
+            <li>
+                <a href="#"><img src="../images/course06.png" width="237px" height="157px">
+                    <h5>Vue3新特性</h5><br>
+                    <p><span>免费</span>  •  586人在学习</p></a>
+            </li>
+            <li>
+                <a href="#"><img src="../images/course07.png" width="237px" height="157px">
+                    <h5>Python编程从入门到精通</h5><br>
+                    <p><span>免费</span>  •  1805人在学习</p></a>
+            </li>
+            <li>
+                <a href="#"><img src="../images/course08.jpg" width="237px" height="157px">
+                    <h5>当下流行的框架整合方案</h5><br>
+                    <p><span>免费</span>  •  525人在学习</p></a>
+            </li>
+            <li>
+                <a href="#"><img src="../images/course09.jpg" width="237px" height="157px">
+                    <h5>Kubernetes(K8s)新版</h5><br>
+                    <p><span>免费</span>  •  178人在学习</p></a>
+            </li>
+            <li>
+                <a href="#"><img src="../images/course10.png" width="237px" height="157px">
+                    <h5>大数据项目之电商数仓3.0</h5><br>
+                    <p><span>免费</span>  •  263人在学习</p></a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="recom-products container">
+    <div class="recom-hd">  <!-- 头部 -->
+        <h4>新课推荐</h4>
+        <a href="#">查看全部</a>
+    </div>
+    <div class="recom-bd clearfix">  <!-- 新课推荐主体部分 -->
+        <ul>
+            <li>
+                <a href="#"><img src="../images/course1-01.png" width="237px" height="157px">
+                    <h5>Java NIO</h5><br>
+                    <p><span>免费</span></p></a>
+            </li>
+            <li>
+                <a href="#"><img src="../images/course1-02.png" width="237px" height="157px">
+                    <h5>Python爬虫入门到精通</h5><br>
+                    <p><span>免费</span></p></a>
+            </li>
+            <li>
+                <a href="#"><img src="../images/course1-03.png" width="237px" height="157px">
+                    <h5>大数据技术之Superset</h5><br>
+                    <p><span>免费</span></p></a>
+            </li>
+            <li>
+                <a href="#"><img src="../images/course1-04.png" width="237px" height="157px">
+                    <h5>大数据技术之Flink CDC</h5><br>
+                    <p><span>免费</span></p></a>
+            </li>
+            <li>
+                <a href="#"><img src="../images/course1-05.png" width="237px" height="157px">
+                    <h5>大数据技术之Flume1.9</h5><br>
+                    <p><span>免费</span></p></a>
+            </li>
+            <li>
+                <a href="#"><img src="../images/course1-06.png" width="237px" height="157px">
+                    <h5>大数据项目之尚品汇</h5><br>
+                    <p><span>免费</span></p></a>
+            </li>
+            <li>
+                <a href="#"><img src="../images/course1-07.png" width="237px" height="157px">
+                    <h5>Hive 3.x高级进阶课程</h5><br>
+                    <p><span>免费</span></p></a>
+            </li>
+            <li>
+                <a href="#"><img src="../images/course1-08.png" width="237px" height="157px">
+                    <h5>掌握大数据CilckHouse</h5><br>
+                    <p><span>免费</span></p></a>
+            </li>
+            <li>
+                <a href="#"><img src="../images/course1-09.png" width="237px" height="157px">
+                    <h5>Sentinel核心源码解析</h5><br>
+                    <p><span>免费</span></p></a>
+            </li>
+            <li>
+                <a href="#"><img src="../images/course1-10.png" width="237px" height="157px">
+                    <h5>跳槽大厂必备技术之JUC</h5><br>
+                    <p><span>免费</span></p></a>
+            </li>
+        </ul>
+
+    </div>
+</div>
+<!--底部-->
+<footer>
+<div class="sgg_bot">
+    <div class="sgg_bot1">
+        <div class="sgg_bot1topbig">
+            <div class="sgg_bot1top">
+                <div class="sgg_bottopimg"><img src="../images/bot1.png" />业界大牛亲自授课</div>
+                <div class="sgg_bottopimg"><img src="../images/bot2.png" />前沿技术实时更新</div>
+                <div class="sgg_bottopimg sgg_bottopimg3"><img src="../images/bot3.png" />足不出户学编程</div>
+            </div>
+        </div>
+        <div class="sgg_botcenter">
+            <div class="sgg_botleft">
+                <ul>
+                    <li><b>新手入门</b></li>
+                    <li><a href="register.html">新用户注册</a></li>
+                    <li><a href="login.html">用户登录</a></li>
+                    <li><a href="/password/reset">找回密码</a></li>
+                </ul>
+                <ul>
+                    <li><b>关于我们</b></li>
+                    <li><a href="#" target="_blank">名师团队</a></li>
+                    <li><a href="#" target="_blank">视频下载</a></li>
+                    <li><a href="#" target="_blank">合作企业</a></li>
+                </ul>
+                <ul>
+                    <li><b>联系我们</b></li>
+                    <li><a href="#" target="_blank">工作机会</a></li>
+                    <li><a href="#" target="_blank">招贤纳师</a></li>
+                    <li><a href="#" target="_blank">联系方式</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="sgg_botbotbg">
+    <div class="sgg_botbot">
+    </div>
+</div>
+</footer>
+<div class="toolbar-box">
+    <div class="model line-img">
+        <a href="/"></a>
+    </div>
+    <div class="tool-line"></div>
+    <div class="model return-img">
+        <a href="#"></a>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <link href="../css/bootstrap.css" rel="stylesheet"/>
+    <link href="../css/login.css" rel="stylesheet"/>
+    
+    <link href="../css/header.css" rel="stylesheet"/>
+    <link href="../css/footer.css" rel="stylesheet"/>
+
+</head>
+<body>
+
+
+<div class="es-wrap">
+
+    <header class="header">
+        <div class="relative h-con">
+            <div class="logo-con absolute">
+                <a href="#" class="logo relative" id="logo">
+                    <img src="../img/logo-green1.png">
+                </a>
+            </div>
+            <div class="slogan">
+                <div class="slogan-t"></div>
+                <div class="slogan-t"></div>
+            </div>
+            <div class="header-search">
+                <form action="#" method="get" id="searchForm">
+                    <div class="header-search-input-wrap">
+                        <input type="text" class="js-header-search header-search-input" placeholder="搜索课程" value="" name="q">
+                        <span class="header-search-icon"></span>
+                    </div>
+                </form>
+            </div>
+
+            <div class="main-width relative main-width-q">
+                <nav class="float-right">
+                    <ul class="nav-list">
+                        <li><a href="home.html" class="active">首页</a></li>
+                        <li class="relative">
+                            <a class=" nav-course" href="course1.html">全部课程</a>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="q-btn-con bg-icon" onclick="headerToggle()"></div>
+
+
+            </div>
+        </div>
+    </header> 
+  <div id="content-container" class="container">
+    <div class="es-section login-section">
+<div class="logon-tab clearfix">
+    <a href="login.html">登录帐号</a>
+    <a class="active">注册帐号</a>
+</div>
+<div class="login-main">
+                    <form id="register-form" method="post" action="">
+              
+
+            
+                                    <div class="form-group mbl">
+                    <label class="control-label required" for="register_mobile">手机号码</label>
+                    <div class="controls">
+                        <input type="tel" id="register_mobile" name="verifiedMobile"  class="form-control input-lg" data-url="/register/mobile/check" placeholder="填写你常用的手机号码作为登录帐号" onkeydown="if(event.keyCode==13) return false;">
+                        <p class="help-block"></p>
+                    </div>
+                </div>
+            
+            <div class="form-group mbl">
+                <label class="control-label required" for="register_nickname">用户名</label>
+                <div class="controls">
+                    <input type="text" id="register_nickname" name="nickname" required="required" class="form-control input-lg" data-url="/register/nickname/check" placeholder="中、英文均可，最长18个英文或9个汉字" onkeydown="if(event.keyCode==13) return false;">
+                    <p class="help-block"></p>
+                </div>
+            </div>
+
+            <div class="form-group mbl">
+                <label class="control-label required" for="register_password">密码</label>
+                <div class="controls">
+                    <input type="password" id="register_password" name="password" required="required" class="form-control input-lg cd-text-sm" placeholder="8-20位英文、数字、符号，至少包含两种，区分大小写" onkeydown="if(event.keyCode==13) return false;">
+                    <p class="help-block"></p>
+                </div>
+            </div>
+              <div class="form-group cd-mb32 js-drag-jigsaw hidden">
+      <label class=" control-label  required ">验证码</label>
+<input type="hidden" name="dragCaptchaToken" value="" />
+<div class="drag-section-wrap">
+<div class="drag-section">
+<div class="drag-img js-drag-img">
+<img class="js-jigsaw drag-img__jigsaw">
+<div class="drag-img__mask js-drag-img-mask infinite-loading"></div>
+</div>
+
+<div class="drag-bar">
+<span class="drag-bar__tip js-drag-bar-tip">拖动左边滑块完成上方拼图</span>
+<div class="drag-bar__mask js-drag-bar-mask"></div>
+<div id="drag-btn" class="drag-bar__btn"></div>
+</div>
+</div>
+</div>
+    </div>
+                                              <div class="form-group mbl  email_mobile_msg">
+                    <label class="control-label required" for="sms_code">短信验证码</label>
+                    <div class="controls cd-row">
+                        <div class="col-xs-6">
+                            <input type="text" maxlength="6" class="form-control input-lg" id="sms_code" name="sms_code" placeholder="填写短信验证码" data-url="/edu_cloud/sms_check/sms_registration" onkeydown="if(event.keyCode==13) return false;">
+                            <p class="help-block"> </p>
+                        </div>
+                        <div class="col-xs-6">
+                            <a href="javascript:;" class="btn btn-default sms-send-btn js-sms-send-btn disabled" data-sms-url="/edu_cloud/sms_send_registration">
+                                <span id="js-time-left"></span>
+                                <span id="js-fetch-btn-text">获取验证码</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            
+                    
+            <div class="form-group mbl">
+                <div class="controls">
+                    <button type="submit" id="register-btn" data-submiting-text="正在提交..." class="btn btn-primary btn-lg btn-block">注册</button>
+                </div>
+            </div>
+
+                                    <div class="form-group mbl">
+                    <div class="controls">
+                        <input type="checkbox" name="agree_policy" checked="checked"> 我已阅读并同意
+                        <a href="/userterms" target="_blank">《用户服务协议》</a>
+                        和
+                        <a href="/privacyPolicy" target="_blank">《隐私政策》</a>
+                    </div>
+                </div>
+            
+  <input type="hidden" id="password_level" value="middle">
+            <input type="hidden" name="captcha_enabled" value="1" />
+            <input type="hidden" name="_csrf_token" value="ydJyFtsx2iimTyzf4iQUT8gNTJJfIBH7wQ2JsfFDo7M">
+            <input type="hidden" name="registerVisitId" value="">
+        </form>
+
+                            <div class="social-login">
+
+    <span>
+      
+<a href="/login/bind/qq?_target_path=/&amp;inviteCode=" class="social-icon social-qq">
+<i class="es-icon es-icon-qq"></i>
+</a>
+
+<a href="/login/bind/weixinweb?_target_path=/&amp;inviteCode=" class="social-icon social-weixin">
+<i class="es-icon es-icon-weixin"></i>
+</a>
+
+
+
+    </span>
+                <div class="line"></div>
+            </div>
+                            </div>
+</div>
+</div>
+
+  
+      
+
+    <div class="sgg_bot">
+        <div class="sgg_bot1">
+            <div class="sgg_bot1topbig">
+                <div class="sgg_bot1top">
+                    <div class="sgg_bottopimg"><img src="../img/bot1.png" />业界大牛亲自授课</div>
+                    <div class="sgg_bottopimg"><img src="../img/bot2.png" />前沿技术实时更新</div>
+                    <div class="sgg_bottopimg sgg_bottopimg3"><img src="../img/bot3.png" />足不出户学编程</div>
+                </div>
+            </div>
+            <div class="sgg_botcenter">
+                <div class="sgg_botleft">
+                    <ul>
+                        <li><b>新手入门</b></li>
+                        <li><a href="register.html">新用户注册</a></li>
+                        <li><a href="login.html">用户登录</a></li>
+                        <li><a href="#">找回密码</a></li>
+                    </ul>
+                    <ul>
+                        <li><b>关于我们</b></li>
+                        <li><a href="#" target="_blank">名师团队</a></li>
+                        <li><a href="#" target="_blank">视频下载</a></li>
+                        <li><a href="#" target="_blank">合作企业</a></li>
+                    </ul>
+                    <ul>
+                        <li><b>联系我们</b></li>
+                        <li><a href="#" target="_blank">工作机会</a></li>
+                        <li><a href="#" target="_blank">招贤纳师</a></li>
+                        <li><a href="#" target="_blank">联系方式</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sgg_botbotbg">
+        <div class="sgg_botbot">
+        </div>
+    </div>
+
+
+</div>
+
+</body>
+</html>

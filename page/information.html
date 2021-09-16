@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../css/bootstrap.css" rel="stylesheet"/>
+    <link href="../css/info.css" rel="stylesheet"/>
+    
+    <link href="../css/header.css" rel="stylesheet"/>
+    <link href="../css/footer.css" rel="stylesheet"/>
+
+</head>
+<body>
+
+
+<div class="es-wrap">
+
+    <header class="header">
+        <div class="relative h-con">
+            <div class="logo-con absolute">
+                <a href="#" class="logo relative" id="logo">
+                    <img src="../img/logo-green1.png">
+                </a>
+            </div>
+            <div class="slogan">
+                <div class="slogan-t"></div>
+                <div class="slogan-t"></div>
+            </div>
+            <div class="header-search">
+                <form action="#" method="get" id="searchForm">
+                    <div class="header-search-input-wrap">
+                        <input type="text" class="js-header-search header-search-input" placeholder="搜索课程" value="" name="q">
+                        <span class="header-search-icon"></span>
+                    </div>
+                </form>
+            </div>
+
+            <div class="main-width relative main-width-q">
+                <nav class="float-right">
+                    <ul class="nav-list">
+                        <li><a href="home.html" class="active">首页</a></li>
+                        <li class="relative">
+                            <a class=" nav-course" href="course1.html">全部课程</a>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="q-btn-con bg-icon" onclick="headerToggle()"></div>
+
+                <!--登录后显示-->
+                <div class="login-after absolute">
+                    <p style="right: -70px; color: #7d7f7f; top: -15px; height: 60px; padding-top: 20px;  text-align: center;">
+                        <span></span>
+                        <a href="login.html">登录</a>
+                        <span>/</span>
+                        <a href="register.html">注册</a>
+                    </p>
+                </div>
+                <!--end 登录后-->
+
+
+            </div>
+        </div>
+    </header>        
+    <div class="container cd-container">
+  <div class="cd-content">
+            <div class="cd-sidebar">
+<ul class="cd-sidebar__list">
+  <li class="cd-sidebar__heading">
+    账户中心
+  </li>
+  <li class="cd-sidebar__item ">
+    <a href="index02.html">我的订单</a>
+  </li>
+                <li class="cd-sidebar__item ">
+      <a href="/my/cards">优惠券</a>
+    </li>
+  
+    <li class="cd-sidebar__item ">
+  <a href="index.html">学习记录</a>
+</li>
+<li class="cd-sidebar__item  ">
+  <a href="/my/cards?cardType=moneyCard">学习卡</a>
+</li>
+<li class="cd-sidebar__item ">
+<a href="/my/reward_point">我的谷粒数</a>
+</li>
+  
+
+        <li class="cd-sidebar__item ">
+      <a href="/my/exchange">兑换卡券</a>
+    </li>
+  
+  <li class="cd-sidebar__heading">
+    个人设置
+  </li>
+  <li class="cd-sidebar__item active">
+    <a href="#">个人信息</a>
+  </li>
+  <li class="cd-sidebar__item ">
+    <a href="/settings/approval/submit">实名认证</a>
+  </li>
+  <li class="cd-sidebar__item ">
+    <a href="/settings/security">安全设置</a>
+  </li>
+            <li class="cd-sidebar__item " >
+      <a href="/settings/binds">第三方登录</a>
+    </li>
+    </ul>
+</div>      
+            <div class="cd-main">
+        <div class="cd-main__heading">
+                        <div class="cd-main__title">
+                  个人信息
+            </div>
+                    </div>
+        <div class="cd-main__body">
+              
+    
+  <div class="row">
+      <div class="col-md-11 pl0 pr0">
+          <form id="user-profile-form" class="cd-row-flex cd-row-flex-space-between" method="post">
+              <div class="cd-md-24">
+                  <div class=" cd-mr24 cd-mb40">
+                      
+<div class="cd-image-upload">
+<img class="cd-avatar cd-avatar-square cd-avatar-lg js-upload-cover" id="profile-avatar" src="/files/system/2017/11-17/10315282ebcf884740.jpg">
+<div class="image-upload-mask">
+  <div class="image-upload-content">
+    <i class="cd-icon cd-icon-camera"></i>
+    修改头像
+  </div>
+</div>
+<label class="image-upload-label">
+  <input type="file" name="file" class="js-upload-input hidden"
+  accept="image/bmp,image/jpeg,image/png,image/jpg"
+  data-token="MTM4MDc5fGRlZmF1bHR8aW1hZ2V8MTYzMTI3NDQwOXxkZDgwZWM5ZDE4OTYwYzdiZGUzYWQ5NTYzOTdhNWFkOA"
+  data-file-upload="/file/upload"
+  data-crop="/file/img/crop"
+  data-save-url="/settings/profile/avatar/crop/modal"
+  data-target-img="#profile-avatar"
+  data-crop-width="270"
+  data-crop-height="270" />
+</label>
+</div>					</div>
+                  <p class="image-upload-tip">请上传jpg, gif, png格式的图片, 建议图片大小不超过2MB</p>
+                  <div class="form-group cd-form-group cd-form-group-inline cd-form-group-action" id="nickname-form-group">
+
+                      <label for="nickname">用户名</label>
+
+                      <div class="static-text input-edit__static-dom">
+                          <span class="input-edit__static-text">狠狠emo了</span>
+                                                  </div>
+
+                      <div class="input-edit__edit-dom" style="display:none">
+                          <input data-url="/settings/nickname/check" name="nickname" id="nickname" type="text" class="form-control input-edit__input" value="狠狠emo了">
+
+                          <div class="action-button">
+                              <button type="button" class="btn cd-btn cd-btn-primary input-edit__save-btn" data-input-name="nickname" data-url="/settings/nickname" data-loading-text="正在保存...">
+                                  保存
+                              </button>
+                              <button type="button" class="btn cd-btn cd-btn-flat-default input-edit__cancel-btn">
+                                  取消
+                              </button>
+                          </div>
+                      </div>
+
+                  </div>
+              </div>
+
+              <div class="cd-md-11">
+                  <div class="form-group cd-form-group">
+                      <label for="profile_truename">真实姓名</label>
+                                                  <input type="text" id="profile_truename" name="profile[truename]" class="form-control" value="">
+                                          </div>
+              </div>
+              <div class="cd-md-11">
+                  <div class="form-group cd-form-group">
+                      <label>性别</label>
+                      <div class="cd-radio-group">
+                          <label class="cd-radio " for="profile_gender_0">
+                              <input type="radio" id="profile_gender_0" name="profile[gender]" value="male"  data-toggle="cd-radio">
+                              男
+                          </label>
+
+                          <label class="cd-radio " for="profile_gender_1">
+                              <input type="radio" id="profile_gender_1" name="profile[gender]" value="female"  data-toggle="cd-radio">
+                              女
+                          </label>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="cd-md-11">
+                  <div class="form-group cd-form-group">
+                      <label for="profile_title">头衔</label>
+                      <input type="text" id="profile_title" name="profile[title]" class="form-control" value="">
+                  </div>
+              </div>
+              <div class="cd-md-11">
+                  <div class="form-group cd-form-group">
+                      <label for="profile_signature">个人签名</label>
+                      <input type="text" id="profile_signature" name="profile[signature]" class="form-control" value="">
+                  </div>
+              </div>
+
+              <div class="cd-md-24">
+                  <div class="form-group cd-form-group">
+                      <label for="profile_about">自我介绍</label>
+                      <textarea name="profile[about]" rows="10" id="profile_about" class="form-control" data-image-upload-url="/editor/upload?token=MTM4MDc5fHVzZXJ8aW1hZ2V8MTYzMTI3NDQwOXwyMDYzY2Y1MWYwOTc5MjQ0MzRhYjcxNzgyZGZiZTk4Yw"></textarea>
+                  </div>
+              </div>
+
+              <div class="cd-md-11">
+                  <div class="form-group cd-form-group">
+                      <label for="profile_company">公司</label>
+                      <input type="text" id="profile_company" name="profile[company]" class="form-control" value="">
+                  </div>
+              </div>
+
+              <div class="cd-md-11">
+                  <div class="form-group cd-form-group">
+                      <label for="profile_job">职业</label>
+                      <input type="text" id="profile_job" name="profile[job]" class="form-control" value="">
+                  </div>
+              </div>
+
+              <div class="cd-md-11">
+                  <div class="form-group cd-form-group">
+                      <label for="profile_site">个人空间</label>
+                      <input type="text" id="profile_site" name="profile[site]" class="form-control" value="" placeholder="http://">
+                  </div>
+              </div>
+
+              <div class="cd-md-11">
+                  <div class="form-group cd-form-group">
+                      <label for="weibo">微博</label>
+                      <input type="text" id="weibo" name="profile[weibo]" class="form-control" value="" placeholder="http://">
+                      <input class="hidden" type="text" name="profile[isWeiboPublic]" value="1"/>
+                      <div class="help-block">微博、微信、QQ信息将会展示在您的个人主页</div>
+                  </div>
+              </div>
+
+              <div class="cd-md-11">
+                  <div class="form-group cd-form-group">
+                      <label for="profile_weixin">微信</label>
+                      <input type="text" id="profile_weixin" name="profile[weixin]" class="form-control" value="">
+                      <input class="hidden" type="text" name="profile[isWeixinPublic]" value="1"/>
+                  </div>
+              </div>
+
+              <div class="cd-md-11">
+                  <div class="form-group cd-form-group">
+                      <label for="profile_qq">QQ</label>
+                      <input type="text" id="profile_qq" name="profile[qq]" class="form-control" value="">
+                      <input class="hidden" type="text" name="profile[isQQPublic]" value="1"/>
+                  </div>
+              </div>
+
+              
+              <div class="cd-md-24">
+                  <button id="profile-save-btn" data-loading-text="正在保存..." type="submit" class="btn cd-btn cd-btn-primary cd-btn-lg">保存</button>
+              </div>
+              <input type="hidden" name="_csrf_token" value="G413r9E0SYK6W0-f01oiffvElN2W8eMdK832-HC2sUI">
+          </form>
+      </div>
+  </div>
+        </div>
+      </div>
+        </div>
+</div>
+
+    <div class="sgg_bot">
+        <div class="sgg_bot1">
+            <div class="sgg_bot1topbig">
+                <div class="sgg_bot1top">
+                    <div class="sgg_bottopimg"><img src="../img/bot1.png" />业界大牛亲自授课</div>
+                    <div class="sgg_bottopimg"><img src="../img/bot2.png" />前沿技术实时更新</div>
+                    <div class="sgg_bottopimg sgg_bottopimg3"><img src="../img/bot3.png" />足不出户学编程</div>
+                </div>
+            </div>
+            <div class="sgg_botcenter">
+                <div class="sgg_botleft">
+                    <ul>
+                        <li><b>新手入门</b></li>
+                        <li><a href="register.html">新用户注册</a></li>
+                        <li><a href="login.html">用户登录</a></li>
+                        <li><a href="#">找回密码</a></li>
+                    </ul>
+                    <ul>
+                        <li><b>关于我们</b></li>
+                        <li><a href="#" target="_blank">名师团队</a></li>
+                        <li><a href="#" target="_blank">视频下载</a></li>
+                        <li><a href="#" target="_blank">合作企业</a></li>
+                    </ul>
+                    <ul>
+                        <li><b>联系我们</b></li>
+                        <li><a href="#" target="_blank">工作机会</a></li>
+                        <li><a href="#" target="_blank">招贤纳师</a></li>
+                        <li><a href="#" target="_blank">联系方式</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sgg_botbotbg">
+        <div class="sgg_botbot">
+        </div>
+    </div>
+
+
+</div>
+
+
+</body>
+</html>
