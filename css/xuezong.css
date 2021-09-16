@@ -1,0 +1,223 @@
+/*body{*/
+/*    margin: 0px;*/
+/*    padding: 0px;*/
+/*    background: #f5f5f5;*/
+/*    line-height: 22px;*/
+/*    font-size: 14px;*/
+/*    font-family: "Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;*/
+/*}*/
+.relative{ position: relative; }
+.absolute{ position: absolute; }
+.header{
+    width: 1519px;
+    height: 60px;
+    color: #0000008F;
+    background-color: #282d30;
+}
+.center{
+    width: 1260px;
+    margin: 0px auto;
+    height: 60px;
+    background-color: #282d30;
+    box-shadow: none;
+}
+.log-con{
+    left: 10px;
+    top: 4px;
+    width: 160px;
+}
+.logo{
+    top: 5px;
+    left: 0px;
+    display: inline-block;
+}
+.slogan{
+    position: absolute;
+    left: 180px;
+    top: 9px;
+    width: 150px;
+    border-left: 1px solid #555;
+    padding-left: 10px;
+    color: #fff;
+}
+.slogan-s{
+    width: 100%;
+    height: 45px;
+    float: left;
+    text-align: center;
+    letter-spacing: 1px;
+    font-family: "楷体";
+}
+.header-search{
+    left: 386px;
+    top: 12px;
+    position: absolute;
+    width: 230px;
+}
+form {
+    display: block;
+    margin-top: 0em;
+}
+.header-search-input-wrap{
+    border: 1px solid #ddd;
+    background: #fff;
+    height: 36px;
+    overflow: hidden;
+}
+.header-search-input{
+    height: 27px;
+    width: 168px;
+    border:none;
+    outline: none;
+    position: relative;
+    top: 4px;
+}
+.header-search-icon {
+    top: 3px;
+    right: 10px;
+    position: absolute;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background: url(../xueimg/img.png) center no-repeat;
+    background-size: cover;
+    cursor: pointer;
+}
+.main-width{
+    width: 78%;
+    margin: 0px auto;
+}
+.float-right{
+    float: right;
+}
+/*ul{*/
+/*    margin-top: 0;*/
+/*    margin-bottom: 10px;*/
+/*    display: block;*/
+/*    list-style-type: disc;*/
+/*    margin-block-start: 1em;*/
+/*    margin-block-end: 1em;*/
+/*    margin-inline-start: 0px;*/
+/*    margin-inline-end: 0px;*/
+/*    padding-inline-start: 40px;*/
+/*    width: 420px;*/
+/*}*/
+.float-right li{
+    display: inline-block;
+    height: 60px;
+    width: 89px;
+    text-align: -webkit-match-parent;
+}
+.list{
+    text-align: center;
+    margin: 0;
+}
+.active{
+    background-color: #3bb149;
+}
+.list a{
+    line-height: 60px;
+    color: #ffffff;
+    vertical-align: middle;
+}
+.login-box{
+    right: -70px;
+    color: #7d7f7f;
+    top: 0px;
+    height: 60px;
+    padding-top: 20px;
+    text-align: center;
+}
+.bg-icon{
+    background: url(../xueimg/img_1.png) no-repeat;
+}
+.login-box>p span {
+    display: inline-block;
+    width: 15px;
+    height: 14px;
+    background-position: 0 0;
+}
+.login-box>p a {
+    display: inline-block;
+    color: #7d7f7f;
+}
+/*<!--底部-->*/
+.sgg_bot {
+        width: 100%;
+        height: 290px;
+        background: #333;
+        clear: both;
+        position: relative;
+        top: 80px;
+    }
+.sgg_bot1{
+    width: 1200px;
+    margin: 0 auto;
+}
+.sgg_bot1-top-big{
+    width: 990px;
+    height: 110px;
+    border-bottom: 1px #464646 solid;
+    margin: 0 auto;
+}
+.sgg_bot1-bottom-big{
+    width: 950px;
+    height: 170px;
+    margin: 0 auto;
+}
+.sgg_bot1-top-big .sgg-bot1-top{
+    max-width: 892px;
+    height: 50px;
+    margin: 0 auto;
+    color: #fff;
+    font-size: 18px;
+    padding-top: 35px;
+}
+.sgg_bot1-top-big .sgg-bot1-top .sgg-bot1-top-img{
+    width: 270px;
+    height: 50px;
+    line-height: 50px;
+    border-right: 1px #464646 solid;
+    margin-right: 60px;
+    float: left;
+}
+.sgg-bot1-top-img img{
+    vertical-align: middle;
+}
+.sgg_bot1-top-big .sgg-bot1-top .sgg-bot1-top-lastImg{
+    border: 0px;
+    width: 230px;
+    margin: 0px;
+}
+.sgg_bot1-bottom-big ul{
+    float: left;
+    width: 315px;
+    margin: 0px;
+    padding: 0px;
+}
+.sgg_bot1-bottom-big ul li{
+    width: 165px;
+    line-height: 30px;
+    font-size: 18px;
+    color: #ccc;
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+.sgg_bot1-bottom-big ul li p{
+    margin-top: 40px;
+    margin-bottom: 0px;
+}
+.sgg_bot1-bottom-big ul li a{
+    font-size: 12px;
+    text-decoration: none;
+    color: #666;
+}
+.sgg-bot2-bottom{
+    width: 100%;
+    height: 50px;
+    background: #333;
+    clear: both;
+    position: relative;
+    top: 80px;
+}
