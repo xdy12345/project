@@ -1,0 +1,24 @@
+{
+  "BigType": ["Python","大数据","Linux","Java","区块链","H5前端","数据库","Android"],
+  "LittleType": ["html","css","js","vue","jquery"],
+  "Hot_context": [{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02","videoPath": "/","click": 45,"price": "免费"}
+  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02","videoPath": "/","click": 45,"price": "免费"}
+  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02","videoPath": "/","click": 45,"price": "免费"}
+  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02","videoPath": "/","click": 45,"price": "免费"}
+  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02","videoPath": "/","click": 45,"price": "免费"}
+  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02","videoPath": "/","click": 45,"price": "免费"}
+  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02","videoPath": "/","click": 45,"price": "免费"}
+  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02","videoPath": "/","click": 45,"price": "免费"}
+  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02","videoPath": "/","click": 45,"price": "免费"}
+  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02","videoPath": "/","click": 45,"price": "免费"}],
+  "New_context": [{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02","videoPath": "/","click": 45,"price": "免费"},
+    {"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02","videoPath": "/","click": 45,"price": "免费"},
+    {"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02","videoPath": "/","click": 45,"price": "免费"},
+    {"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02","videoPath": "/","click": 45,"price": "免费"},
+    {"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02","videoPath": "/","click": 45,"price": "免费"},
+    {"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02","videoPath": "/","click": 45,"price": "免费"},
+    {"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02","videoPath": "/","click": 45,"price": "免费"},
+    {"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02","videoPath": "/","click": 45,"price": "免费"},
+    {"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02","videoPath": "/","click": 45,"price": "免费"},
+    {"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02","videoPath": "/","click": 45,"price": "免费"}]
+}
