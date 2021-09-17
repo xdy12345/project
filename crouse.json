@@ -6,9 +6,9 @@
     "videoPath": "https://www.baidu.com/",
     "picturePath": "../images/course1-02"
   }],
-  "otherVideo": [{"videoName": "Java_course_2", "videoPath": "https://www.baidu.com/"},{"videoName": "Java_course_3", "videoPath": ""},
-    {"videoName": "Java_course_3", "videoPath": "https://www.baidu.com/"},{"videoName": "Java_course_3", "videoPath": ""},
-    {"videoName": "Java_course_3", "videoPath": ""}],
+  "otherVideo": [{"videoName": "Java_course_2", "videoPath": "https://www.baidu.com/","videoTime": "3:05"},{"videoName": "Java_course_3", "videoPath": "","videoTime": "3:05"},
+    {"videoName": "Java_course_3", "videoPath": "https://www.baidu.com/","videoTime": "3:05"},{"videoName": "Java_course_3", "videoPath": "","videoTime": "3:05"},
+    {"videoName": "Java_course_3", "videoPath": "","videoTime": "3:05"}],
   "hotVideo": [{"videoName": "前端1", "videoPath": "", "price": "免费"}]
 
 }
