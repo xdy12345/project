@@ -5,58 +5,89 @@
     <title>Title</title>
     <link rel="stylesheet" href="../css/css.css">
     <script src="../js/jquery-3.3.1.js"></script>
+    <script src="../js/vue.js"></script>
     <script>
+        let currentFirstType="";
+        let currentSecondType="";
         $(function () {
-            $(".course-item-wrap a").each(function (index,el) {
-                $(this).attr("href","crouse.html");
+            $.ajax({
+                url: "../totalCourse.json",
+                dataType: "json",
+                success: function (date) {
+                    app.context = date.context;
+                    app1.page = date.page;
+                    app3.firstType = date.FirstType;
+                }
             })
         })
+        function f2() {
+            $.ajax({
+                url: "../totalCourse.json",
+                data: {"pageNum":app1.page.pageNum},
+                dataType: "json",
+                success: function (date) {
+                    app.context = date.context;
+                    app1.page = date.page;
+                }
+            })
+        }
+        function f5() {
+            $.ajax({
+                url: "../totalCourse.json",//最新，最热，最火请求链接不同
+                data: {"currentFirstType": currentFirstType,"currentSecondType": currentSecondType},
+                dataType: "json",
+                success: function (date) {
+                    app.context=date.context;
+                    app1.page=date.page;
+                }
+            })
+        }
     </script>
 </head>
 <body>
 <div class="header">
-  <div class="relative center">
-      <div class="log-con absolute">
-          <a href="/" class="logo relative">
-              <img src="../images/img_2.png" width="160px" height="38px">
-          </a> 
-      </div>
-      <div class="slogan">
-          <div class="slogan-s"></div>
-      </div>
-      <div class="header-search">
-          <form action="/" >
-              <div class="header-search-input-wrap">
-                  <input type="text" class="header-search-input" placeholder="搜索课程">
-                  <span class="header-search-icon"></span>
-              </div>
-          </form>
-      </div>
-      <div class="float-right">
-          <ul class="list">
-              <li class="active">
-                  <a href="home.html">首页</a>
-              </li>
-              <li>
-                  <a href="#" class="course">全部课程</a>
-              </li>
-          </ul>
-      </div>
-      <div class="absolute login-box">
-          <p>
-              <span class="bg-icon"></span>
-              <a href="login.html">登录</a>
-              <span>/</span>
-              <a href="register.html">注册</a>
-          </p>
-      </div>
-  </div>
+    <div class="relative center">
+        <div class="log-con absolute">
+            <a href="/" class="logo relative">
+                <img src="../images/img_2.png" width="160px" height="38px">
+            </a>
+        </div>
+        <div class="slogan">
+            <div class="slogan-s"></div>
+        </div>
+        <div class="header-search">
+            <form action="/">
+                <div class="header-search-input-wrap">
+                    <input type="text" class="header-search-input" placeholder="搜索课程" v-model="select_text">
+                    <span class="header-search-icon" v-on:click="f3()"></span>
+                </div>
+            </form>
+        </div>
+        <div class="float-right">
+            <ul class="list">
+                <li class="active">
+                    <a href="home.html">首页</a>
+                </li>
+                <li>
+                    <a href="#" class="course">全部课程</a>
+                </li>
+            </ul>
+        </div>
+        <div class="absolute login-box">
+            <p>
+                <span class="bg-icon"></span>
+                <a href="login.html">登录</a>
+                <span>/</span>
+                <a href="register.html">注册</a>
+            </p>
+        </div>
+    </div>
 </div>
 <div class="es-banner">
     <div class="container">
         <div class="title">课程列表</div>
         <div class="more">
-            <a href="/" class="btn btn-lg btn-primary">查看公开课</a>
+            <a href="javascript:void(0);" class="btn btn-lg btn-primary" onclick="f5()">查看免费课</a>
         </div>
     </div>
 </div>
@@ -65,390 +96,47 @@
         <div class="tabs-mark-group plm ptm">
             <div class="title">所有分类:</div>
         </div>
-        <div class="tabs-group">
+        <div class="tabs-group" style="border-bottom: 1px dashed #e4ecf3;">
             <div class="title">分类:</div>
             <ul class="content">
-                <li><a href="/" style="color: #61b13b">全部</a></li>
-                <li><a href="/">Python</a></li>
-                <li><a href="/">大数据</a></li>
-                <li><a href="/">Linux</a></li>
-                <li><a href="/">区块链</a></li>
-                <li><a href="/">Java</a></li>
-                <li><a href="/">H5前端</a></li>
-                <li><a href="/">数据库</a></li>
-                <li><a href="/">Android</a></li>
+                <li v-for="firstType in firstType"><a href="javascript:void(0);" v-on:click="f(firstType.firstTypeId)">{{firstType.firstTypeName}}</a>
+                </li><!--style="color: #61b13b"-->
+            </ul>
+        </div>
+        <div class="tabs-group">
+            <ul class="content">
+                <li v-for="secondType in secondType"><a href="javascript:void(0);" v-on:click="f1(secondType.secondTypeId)">{{secondType.secondTypeName}}</a></li>
             </ul>
         </div>
     </div>
     <div class="es-filter">
         <ul class="nav nav-sort">
-            <li><a href="/" class="active" style="color: white">最新</a></li>
-            <li><a href="/">最热</a></li>
-            <li><a href="/">推荐</a></li>
+            <li><a href="javascript:void(0);" class="active" style="color: white" onclick="f5()">最新</a></li>
+            <li><a href="javascript:void(0);" onclick="f5()">最热</a></li>
+            <li><a href="javascript:void(0);" onclick="f5()">推荐</a></li>
         </ul>
         <div class="filter">
             <label class="checkbox-inline">
-                <input type="checkbox">推荐课程
+                <input type="checkbox" v-model="checked" v-on:change="f4()">推荐课程
             </label>
         </div>
     </div>
-    <div class="row">
-        <div class="course-item-wrap">
+    <div class="row" id="row-total">
+        <div class="course-item-wrap" v-for="context in context">
             <div class="course-img">
-                <a href="crouse.html">
-                    <img src="../images/img_3.png" alt="python爬虫零基础入门到精通">
+                <a v-bind:href="context.videoPath">
+                    <img v-bind:src="context.picturePath" v-bind:alt="context.videoName">
                 </a>
             </div>
             <div class="course-info">
                 <div class="title">
-                    <a href="crouse.html" style="color: black; text-decoration: none">爬虫零基础入门到精通</a>
+                    <a v-bind:href="context.videoPath"
+                       style="color: black; text-decoration: none">{{context.videoName}}</a>
                 </div>
                 <div class="metas">
-                    <span><div class="es-icon"><img src="../images/img_4.png"></div>45</span>
+                    <span><div class="es-icon"><img v-bind:src="context.picturePath"></div>{{context.click}}</span>
                     <span class="course-price-widget">
-                        <span class="free">免费</span>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="course-item-wrap">
-            <div class="course-img">
-                <a href="/">
-                    <img src="../images/img_3.png" alt="python爬虫零基础入门到精通">
-                </a>
-            </div>
-            <div class="course-info">
-                <div class="title">
-                    <a href="/" style="color: black; text-decoration: none">爬虫零基础入门到精通</a>
-                </div>
-                <div class="metas">
-                    <span><div class="es-icon"><img src="../images/img_4.png"></div>45</span>
-                    <span class="course-price-widget">
-                        <span class="free">免费</span>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="course-item-wrap">
-            <div class="course-img">
-                <a href="/">
-                    <img src="../images/img_3.png" alt="python爬虫零基础入门到精通">
-                </a>
-            </div>
-            <div class="course-info">
-                <div class="title">
-                    <a href="/" style="color: black; text-decoration: none">爬虫零基础入门到精通</a>
-                </div>
-                <div class="metas">
-                    <span><div class="es-icon"><img src="../images/img_4.png"></div>45</span>
-                    <span class="course-price-widget">
-                        <span class="free">免费</span>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="course-item-wrap">
-            <div class="course-img">
-                <a href="/">
-                    <img src="../images/img_3.png" alt="python爬虫零基础入门到精通">
-                </a>
-            </div>
-            <div class="course-info">
-                <div class="title">
-                    <a href="/" style="color: black; text-decoration: none">爬虫零基础入门到精通</a>
-                </div>
-                <div class="metas">
-                    <span><div class="es-icon"><img src="../images/img_4.png"></div>45</span>
-                    <span class="course-price-widget">
-                        <span class="free">免费</span>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="course-item-wrap">
-            <div class="course-img">
-                <a href="/">
-                    <img src="../images/img_3.png" alt="python爬虫零基础入门到精通">
-                </a>
-            </div>
-            <div class="course-info">
-                <div class="title">
-                    <a href="/" style="color: black; text-decoration: none">爬虫零基础入门到精通</a>
-                </div>
-                <div class="metas">
-                    <span><div class="es-icon"><img src="../images/img_4.png"></div>45</span>
-                    <span class="course-price-widget">
-                        <span class="free">免费</span>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="course-item-wrap">
-            <div class="course-img">
-                <a href="/">
-                    <img src="../images/img_3.png" alt="python爬虫零基础入门到精通">
-                </a>
-            </div>
-            <div class="course-info">
-                <div class="title">
-                    <a href="/" style="color: black; text-decoration: none">爬虫零基础入门到精通</a>
-                </div>
-                <div class="metas">
-                    <span><div class="es-icon"><img src="../images/img_4.png"></div>45</span>
-                    <span class="course-price-widget">
-                        <span class="free">免费</span>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="course-item-wrap">
-            <div class="course-img">
-                <a href="/">
-                    <img src="../images/img_3.png" alt="python爬虫零基础入门到精通">
-                </a>
-            </div>
-            <div class="course-info">
-                <div class="title">
-                    <a href="/" style="color: black; text-decoration: none">爬虫零基础入门到精通</a>
-                </div>
-                <div class="metas">
-                    <span><div class="es-icon"><img src="../images/img_4.png"></div>45</span>
-                    <span class="course-price-widget">
-                        <span class="free">免费</span>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="course-item-wrap">
-            <div class="course-img">
-                <a href="/">
-                    <img src="../images/img_3.png" alt="python爬虫零基础入门到精通">
-                </a>
-            </div>
-            <div class="course-info">
-                <div class="title">
-                    <a href="/" style="color: black; text-decoration: none">爬虫零基础入门到精通</a>
-                </div>
-                <div class="metas">
-                    <span><div class="es-icon"><img src="../images/img_4.png"></div>45</span>
-                    <span class="course-price-widget">
-                        <span class="free">免费</span>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="course-item-wrap">
-            <div class="course-img">
-                <a href="/">
-                    <img src="../images/img_3.png" alt="python爬虫零基础入门到精通">
-                </a>
-            </div>
-            <div class="course-info">
-                <div class="title">
-                    <a href="/" style="color: black; text-decoration: none">爬虫零基础入门到精通</a>
-                </div>
-                <div class="metas">
-                    <span><div class="es-icon"><img src="../images/img_4.png"></div>45</span>
-                    <span class="course-price-widget">
-                        <span class="free">免费</span>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="course-item-wrap">
-            <div class="course-img">
-                <a href="/">
-                    <img src="../images/img_3.png" alt="python爬虫零基础入门到精通">
-                </a>
-            </div>
-            <div class="course-info">
-                <div class="title">
-                    <a href="/" style="color: black; text-decoration: none">爬虫零基础入门到精通</a>
-                </div>
-                <div class="metas">
-                    <span><div class="es-icon"><img src="../images/img_4.png"></div>45</span>
-                    <span class="course-price-widget">
-                        <span class="free">免费</span>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="course-item-wrap">
-            <div class="course-img">
-                <a href="/">
-                    <img src="../images/img_3.png" alt="python爬虫零基础入门到精通">
-                </a>
-            </div>
-            <div class="course-info">
-                <div class="title">
-                    <a href="/" style="color: black; text-decoration: none">爬虫零基础入门到精通</a>
-                </div>
-                <div class="metas">
-                    <span><div class="es-icon"><img src="../images/img_4.png"></div>45</span>
-                    <span class="course-price-widget">
-                        <span class="free">免费</span>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="course-item-wrap">
-            <div class="course-img">
-                <a href="/">
-                    <img src="../images/img_3.png" alt="python爬虫零基础入门到精通">
-                </a>
-            </div>
-            <div class="course-info">
-                <div class="title">
-                    <a href="/" style="color: black; text-decoration: none">爬虫零基础入门到精通</a>
-                </div>
-                <div class="metas">
-                    <span><div class="es-icon"><img src="../images/img_4.png"></div>45</span>
-                    <span class="course-price-widget">
-                        <span class="free">免费</span>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="course-item-wrap">
-            <div class="course-img">
-                <a href="/">
-                    <img src="../images/img_3.png" alt="python爬虫零基础入门到精通">
-                </a>
-            </div>
-            <div class="course-info">
-                <div class="title">
-                    <a href="/" style="color: black; text-decoration: none">爬虫零基础入门到精通</a>
-                </div>
-                <div class="metas">
-                    <span><div class="es-icon"><img src="../images/img_4.png"></div>45</span>
-                    <span class="course-price-widget">
-                        <span class="free">免费</span>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="course-item-wrap">
-            <div class="course-img">
-                <a href="/">
-                    <img src="../images/img_3.png" alt="python爬虫零基础入门到精通">
-                </a>
-            </div>
-            <div class="course-info">
-                <div class="title">
-                    <a href="/" style="color: black; text-decoration: none">爬虫零基础入门到精通</a>
-                </div>
-                <div class="metas">
-                    <span><div class="es-icon"><img src="../images/img_4.png"></div>45</span>
-                    <span class="course-price-widget">
-                        <span class="free">免费</span>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="course-item-wrap">
-            <div class="course-img">
-                <a href="/">
-                    <img src="../images/img_3.png" alt="python爬虫零基础入门到精通">
-                </a>
-            </div>
-            <div class="course-info">
-                <div class="title">
-                    <a href="/" style="color: black; text-decoration: none">爬虫零基础入门到精通</a>
-                </div>
-                <div class="metas">
-                    <span><div class="es-icon"><img src="../images/img_4.png"></div>45</span>
-                    <span class="course-price-widget">
-                        <span class="free">免费</span>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="course-item-wrap">
-            <div class="course-img">
-                <a href="/">
-                    <img src="../images/img_3.png" alt="python爬虫零基础入门到精通">
-                </a>
-            </div>
-            <div class="course-info">
-                <div class="title">
-                    <a href="/" style="color: black; text-decoration: none">爬虫零基础入门到精通</a>
-                </div>
-                <div class="metas">
-                    <span><div class="es-icon"><img src="../images/img_4.png"></div>45</span>
-                    <span class="course-price-widget">
-                        <span class="free">免费</span>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="course-item-wrap">
-            <div class="course-img">
-                <a href="/">
-                    <img src="../images/img_3.png" alt="python爬虫零基础入门到精通">
-                </a>
-            </div>
-            <div class="course-info">
-                <div class="title">
-                    <a href="/" style="color: black; text-decoration: none">爬虫零基础入门到精通</a>
-                </div>
-                <div class="metas">
-                    <span><div class="es-icon"><img src="../images/img_4.png"></div>45</span>
-                    <span class="course-price-widget">
-                        <span class="free">免费</span>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="course-item-wrap">
-            <div class="course-img">
-                <a href="/">
-                    <img src="../images/img_3.png" alt="python爬虫零基础入门到精通">
-                </a>
-            </div>
-            <div class="course-info">
-                <div class="title">
-                    <a href="/" style="color: black; text-decoration: none">爬虫零基础入门到精通</a>
-                </div>
-                <div class="metas">
-                    <span><div class="es-icon"><img src="../images/img_4.png"></div>45</span>
-                    <span class="course-price-widget">
-                        <span class="free">免费</span>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="course-item-wrap">
-            <div class="course-img">
-                <a href="/">
-                    <img src="../images/img_3.png" alt="python爬虫零基础入门到精通">
-                </a>
-            </div>
-            <div class="course-info">
-                <div class="title">
-                    <a href="/" style="color: black; text-decoration: none">爬虫零基础入门到精通</a>
-                </div>
-                <div class="metas">
-                    <span><div class="es-icon"><img src="../images/img_4.png"></div>45</span>
-                    <span class="course-price-widget">
-                        <span class="free">免费</span>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="course-item-wrap">
-            <div class="course-img">
-                <a href="/">
-                    <img src="../images/img_3.png" alt="python爬虫零基础入门到精通">
-                </a>
-            </div>
-            <div class="course-info">
-                <div class="title">
-                    <a href="/" style="color: black; text-decoration: none">爬虫零基础入门到精通</a>
-                </div>
-                <div class="metas">
-                    <span><div class="es-icon"><img src="../images/img_4.png"></div>45</span>
-                    <span class="course-price-widget">
-                        <span class="free">免费</span>
+                        <span class="free">{{context.price}}</span>
                     </span>
                 </div>
             </div>
@@ -456,13 +144,14 @@
     </div>
     <div class="text-center">
         <ul class="pagination">
-            <li><a href="/" style="color: white;background-color: #43bc60">1</a></li>
-            <li><a href="/">2</a></li>
-            <li><a href="/">3</a></li>
-            <li><a href="/">4</a></li>
-            <li><a href="/">5</a></li>
-            <li><a href="/" class="pagination-img"><img src="../images/img_5.png"></a></li>
-            <li><a href="/" class="pagination-img"><img src="../images/img_6.png"></a></li>
+            <!--            <li><a href="/" style="color: white;background-color: #43bc60">1</a></li>-->
+            <div>
+                <li><a href="javascript:void(0);" v-for="page of page.totalPage" onclick="f2()">{{page}}</a></li>
+            </div>
+            <li><a href="javascript:void(0);" class="pagination-img" onclick="f2()"><img src="../images/img_5.png"></a>
+            </li>
+            <li><a href="javascript:void(0);" class="pagination-img" onclick="f2()"><img src="../images/img_6.png"></a>
+            </li>
         </ul>
     </div>
 </div>
@@ -518,3 +207,105 @@
 </div>
 </body>
 </html>
+<script>
+    let app = new Vue({
+        el: "#row-total",
+        data: {
+            context: []
+        }
+    });
+    let app1 = new Vue({
+        el: ".text-center",
+        data: {
+            page: []
+        }
+    })
+    let app2 = new Vue({
+        el: ".header-search",
+        data: {
+            select_text: ""
+        },
+        methods: {
+            f3: function () {
+                if (app2.select_text !== "") {
+                    $.ajax({
+                        url: "../totalCourse.json",
+                        data: {"text": app2.select_text},
+                        dataType: "json",
+                        success: function (date) {
+                            app.context = date.context;
+                            app1.page = date.page;
+                            app3.firstType = date.FirstType;
+                        }
+                    })
+                }
+            }
+        }
+    })
+    let app3 = new Vue({
+        el: ".tabs-wrapper",
+        data: {
+            firstType: [],
+            secondType: [],
+        },
+        methods: {
+            f: function (firstTypeId) {
+                currentFirstType=firstTypeId;
+                $.ajax({
+                    url: "../totalCourse.json",
+                    data: {"firstTypeId": firstTypeId},
+                    dataType: "json",
+                    success: function (date) {
+                        app3.secondType = date.SecondType;
+                        app.context = date.context;
+                        app1.page = date.page;
+                        console.log(app3.firstTypeId)
+                    }
+                })
+            },
+            f1: function (secondTypeId) {
+                currentSecondType=secondTypeId;
+                $.ajax({
+                    url: "../totalCourse.json",
+                    data: {"secondTypeId": secondTypeId},
+                    dataType: "json",
+                    success: function (date) {
+                        app.context = date.context;
+                        app1.page = date.page;
+                    }
+                })
+            }
+        }
+    })
+    let app4 = new Vue({
+        el: ".es-filter",
+        data: {
+            checked: ""
+        },
+        methods: {
+            f4: function () {
+                if (app4.checked === true) {
+                    $.ajax({
+                        url: "../totalCourse.json",//查当前type下点击量最高的
+                        data: {"currentFirstType": currentFirstType, "currentSecondType": currentSecondType},
+                        dataType: "json",
+                        success: function (date) {
+                            app.context = date.context;
+                            app1.page = date.page;
+                        }
+                    })
+                } else {
+                    $.ajax({
+                        url: "../totalCourse.json",//查当前type下所有
+                        data: {"currentFirstType": currentFirstType, "currentSecondType": currentSecondType},
+                        dataType: "json",
+                        success: function (date) {
+                            app.context = date.context;
+                            app1.page = date.page;
+                        }
+                    })
+                }
+            }
+        }
+    })
+</script>
