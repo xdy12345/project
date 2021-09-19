@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/addBook.css"/>
+    <script type="text/javascript" src="js/Use_id.js"></script>
+    <script src="js/vue.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/ajaxfileupload.js"></script>
+</head>
+<script type="text/javascript">
+    function fileChange() {
+        $.ajaxFileUpload({
+            url: "/prod/ajaxImg.action",
+            secureuri: false,
+            fileElementId: 'pimage',
+            dataType: "json",
+            success: function (obj) {
+                //清空div
+                $("#imgDiv").empty();
+                //创建一个图片的标签
+                var imgObj = $("<img>");
+                alert(obj.imgurl);
+                imgObj.attr("src", "/image_big/" + obj.imgurl);
+                imgObj.attr("width", "100px");
+                imgObj.attr("height", "100px");
+                //将图片追加到imgDiv
+                $("#imgDiv").append(imgObj);
+            }
+        });
+
+    }
+</script>
+<body>
+<!--取出上一个页面上带来的page的值-->
+
+<div id="addAll">
+    <div id="nav">
+        <p>用户管理>编辑用户</p>
+    </div>
+
+    <div id="table">
+        <form id="myform" onsubmit="submitNo(event)" action="manageUser.html">
+            <table>
+                <tr>
+                    <td class="one">用户id</td>
+                    <td><input v-model="user_id" type="text" name="pName" class="two" v-bind:value="user_id"></td>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <td class="one">登录账号</td>
+                    <td><input v-model="user_log_id" type="text" name="pContent" class="two" v-bind:value="user_log_id"></td>
+                </tr>
+                <tr>
+                    <td class="one">密码</td>
+                    <td><input v-model="user_password" type="text" name="pContent" class="two" v-bind:value="user_password"></td>
+                </tr>
+                <tr>
+                    <td class="one">邮箱</td>
+                    <td><input v-model="user_email" type="text" name="pContent" class="two" v-bind:value="user_email"></td>
+                </tr>
+                <tr>
+                    <td class="one">昵称</td>
+                    <td><input v-model="user_name" type="text" name="pContent" class="two" v-bind:value="user_name"></td>
+                </tr>
+                <tr>
+                    <td class="one">头像地址</td>
+                    <td><input v-model="user_header" type="text" name="pContent" class="two" v-bind:value="user_header"></td>
+                </tr>
+                <tr>
+                    <td class="one">性别</td>
+                    <td><input v-model="user_sex" type="text" name="pContent" class="two" v-bind:value="user_sex"></td>
+                </tr>
+                <tr>
+                    <td class="one">登录状态</td>
+                    <td><input v-model="state" type="text" name="pContent" class="two" v-bind:value="state"></td>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <td>
+                        <input type="submit" value="提交" class="btn btn-success">
+                    </td>
+                    <td>
+                        <input type="reset" value="取消" class="btn btn-default" onclick="myclose()">
+                        <script type="text/javascript">
+                            function myclose(ispage) {
+                                // window.location = "/prod/split.action?page=" + ispage;
+                                //两种风格跳转
+                                // window.location = "manageUser.html" ;
+                                window.location = "manageUser.html" ;
+                            }
+                        </script>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+
+</body>
+<script>
+    let vm = new Vue({
+        el:"#addAll",
+        data:{
+            user_id:0,
+            user_log_id:0,
+            user_password:"",
+            user_email:"",
+            user_name:"",
+            user_header:"",
+            user_sex:"",
+            state:"在线"
+        },
+        mounted:function (){
+            $.ajax({
+                url: "http://localhost:3000/editUser",
+                type: "get",
+                //根据userid回显数据
+                // data:{"vide_id":User_id},
+                dataType: "json",
+                success: function (req) {
+                    //接收数据 数组
+                        vm.user_id=req[0].user_id
+                        vm.user_log_id=req[0].user_log_id
+                        vm.user_password=req[0].user_password
+                        vm.user_email=req[0].user_email
+                        vm.user_name=req[0].user_name
+                        vm.user_header=req[0].user_header
+                        vm.user_sex=req[0].user_sex
+                        vm.state=req[0].state
+                }
+            })
+
+        }
+    })
+    //表单的异步提交
+    function submitNo(e){
+        e.preventDefault()
+        console.log(vm.cName)
+        $.ajax({
+            url:"http://localhost:3000/updateUser",
+            type: "post",
+            dataType:"json",
+            data:{
+                // obj:{"cName":vm.cName,"cid":vm.cid,"cPrice":vm.cPrice,"cNo":vm.cNo}
+                obj:{"user_id":vm.user_id, "user_log_id":vm.user_log_id, "user_password":vm.user_password,
+                    "user_email":vm.user_email, "user_name":vm.user_name, "user_header":vm.user_header, "user_sex":vm.user_sex,
+                    "state":vm.state}
+            },
+            success:function (){
+                window.location.href="manageUser.html"
+            }
+        })
+    }
+</script>
+</html>
