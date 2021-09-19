@@ -6,19 +6,33 @@
     <link rel="stylesheet" href="../css/css.css">
     <script src="../js/jquery-3.3.1.js"></script>
     <script src="../js/vue.js"></script>
+    <script src="../js/url.js"></script>
     <script>
         let currentFirstType="";
         let currentSecondType="";
         $(function () {
-            $.ajax({
-                url: "../totalCourse.json",
-                dataType: "json",
-                success: function (date) {
-                    app.context = date.context;
-                    app1.page = date.page;
-                    app3.firstType = date.FirstType;
-                }
-            })
+            let req = GetRequest();
+            app2.select_text=req['select_text'];
+            if (app2.select_text===""){
+                $.ajax({
+                    url: "../totalCourse.json",
+                    dataType: "json",
+                    success: function (date) {
+                        app.context = date.context;
+                        app1.page = date.page;
+                        app3.firstType = date.FirstType;
+                    }
+                })
+            }else {
+                app2.f3();
+            }
+            userState=GetUserState();
+            if (userState===1){
+                //刷新右上角div
+                document.getElementById("no_logo").style.display="none";
+            }else {
+
+            }
         })
         function f2() {
             $.ajax({
@@ -73,7 +87,7 @@
                 </li>
             </ul>
         </div>
-        <div class="absolute login-box">
+        <div class="absolute login-box" id="no_logo">
             <p>
                 <span class="bg-icon"></span>
                 <a href="login.html">登录</a>
@@ -124,14 +138,13 @@
     <div class="row" id="row-total">
         <div class="course-item-wrap" v-for="context in context">
             <div class="course-img">
-                <a v-bind:href="context.videoPath">
+                <a href="javascript:void(0);" v-on:click="a_href(context.videoId)">
                     <img v-bind:src="context.picturePath" v-bind:alt="context.videoName">
                 </a>
             </div>
             <div class="course-info">
                 <div class="title">
-                    <a v-bind:href="context.videoPath"
-                       style="color: black; text-decoration: none">{{context.videoName}}</a>
+                    <a href="javascript:void(0);" style="color: black; text-decoration: none" v-on:click="a_href(context.videoId)">{{context.videoName}}</a>
                 </div>
                 <div class="metas">
                     <span><div class="es-icon"><img v-bind:src="context.picturePath"></div>{{context.click}}</span>
@@ -212,6 +225,11 @@
         el: "#row-total",
         data: {
             context: []
+        },
+        methods: {
+          a_href: function (videoId) {
+              window.location.href="crouse.html?videoId="+videoId
+          }
         }
     });
     let app1 = new Vue({
