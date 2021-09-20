@@ -1,0 +1,35 @@
+.shop-page{
+    width: 800px;
+    height: 500px;
+    background-color: rgb(255,255,255);
+    border: #c8c8c8 2px solid;
+    margin: 40px 10px 20px 180px;
+    float: left;
+}
+.shop-page-img img{
+    width: 380px;
+    height: 220px;
+    margin: 25px;
+    float: left;
+}
+
+.shop-page-title h1{
+    float: left;
+    font-size: 50px;
+    margin-left: 50px;
+}
+.shop-page-desc{
+    float: left;
+    padding: 5px 26px;
+}
+.shop-page-but{
+    width: 60px;
+    height: 35px;
+    background-color: rgb(59,177,73);
+    float: right;
+    margin-left: 30px;
+    margin-right: 50px;
+    border: none;
+    color: #0f0f0f;
+    border-radius: 15%;
+}
