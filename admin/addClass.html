@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/addBook.css"/>
     <script src="js/vue.js"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="../js/url.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
     <script type="text/javascript" src="js/ajaxfileupload.js"></script>
 </head>
@@ -124,6 +125,13 @@
             type_id:0,
             price:""
         },
+        mounted:function (){
+            //接受用户上传时的用户id
+            var getRequest = GetRequest();
+            var userId = getRequest['userId'];
+            this.user_id=userId
+            console.log(this.user_id)
+        }
     })
  //表单的异步提交
  function submitNo(e){
