@@ -41,16 +41,21 @@
                 },
                 methods:{
                     collection:function () {
-                        var uid = sessionStorage.getItem("userId")
-                        $.ajax({
-                            url:"",
-                            data:{Param_video_id,uid},
-                            success:function (resp) {
-                                if(resp){
-                                    alert("收藏成功！")
+                        if(GetUserState==1){
+                            var uid = sessionStorage.getItem("userId")
+                            $.ajax({
+                                url:"",
+                                data:{Param_video_id,uid},
+                                success:function (resp) {
+                                    if(resp){
+                                        alert("收藏成功！")
+                                    }
                                 }
-                            }
-                        })
+                            })
+                        }else {
+                            window.location.href="login.html"
+                        }
+
                     },getCourse:function () {
                         window.location.href="course1.html?select_text="+app.searchName
                     }
