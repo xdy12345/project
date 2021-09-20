@@ -88,6 +88,11 @@
                 return element.checked;
             }, "请勾选!");
 
+
+            $("#code_img").click(function () {
+                this.src = "${basePath}kaptcha.jpg?d="+new Date();
+            })
+
         })
 
     </script>
@@ -139,7 +144,7 @@
                 <a class="active">注册帐号</a>
             </div>
             <div class="login-main">
-                    <form id="register-form" method="post" action="">
+                    <form id="register-form" method="post" action="login.html">
 
                         <div class="form-group mbl">
                             <label class="control-label required" for="register_mobile">手机号码</label>
@@ -177,27 +182,6 @@
                         </div>
 
 
-                        <!--<div class="form-group cd-mb32 js-drag-jigsaw hidden">-->
-                            <!--<label class=" control-label  required ">验证码</label>-->
-                            <!--<input type="hidden" name="dragCaptchaToken" value="" />-->
-
-                            <!--<div class="drag-section-wrap">-->
-                                <!--<div class="drag-section">-->
-                                    <!--<div class="drag-img js-drag-img">-->
-                                        <!--<img class="js-jigsaw drag-img__jigsaw">-->
-                                        <!--<div class="drag-img__mask js-drag-img-mask infinite-loading"></div>-->
-                                    <!--</div>-->
-
-                                    <!--&lt;!&ndash;<div class="drag-bar">&ndash;&gt;-->
-                                    <!--&lt;!&ndash;<span class="drag-bar__tip js-drag-bar-tip">拖动左边滑块完成上方拼图</span>&ndash;&gt;-->
-                                    <!--&lt;!&ndash;<div class="drag-bar__mask js-drag-bar-mask"></div>&ndash;&gt;-->
-                                    <!--&lt;!&ndash;<div id="drag-btn" class="drag-bar__btn"></div>&ndash;&gt;-->
-                                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-
-
                         <div class="form-group mbl  email_mobile_msg">
                             <label class="control-label required" for="sms_code">验证码</label>
                             <div class="controls cd-row">
@@ -206,10 +190,9 @@
                                 <p class="help-block"> </p>
                                 </div>
                                 <div class="col-xs-6">
-                                    <a href="javascript:;" class="btn btn-default sms-send-btn js-sms-send-btn disabled" data-sms-url="/edu_cloud/sms_send_registration">
-                                        <span id="js-time-left"></span>
-                                        <span id="js-fetch-btn-text">获取验证码</span>
-                                    </a>
+
+
+                                    <img id="code_img" src="../images/bot2.png" >
                                 </div>
                             </div>
                         </div>

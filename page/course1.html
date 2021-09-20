@@ -31,7 +31,7 @@
                 //刷新右上角div
                 document.getElementById("no_logo").style.display="none";
             }else {
-
+                document.getElementById("userInformation").style.display="none";
             }
         })
         function f2() {
@@ -55,6 +55,9 @@
                     app1.page=date.page;
                 }
             })
+        }
+        function userInformation() {
+            window.location.href="information.html?videoId="+sessionStorage.getItem("userId");
         }
     </script>
 </head>
@@ -93,6 +96,11 @@
                 <a href="login.html">登录</a>
                 <span>/</span>
                 <a href="register.html">注册</a>
+            </p>
+        </div>
+        <div class="absolute login-box" id="userInformation">
+            <p>
+                <a href="javascript:void(0);" onclick="userInformation()">个人中心</a>
             </p>
         </div>
     </div>
