@@ -6,9 +6,25 @@
     <link rel="stylesheet" href="../css/crouse.css">
     <script src="../js/jquery-3.3.1.js"></script>
     <script src="http://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="../js/url.js"></script>
     <script src="../js/vue.js"></script>
     <script>
         $(function () {
+            console.log(GetUserState())
+            function getParams () {
+                var url = location.search;
+                var theRequest = new Object();
+                if(url.indexOf("?") != -1){
+                    var str = url.substr(1);
+                    var strs = str.split("&");
+                    for(var i = 0;i < strs.length;i++) {
+                        theRequest[ strs[i].split("=")[0] ] = (strs[i].split("=")[1]);
+                    }
+                }
+                this.identification_code=theRequest.identification_code;
+                return theRequest
+            }
+            var Param_video_id = getParams().Param_video_id
             var app = new Vue({
                 el:".es-wrap",
                 data:{
@@ -19,34 +35,43 @@
                     videoPath:"",
                     picturePath:"",
                     contentss:[],
-                    hotVideo:[],
-                    searchName:""
+                    classes:[],
+                    searchName:"",
+                    classURL:"crouse.html?Param_video_id="
                 },
                 methods:{
-                    getCourse:function () {//回车搜索课程
-
-                    },
-                    collection:function () {//点击收藏
-                        
+                    collection:function () {
+                        var uid = sessionStorage.getItem("userId")
+                        $.ajax({
+                            url:"",
+                            data:{Param_video_id,uid},
+                            success:function (resp) {
+                                if(resp){
+                                    alert("收藏成功！")
+                                }
+                            }
+                        })
+                    },getCourse:function () {
+                        window.location.href="course1.html?select_text="+app.searchName
                     }
                 },
                 mounted:function () {
-                    axios.get("http://localhost:3000/course")
+                    axios.get("http://localhost:3000/class?video_id="+Param_video_id)
                     .then(resp => {
-                        this.videoName=resp.data[0].videoName
+                        this.videoName=resp.data[0].video_name
                         this.price=resp.data[0].price
                         this.description=resp.data[0].description
-                        this.videoPath=resp.data[0].videoPath
-                        this.picturePath=resp.data[0].picturePath
-                        this.clicks=resp.data[0].clicks
+                        this.videoPath=resp.data[0].video_path
+                        this.picturePath=resp.data[0].picture_path
+                        this.clicks=resp.data[0].click
                     }).catch(function () {})
                     axios.get("http://localhost:3000/otherVideo")
                         .then(resp => {
                             this.contentss=resp.data
                         }).catch(function () {})
-                    axios.get("http://localhost:3000/hotVideo")
+                    axios.get("http://localhost:3000/class")
                         .then(resp => {
-                            this.hotVideo=resp.data
+                            this.classes=resp.data
                         }).catch(function () {})
                 }
             })
@@ -69,8 +94,8 @@
             <div class="header-search">
                 <form action=" " method="get" id="searchForm">
                     <div class="header-search-input-wrap">
-                        <input type="text" @keyup.enter="getCourse" v-model="searchName"  class="js-header-search header-search-input" placeholder="搜索课程">
-                        <span class="header-search-icon"></span>
+                        <input type="text"  v-model="searchName"  class="js-header-search header-search-input" placeholder="搜索课程">
+                        <span class="header-search-icon" @click="getCourse()"></span>
                     </div>
                 </form>
             </div>
@@ -83,13 +108,16 @@
                         </li>
                     </ul>
                 </nav>
-                <div class="absolute login-box login-before">
+                <div class="absolute login-box login-before" v-if="GetUserState!=1">
                     <p>
                         <span class="bg-icon"></span>
                         <a href="login.html">登录</a>
                         <span>/</span>
                         <a href="register.html">注册</a>
                     </p>
+                </div>
+                <div class="absolute login-box login-before" v-if="GetUserState==1">
+                    <a href="">个人中心</a>
                 </div>
             </div>
         </div>
@@ -176,13 +204,14 @@
                     <div class="title">猜你想学</div>
                     <div class="learn-info">
                         <div>
-                            <div class="learn-info-item learn clearfix" v-for="item in hotVideo">
-                                <div class="learn-img pull-left"><a href="crouse.html"><img
-                                        :src="item.picturePath"
-                                        alt=""></a>
+                            <div class="learn-info-item learn clearfix" v-for="item in classes">
+                                <div class="learn-img pull-left">
+                                    <a :href="classURL+item.video_id" >
+                                        <img :src="item.picturePath" alt="">
+                                    </a>
                                 </div>
-                                <div class="learn-text pull-right"><p class="learn-text__title">
-                                    {{item.videoName}}</p>
+                                <div class="learn-text pull-right"><a class="learn-text__title" :href="classURL+item.video_id" >
+                                    {{item.videoName}}</a>
                                     <p class="text-overflow learn-text__p"><span>
                                         <span class="learn-text__price price">{{item.price}}</span>
                                     </span></p>

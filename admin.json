@@ -7,6 +7,12 @@
       "totalPage": 10
     }
   ],
+  "otherVideo": [{"videoName": "Java_course_1", "videoPath": "https://www.baidu.com","videoTime": "3:05"},
+    {"videoName": "Java_course_2", "videoPath": "https://www.baidu.com","videoTime": "3:05"},
+    {"videoName": "Java_course_3", "videoPath": "https://www.baidu.com","videoTime": "3:05"},
+    {"videoName": "Java_course_4", "videoPath": "https://www.baidu.com","videoTime": "3:05"},
+    {"videoName": "Java_course_4", "videoPath": "https://www.baidu.com","videoTime": "3:05"},
+    {"videoName": "Java_course_4", "videoPath": "https://www.baidu.com","videoTime": "3:05"}],
   "message": [
     {
       "comment_id": 1,
