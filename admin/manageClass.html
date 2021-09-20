@@ -164,9 +164,10 @@
     }
     //编辑按钮需要带参数跳转
     function edit(video_id){
-        Class_id=video_id
-        alert(Class_id)
-        window.location.href="updateClass.html?class="+123
+        sessionStorage.setItem("Class_id",video_id)
+        // Class_id=video_id
+        // alert(Class_id)
+        window.location.href="updateClass.html?class="+video_id
     }
 </script>
 <body>

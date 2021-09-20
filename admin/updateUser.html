@@ -116,10 +116,12 @@
             state:"在线"
         },
         mounted:function (){
+            alert(sessionStorage.getItem("User_id"))
             $.ajax({
                 url: "http://localhost:3000/editUser",
                 type: "get",
                 //根据userid回显数据
+                data:{"User_id":User_id},
                 // data:{"vide_id":User_id},
                 dataType: "json",
                 success: function (req) {

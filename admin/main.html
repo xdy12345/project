@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/bootstrap.css"/>
@@ -18,8 +18,11 @@
 <script type="text/javascript">
     //搜索课程跳到搜索页面
     let SelectClass=function (){
+
         var val = $(".header-search-input").val()
+            // window.location.href=decodeURI(encodeURI("../page/course1.html?select_text="+val))
             window.location.href="../page/course1.html?select_text="+val
+
     }
 </script>
 <!--整体部分-->
