@@ -1,0 +1,227 @@
+{
+  "page": [
+    {
+      "prePage": 0,
+      "pageNum": 1,
+      "nextPage": 2,
+      "totalPage": 10
+    }
+  ],
+  "message": [
+    {
+      "comment_id": 1,
+      "context": "视频非常好！",
+      "user_name": "张三",
+      "video_name": "java",
+      "load_time": "1999-1-1"
+    },
+    {
+      "comment_id": 2,
+      "context": "视频非常好！",
+      "user_name": "詹姆斯",
+      "video_name": "java",
+      "load_time": "1999-1-1"
+    },
+    {
+      "comment_id": 3,
+      "context": "视频非常好！",
+      "user_name": "李四",
+      "video_name": "java",
+      "load_time": "1999-1-1"
+    }
+  ],
+  "class": [
+    {
+      "video_id": 1,
+      "video_name": "java零基础",
+      "description": "适合java零基础的学生学习",
+      "time": "20mins",
+      "load_time": "2021-9-18",
+      "click": 10000,
+      "video_path": "baidu.com",
+      "picture_path": "4399.com",
+      "user_id": 98,
+      "type_id": 34,
+      "price": "100元"
+    },
+    {
+      "video_id": 2,
+      "video_name": "jquery",
+      "description": "适合jquery零基础的学生学习",
+      "time": "20mins",
+      "load_time": "2021-9-18",
+      "click": 9999,
+      "video_path": "baidu.com",
+      "picture_path": "4399.com",
+      "user_id": 98,
+      "type_id": 3,
+      "price": "100元"
+    },
+    {
+      "video_id": 3,
+      "video_name": "Spring",
+      "description": "适合Spring零基础的学生学习",
+      "time": "5mins",
+      "load_time": "2021-9-18",
+      "click": 8596,
+      "video_path": "baidu.com",
+      "picture_path": "4399.com",
+      "user_id": 98,
+      "type_id": 3,
+      "price": "100元"
+    }
+  ],
+  "user": [
+    {
+      "user_id": 12,
+      "user_log_id": 1,
+      "user_password": "12345678",
+      "user_email": "123456@qq.com",
+      "user_name": "测试用户1",
+      "user_header": "www.baidu.header",
+      "user_sex": "男",
+      "state": "在线"
+    },
+    {
+      "user_id": 21,
+      "user_log_id": 1,
+      "user_password": "12345678",
+      "user_email": "123456@qq.com",
+      "user_name": "测试用户2",
+      "user_header": "www.baidu.header",
+      "user_sex": "男",
+      "state": "在线"
+    },
+    {
+      "user_id": 13,
+      "user_log_id": 2,
+      "user_password": "12345678",
+      "user_email": "123456@qq.com",
+      "user_name": "测试用户3",
+      "user_header": "www.baidu.header",
+      "user_sex": "女",
+      "state": "不在线"
+    }
+  ],
+  "editclass": [
+    {
+      "video_id": 1,
+      "video_name": "java零基础",
+      "description": "适合java零基础的学生学习",
+      "time": "20mins",
+      "load_time": "2021-9-18",
+      "click": 10000,
+      "video_path": "baidu.com",
+      "picture_path": "4399.com",
+      "user_id": 98,
+      "type_id": 34,
+      "price": "100元"
+    }
+  ],
+  "editUser": [
+    {
+      "user_id": 12,
+      "user_log_id": 1,
+      "user_password": "12345678",
+      "user_email": "123456@qq.com",
+      "user_name": "测试用户1",
+      "user_header": "www.baidu.header",
+      "user_sex": "男",
+      "state": "在线"
+    }
+  ],
+  "updateUser": [
+    {
+      "user_id": 13,
+      "user_log_id": 2,
+      "user_password": "12345678",
+      "user_email": "123456@qq.com",
+      "user_name": "测试用户3",
+      "user_header": "www.baidu.header",
+      "user_sex": "女",
+      "state": "不在线"
+    }
+  ],
+  "updateClass": [
+    {
+      "obj[video_id]": "1",
+      "obj[video_name]": "java零基础",
+      "obj[description]": "适合java零基础的学生学习",
+      "obj[time]": "20mins",
+      "obj[load_time]": "2021-9-18",
+      "obj[click]": "10000",
+      "obj[video_path]": "baidu.com",
+      "obj[picture_path]": "4399.com",
+      "obj[user_id]": "98",
+      "obj[type_id]": "34",
+      "obj[cNo]": "100元",
+      "id": 1
+    }
+  ],
+  "addClass": [
+    {
+      "obj[video_id]": "0",
+      "obj[video_name]": "666",
+      "obj[description]": "",
+      "obj[time]": "",
+      "obj[load_time]": "",
+      "obj[click]": "0",
+      "obj[video_path]": "",
+      "obj[picture_path]": "",
+      "obj[user_id]": "0",
+      "obj[type_id]": "0",
+      "obj[cNo]": "",
+      "id": 1
+    },
+    {
+      "obj[user_id]": "0",
+      "obj[user_log_id]": "0",
+      "obj[user_password]": "",
+      "obj[user_email]": "",
+      "obj[user_name]": "",
+      "obj[user_header]": "",
+      "obj[user_sex]": "",
+      "obj[state]": "在线",
+      "id": 2
+    },
+    {
+      "obj[video_id]": "0",
+      "obj[video_name]": "666",
+      "obj[description]": "",
+      "obj[time]": "",
+      "obj[load_time]": "",
+      "obj[click]": "0",
+      "obj[video_path]": "",
+      "obj[picture_path]": "",
+      "obj[user_id]": "0",
+      "obj[type_id]": "0",
+      "obj[cNo]": "",
+      "id": 3
+    },
+    {
+      "obj[video_id]": "0",
+      "obj[video_name]": "666",
+      "obj[description]": "",
+      "obj[time]": "",
+      "obj[load_time]": "",
+      "obj[click]": "0",
+      "obj[video_path]": "",
+      "obj[picture_path]": "",
+      "obj[user_id]": "0",
+      "obj[type_id]": "0",
+      "obj[cNo]": "",
+      "id": 4
+    },
+    {
+      "obj[user_id]": "0",
+      "obj[user_log_id]": "0",
+      "obj[user_password]": "",
+      "obj[user_email]": "",
+      "obj[user_name]": "",
+      "obj[user_header]": "",
+      "obj[user_sex]": "",
+      "obj[state]": "在线",
+      "id": 5
+    }
+  ]
+}

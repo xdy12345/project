@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/addBook.css"/>
+    <script type="text/javascript" src="js/Use_id.js"></script>
+    <script src="js/vue.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/ajaxfileupload.js"></script>
+</head>
+<script type="text/javascript">
+    function fileChange() {
+        $.ajaxFileUpload({
+            url: "/prod/ajaxImg.action",
+            secureuri: false,
+            fileElementId: 'pimage',
+            dataType: "json",
+            success: function (obj) {
+                //清空div
+                $("#imgDiv").empty();
+                //创建一个图片的标签
+                var imgObj = $("<img>");
+                alert(obj.imgurl);
+                imgObj.attr("src", "/image_big/" + obj.imgurl);
+                imgObj.attr("width", "100px");
+                imgObj.attr("height", "100px");
+                //将图片追加到imgDiv
+                $("#imgDiv").append(imgObj);
+            }
+        });
+
+    }
+</script>
+<body>
+<div id="addAll">
+    <div id="nav">
+        <p>课程管理>编辑课程</p>
+    </div>
+
+    <div id="table">
+        <form id="myform" onsubmit="submitNo(event)" action="manageUser.html">
+            <table>
+                <tr>
+                    <td class="one">视频名称</td>
+                    <td><input v-model="video_name" type="text" name="pName" class="two" v-bind:value="video_name"></td>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <td class="one">描述</td>
+                    <td><input v-model="description" type="text" name="pContent" class="two" v-bind:value="description"></td>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <td class="one">时长</td>
+                    <td><input v-model="time" type="text" name="pPrice" class="two" v-bind:value="time"></td>
+                </tr>
+                <tr>
+                    <td class="one">上传时间</td>
+                    <td><input v-model="load_time" type="textr" name="pPrice" class="two" v-bind:value="load_time"></td>
+                </tr>
+                <tr>
+                    <td class="one">点击量</td>
+                    <td><input v-model="click" type="text" name="pPrice" class="two" v-bind:value="click"></td>
+                </tr>
+                <tr>
+                    <td class="one">视频存放路径</td>
+                    <td><input v-model="video_path" type="text" name="pPrice" class="two" v-bind:value="video_path"></td>
+                </tr>
+                <tr>
+                    <td class="one">封面存放路径</td>
+                    <td><input v-model="picture_path" type="text" name="pPrice" class="two" v-bind:value="picture_path"></td>
+                </tr>
+                <tr>
+                    <td class="one">上传用户id</td>
+                    <td><input v-model="user_id" type="text" name="pPrice" class="two" v-bind:value="user_id"></td>
+                </tr>
+                <tr>
+                    <td class="one">所属类</td>
+                    <td><input v-model="type_id" type="text" name="pPrice" class="two" v-bind:value="type_id"></td>
+                </tr>
+                <tr>
+                    <td class="one">价格</td>
+                    <td><input v-model="price" type="text" name="pPrice" class="two" v-bind:value="price"></td>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <td>
+                        <input type="submit" value="提交" class="btn btn-success">
+                    </td>
+                    <td>
+                        <input type="reset" value="取消" class="btn btn-default" onclick="myclose()">
+                        <script type="text/javascript">
+                            function myclose() {
+                                // window.location = "/prod/split.action?page=" + ispage;
+                                //两种风格跳转
+                                // window.location = "manageUser.html" ;
+                                window.location = "manageClass.html" ;
+                            }
+                        </script>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+</body>
+<script>
+    let vm = new Vue({
+        el:"#addAll",
+        data:{
+            video_id:1,
+            video_name:"java零基础",
+            description:"适合java零基础的学生学习",
+            time:"20mins",
+            load_time:"2021-9-18",
+            click:10000,
+            video_path:"baidu.com",
+            picture_path:"4399.com",
+            user_id:98,
+            type_id:34,
+            price:"100元"
+        },
+        mounted:function (){
+            alert()
+            $.ajax({
+                url: "http://localhost:3000/editClass",
+                type: "get",
+                //数据回显
+                // data:{"videp_id":Class_id},
+                dataType: "json",
+                success: function (req) {
+                    //接收数据 数组
+                        vm.video_id=req[0].video_id
+                        vm.video_name=req[0].video_name
+                        vm.description=req[0].description
+                        vm.time=req[0].time
+                        vm.load_time=req[0].load_time
+                        vm.click=req[0].click
+                        vm.video_path=req[0].video_path
+                        vm.picture_path=req[0].picture_path
+                        vm.user_id=req[0].user_id
+                        vm.type_id=req[0].type_id
+                        vm.price=req[0].price
+                        console.log(req[0].price)
+                        console.log(req)
+                }
+            })
+
+        }
+    })
+    //表单的异步提交
+    function submitNo(e){
+        e.preventDefault()
+        console.log(vm.cName)
+        $.ajax({
+            url:"http://localhost:3000/updateClass",
+            type: "post",
+            dataType:"json",
+            data:{
+                // obj:{"cName":vm.cName,"cid":vm.cid,"cPrice":vm.cPrice,"cNo":vm.cNo}
+                obj:{"video_id":vm.video_id,"video_name":vm.video_name,"description":vm.description,
+                    "time":vm.time,"load_time":vm.load_time,"click":vm.click,"video_path":vm.video_path,"picture_path":vm.picture_path,"user_id":vm.user_id,
+                    "type_id":vm.type_id,"cNo":vm.price
+                }
+            },
+            success:function (){
+                window.location.href="manageClass.html"
+            }
+        })
+    }
+</script>
+</html>

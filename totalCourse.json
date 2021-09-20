@@ -1,25 +1,39 @@
 {
-  "FirstType": ["Python","大数据","Linux","Java","区块链","H5前端","数据库","Android"],
-  "SecondType": ["html","css","js","vue","jquery"],
+  "FirstType": [{"firstTypeId": 1,"firstTypeName": "全部"},
+    {"firstTypeId": 2,"firstTypeName": "Python"},
+    {"firstTypeId": 3,"firstTypeName": "大数据"},
+    {"firstTypeId": 4,"firstTypeName": "Linux"},
+    {"firstTypeId": 5,"firstTypeName": "Java"},
+    {"firstTypeId": 6,"firstTypeName": "区块链"},
+    {"firstTypeId": 7,"firstTypeName": "H5前端"},
+    {"firstTypeId": 8,"firstTypeName": "数据库"},
+    {"firstTypeId": 9,"firstTypeName": "Android"}],
+  "SecondType": [{"secondTypeId": 1,"secondTypeName": "全部"},
+    {"secondTypeId": 2,"secondTypeName": "html"},
+    {"secondTypeId": 3,"secondTypeName": "css"},
+    {"secondTypeId": 4,"secondTypeName": "js"},
+    {"secondTypeId": 5,"secondTypeName": "vue"},
+    {"secondTypeId": 6,"secondTypeName": "jquery"}],
   "context": [{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02","videoPath": "/","click": 45,"price": "免费"}
-  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02","videoPath": "/","click": 45,"price": "免费"}
-  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02","videoPath": "/","click": 45,"price": "免费"}
-  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02","videoPath": "/","click": 45,"price": "免费"}
-  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02","videoPath": "/","click": 45,"price": "免费"}
-  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02","videoPath": "/","click": 45,"price": "免费"}
-  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02","videoPath": "/","click": 45,"price": "免费"}
-  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02","videoPath": "/","click": 45,"price": "免费"}
-  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02","videoPath": "/","click": 45,"price": "免费"}
-  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02","videoPath": "/","click": 45,"price": "免费"}
-  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02","videoPath": "/","click": 45,"price": "免费"}
-  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02","videoPath": "/","click": 45,"price": "免费"}
-  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02","videoPath": "/","click": 45,"price": "免费"}
-  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02","videoPath": "/","click": 45,"price": "免费"}
-  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02","videoPath": "/","click": 45,"price": "免费"}
-  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02","videoPath": "/","click": 45,"price": "免费"}
-  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02","videoPath": "/","click": 45,"price": "免费"}
-  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02","videoPath": "/","click": 45,"price": "免费"}
-  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02","videoPath": "/","click": 45,"price": "免费"}
-  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02","videoPath": "/","click": 45,"price": "免费"}],
-  "page": [{"pageNum": 2,"prePage": 1,"nextPage": 3,"totalPage": 5}]
+  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02.png","videoPath": "/","click": 45,"price": "免费"}
+  ,{"videoId": 23456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02.png","videoPath": "/","click": 45,"price": "免费"}
+  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02.png","videoPath": "/","click": 45,"price": "免费"}
+  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02.png","videoPath": "/","click": 45,"price": "免费"}
+  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02.png","videoPath": "/","click": 45,"price": "免费"}
+  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02.png","videoPath": "/","click": 45,"price": "免费"}
+  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02.png","videoPath": "/","click": 45,"price": "免费"}
+  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02.png","videoPath": "/","click": 45,"price": "免费"}
+  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02.png","videoPath": "/","click": 45,"price": "免费"}
+  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02.png","videoPath": "/","click": 45,"price": "免费"}
+  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02.png","videoPath": "/","click": 45,"price": "免费"}
+  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02.png","videoPath": "/","click": 45,"price": "免费"}
+  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02.png","videoPath": "/","click": 45,"price": "免费"}
+  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02.png","videoPath": "/","click": 45,"price": "免费"}
+  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02.png","videoPath": "/","click": 45,"price": "免费"}
+  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02.png","videoPath": "/","click": 45,"price": "免费"}
+  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02.png","videoPath": "/","click": 45,"price": "免费"}
+  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02.png","videoPath": "/","click": 45,"price": "免费"}
+  ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02.png","videoPath": "/","click": 45,"price": "免费"}],
+  "page": {"pageNum": 2,"prePage": 1,"nextPage": 3,"totalPage": 5},
+  "userState": {"userState": 1}
 }

@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/bootstrap.css"/>
     <link rel="stylesheet" href="css/index.css"/>
     <link rel="stylesheet" href="css/xuezong.css"/>
-    <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
     <title></title>
 
@@ -14,14 +13,21 @@
 
     </style>
 </head>
-
 <body>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+    //搜索课程跳到搜索页面
+    let SelectClass=function (){
+        var val = $(".header-search-input").val()
+            window.location.href="../page/course1.html?select_text="+val
+    }
+</script>
 <!--整体部分-->
 <!--上面一个大盒子-->
 <div class="header">
     <div class="relative center">
         <div class="log-con absolute">
-            <a href="/" class="logo relative">
+            <a href="#" class="logo relative">
                 <img src="xueimg/img_2.png" width="160px" height="38px">
             </a>
         </div>
@@ -29,53 +35,38 @@
             <div class="slogan-s"></div>
         </div>
         <div class="header-search">
-            <form action="/" >
+            <form>
                 <div class="header-search-input-wrap">
-                    <input type="text" class="header-search-input" placeholder="搜索课程">
-                    <a href="err.html"><span class="header-search-icon">
-                    </span></a>
+                    <input type="text" class="header-search-input" value="">
+                    <a  onclick="SelectClass()" >
+                        <span class="header-search-icon">
+                    </span>
+                    </a>
                 </div>
             </form>
         </div>
         <div class="float-right">
             <ul class="list" style="width: 420px">
                 <li class="active">
-                    <a href="err.html">首页</a>
+                    <a href="../page/home.html">首页</a>
                 </li>
                 <li>
-                    <a href="err.html" class="course">全部课程</a>
+                    <a href="../page/course1.html" class="course">全部课程</a>
                 </li>
             </ul>
         </div>
         <div class="absolute login-box">
             <p>
                 <span class="bg-icon"></span>
-                <a href="err.html">登录</a>
+                <a href="../page/login.html">登录</a>
                 <span>/</span>
-                <a href="err.html">注册</a>
+                <a href="../page/register.html">注册</a>
             </p>
         </div>
     </div>
 </div>
 <!--下面一个大盒子-->
 <div id="all" >
-    <!--上部分-->
-<!--    <div id="top" >-->
-<!--        <div id="top1">-->
-<!--            <span>-->
-<!--                <img width="200px" height="60px" src="img/guli1.png">-->
-<!--            </span>-->
-<!--        </div>-->
-<!--        <div id="top2" >-->
-<!--            <span>-->
-<!--                <img width="200px" height="60px" src="img/guigu1.png">-->
-<!--            </span>-->
-<!--        </div>-->
-<!--        <div id="top3" >-->
-
-<!--            <span>欢迎您，管理员</span>-->
-<!--        </div>-->
-<!--    </div>-->
     <!--下部分-->
     <div id="bottom" >
         <!--下部分左边-->
@@ -96,8 +87,8 @@
                         <li class="one"><span class="glyphicon glyphicon-sort" style="color: white;"></span>&nbsp;&nbsp;&nbsp;&nbsp;课程管理&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
                                 class="glyphicon glyphicon-play" style="color: white;"></span></li>
                     </a>
-                    <a href="err.html" target="myright">
-                        <li class="one"><span class="glyphicon glyphicon-user" style="color: white;"></span>&nbsp;&nbsp;&nbsp;&nbsp;其他管理&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                    <a href="manageMessage.html" target="myright">
+                        <li class="one"><span class="glyphicon glyphicon-user" style="color: white;"></span>&nbsp;&nbsp;&nbsp;&nbsp;留言管理&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
                                 class="glyphicon glyphicon-play" style="color: white;"></span></li>
                     </a>
                     <a href="err.html" target="myright">
@@ -118,48 +109,5 @@
 </div>
 <!--底部div 兜底-->
 <div style="background: white"></div>
-<!--<div class="sgg_bot" style="background: yellow">-->
-<!--    <div class="sgg_bot1">-->
-<!--        <div class="sgg_bot1-top-big">-->
-<!--            <div class="sgg-bot1-top">-->
-<!--                <div class="sgg-bot1-top-img">-->
-<!--                    <img src="../images/img_7.png">-->
-<!--                    名师亲自授课-->
-<!--                </div>-->
-<!--                <div class="sgg-bot1-top-img">-->
-<!--                    <img src="../images/img_8.png">-->
-<!--                    前沿技术实时更新-->
-<!--                </div>-->
-<!--                <div class="sgg-bot1-top-img sgg-bot1-top-lastImg">-->
-<!--                    <img src="../images/img_9.png">-->
-<!--                    足不出户学编程-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="sgg_bot1-bottom-big">-->
-<!--            <ul>-->
-<!--                <li><p>新手入门</p><>-->
-<!--                <li><a href="/">新用户注册</a><>-->
-<!--                <li><a href="/">用户登录</a><>-->
-<!--                <li><a href="/">找回密码</a><>-->
-<!--            </ul>-->
-<!--            <ul>-->
-<!--                <li><p>关于我们</p><>-->
-<!--                <li><a href="/">名师团队</a><>-->
-<!--                <li><a href="/">视频在线观看</a><>-->
-<!--                <li><a href="/">合作企业</a><>-->
-<!--            </ul>-->
-<!--            <ul>-->
-<!--                <li><p>联系我们</p><>-->
-<!--                <li><a href="/">工作机会</a><>-->
-<!--                <li><a href="/">上传视频</a><>-->
-<!--                <li><a href="/">联系方式</a><>-->
-<!--            </ul>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-<!--<div class="sgg-bot2-bottom" style="background: yellow"></div>-->
-
 </body>
-
 </html>

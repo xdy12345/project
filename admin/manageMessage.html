@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
-    <script type="text/javascript" src="js/Use_id.js"></script>
     <script src="js/vue.js"></script>
     <link rel="stylesheet" href="css/bootstrap.css"/>
     <link rel="stylesheet" href="css/bright.css"/>
@@ -35,10 +34,10 @@
             $("#all").prop("checked", false);
         }
     }
-    //获取用户信息
-    let getUser=function (){
+    //获取留言信息
+    let getMessage=function (){
         $.ajax({
-            url: "http://localhost:3000/user",
+            url: "http://localhost:3000/message",
             type: "get",
             dataType: "json",
             success: function (req) {
@@ -83,7 +82,7 @@
                 },
                 error:function (){
                     alert("成功请求"+page)
-                    getUser()
+                    getMessage()
                     getPage()
                 }
 
@@ -107,27 +106,26 @@
                 getClazz()
             },
             error:function (){
-                window.location.href="manageUser.html";
+                window.location.href="manageMessage.html";
             }
         });
     }
-    //批量删除用户
+    //批量删除留言
     function deleteAll(){
         //得到所有选中复选框的对象,根据其长度判断是否有选中商品
         var input = $("input[name='ck']:checked")
         var pid=""
         var str=""
         if (input.length==0){
-            alert("请先勾选要删除的用户！")
+            alert("请先勾选要删除的留言！")
         }else {
             $.each(input,function (){
-                alert(input.val())
                 pid=$(this).val()
                 if (pid!=null){
                     str+=pid+","
                 }
             })
-            alert("您确定要删除"+str+"条用户吗？")
+            alert("您确定要删除"+str+"条留言吗？")
             $.ajax({
                 url:"",
                 type:"post",
@@ -140,48 +138,45 @@
                 },
                 error: function (){
                     alert(str)
-                    window.location.href="manageUser.html"
+                    window.location.href="manageMessage.html"
                 }
             })
         }
 
     }
-    //按照用户名搜索用户
-    function findUser(e){
+    //按照视频名搜索留言
+    function findMessage(e){
         //阻止表单提交事件 Ajax异步提交
         e.preventDefault()
-        var val = $("input[name='Username']").val();
+        var val = $("input[name='Videoname']").val();
         alert(val)
         $.ajax({
             url:"",
             type:"get",
             dataType:"json",
-            data:{"Username":val},
+            data:{"Videoname":val},
             success:function (){
 
             },
             error:function (){
                 alert("查找成功！")
-                getUser()
+                getMessage()
             }
         })
     }
     //编辑按钮 需要带参数跳转
-    function edit(userid){
-        //和updateUser使用一个全局变量 manage负责修改 update负责读取
-        User_id=userid;
-        alert(User_id)
+    function edit(){
         window.location.href="updateUser.html"
     }
 </script>
 <body>
 <div id="brall">
     <div id="nav">
-        <p>用户管理>用户列表</p>
+        <p>留言管理>留言列表</p>
     </div>
     <div id="condition" style="text-align: center">
-        <form id="myform" onsubmit="findUser(event)">
-            用户名称：<input name="Username" id="pname">&nbsp;&nbsp;&nbsp;
+        <form id="myform" onsubmit="findMessage(event)">
+            视频名称：<input name="Videoname" id="pname">&nbsp;&nbsp;&nbsp;
             <input type="submit" value="查找">
         </form>
     </div>
@@ -189,46 +184,34 @@
     <div id="table">
         <div id="top">
             <input type="checkbox" id="all" onclick="allClick()" style="margin-left: 50px">&nbsp;&nbsp;全选&nbsp&nbsp&nbsp
-            <a href="addUser.html">
-                <input type="button" class="btn btn-warning" id="btn3"
-                       value="新增用户">
-            </a>
             <input type="button" class="btn btn-warning" id="btn2" name="delall"
                    value="批量删除" v-on:click="deleteAll()">
         </div>
-        <!--显示分页后的用户-->
+        <!--显示分页后的留言-->
         <div id="middle">
             <table class="table table-bordered table-striped">
                 <tr>
                     <th></th>
-                    <th>登录账号</th>
-                    <th>密码</th>
-                    <th>邮箱</th>
-                    <th>昵称</th>
-                    <th>头像地址</th>
-                    <th>性别</th>
-                    <th>登录状态</th>
+                    <th>内容</th>
+                    <th>评论用户</th>
+                    <th>所属视频</th>
+                    <th>评论时间</th>
                     <th>编辑</th>
                 </tr>
                 <tr v-for="clazz in clazzs">
-                    <td valign="center" align="center"><input  v-bind:value="clazz.user_id" type="checkbox" name="ck" id="ck" onclick="ckClick()"></td>
-                    <td>{{clazz.user_log_id}}</td>
-                    <td>{{clazz.user_password}}</td>
-                    <td>{{clazz.user_email}}</td>
+                    <td valign="center" align="center"><input v-bind:value="clazz.comment_id" type="checkbox" name="ck" id="ck" onclick="ckClick()"></td>
+                    <td>{{clazz.context}}</td>
                     <td>{{clazz.user_name}}</td>
-                    <td>{{clazz.user_header}}</td>
-                    <td>{{clazz.user_sex}}</td>
-                    <td>{{clazz.state}}</td>
+                    <td>{{clazz.video_name}}</td>
+                    <td>{{clazz.load_time}}</td>
                     <td>
-                        <button name="edit" type="button" class="btn btn-info" v-on:click="edit(clazz.user_id)" >编辑
-                        </button>
-                        <button type="button" class="btn btn-warning" id="mydel" name="mydel" v-on:click="deleteSingle(clazz.user_id)">删除
+                        <button type="button" class="btn btn-warning" id="mydel" name="mydel" v-on:click="deleteSingle(clazz.comment_id)">删除
                         </button>
                     </td>
                 </tr>
             </table>
             <!--分页栏-->
-<!--            需要分页的信息-->
+            <!--            需要分页的信息-->
             <div id="bottom" >
                 <div v-for="page in pages">
                     <nav aria-label="..." style="text-align:center;">
@@ -311,7 +294,7 @@
         },
         mounted: function () {
             //获取课程信息
-            getUser()
+            getMessage()
             //获取分页信息
             getPage()
 
