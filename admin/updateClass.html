@@ -124,7 +124,7 @@
             price:"100元"
         },
         mounted:function (){
-            alert()
+            alert(sessionStorage.getItem("Class_id"))
             $.ajax({
                 url: "http://localhost:3000/editClass",
                 type: "get",
