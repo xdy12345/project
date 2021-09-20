@@ -9,9 +9,88 @@
     <link href="../css/header.css" rel="stylesheet"/>
     <link href="../css/footer.css" rel="stylesheet"/>
 
+    <script src="../js/jquery-3.3.1.js"></script>
+    <script src="../js/jquery.validate.js"></script>
+    <script src="../js/jquery.validate.regex.js"></script>
+
+    <style>
+        .input_error {
+
+            color: red;
+        }
+
+    </style>
 </head>
 <body>
+    <script>
+        $(function () {
+            $("#register-form").validate({
+                errorClass:"input_error",
+                validClass: "input_success",
+                rules: {
 
+                    verifiedMobile: {
+                        required: true,
+                        minlength : 11,
+                        isMobile : true
+                    },
+                    nickname: {
+                        required: true,
+                        rangelength:[5,10],
+
+                    },
+                    password: {
+                        required: true,
+                        passWord:true
+                    },
+                    password_confirm: {
+                        required: true,
+                        equalTo: "#register_password"
+                    },
+                    agree_policy:{
+                        isAgreeRule:true
+                    },
+                },
+                messages: {
+                    verifiedMobile: {
+                        required: "请输入手机号！",
+                        minlength : "不能小于11个字符！",
+                    },
+                    nickname: {
+                        required: "请输入用户名！",
+                        rangelength:"用户名格式错误！"
+                    },
+                    password: {
+                        required: "请输入密码！"
+                    },
+                    password_confirm: {
+                        required: "请输入密码！",
+                        equalTo: "两次输入密码不一致"
+                    },
+
+                },
+
+            });
+
+            $.validator.addMethod("isMobile", function(value, element) {
+                var length = value.length;
+                var mobile = /^(13[0-9]{9})|(18[0-9]{9})|(14[0-9]{9})|(17[0-9]{9})|(15[0-9]{9})$/;
+                return this.optional(element) || (length == 11 && mobile.test(value));
+            }, "请正确填写您的手机号码");
+
+            // 自定义密码验证
+            $.validator.addMethod("passWord", function(value, element) {
+                var passWord = /^(?![0-9]+$)(?![a-zA-Z]+$)(?!([^(0-9a-zA-Z)]|[\\(\\)])+$)([^(0-9a-zA-Z)]|[\\(\\)]|[a-zA-Z]|[0-9]){6,16}$/;
+                return this.optional(element) || (passWord.test(value));
+            }, "请输入至少6-16位密码（至少包含字母，数字）");
+
+            $.validator.addMethod("isAgreeRule", function(value, element) {
+                return element.checked;
+            }, "请勾选!");
+
+        })
+
+    </script>
 
 <div class="es-wrap">
 
@@ -49,120 +128,118 @@
 
             </div>
         </div>
-    </header> 
+    </header>
+
+
+
   <div id="content-container" class="container">
-    <div class="es-section login-section">
-<div class="logon-tab clearfix">
-    <a href="login.html">登录帐号</a>
-    <a class="active">注册帐号</a>
-</div>
-<div class="login-main">
+        <div class="es-section login-section">
+            <div class="logon-tab clearfix">
+                <a href="../../project9.20/page/login.html">登录帐号</a>
+                <a class="active">注册帐号</a>
+            </div>
+            <div class="login-main">
                     <form id="register-form" method="post" action="">
-              
 
-            
-                                    <div class="form-group mbl">
-                    <label class="control-label required" for="register_mobile">手机号码</label>
-                    <div class="controls">
-                        <input type="tel" id="register_mobile" name="verifiedMobile"  class="form-control input-lg" data-url="/register/mobile/check" placeholder="填写你常用的手机号码作为登录帐号" onkeydown="if(event.keyCode==13) return false;">
-                        <p class="help-block"></p>
-                    </div>
-                </div>
-            
-            <div class="form-group mbl">
-                <label class="control-label required" for="register_nickname">用户名</label>
-                <div class="controls">
-                    <input type="text" id="register_nickname" name="nickname" required="required" class="form-control input-lg" data-url="/register/nickname/check" placeholder="中、英文均可，最长18个英文或9个汉字" onkeydown="if(event.keyCode==13) return false;">
-                    <p class="help-block"></p>
-                </div>
-            </div>
-
-            <div class="form-group mbl">
-                <label class="control-label required" for="register_password">密码</label>
-                <div class="controls">
-                    <input type="password" id="register_password" name="password" required="required" class="form-control input-lg cd-text-sm" placeholder="8-20位英文、数字、符号，至少包含两种，区分大小写" onkeydown="if(event.keyCode==13) return false;">
-                    <p class="help-block"></p>
-                </div>
-            </div>
-              <div class="form-group cd-mb32 js-drag-jigsaw hidden">
-      <label class=" control-label  required ">验证码</label>
-<input type="hidden" name="dragCaptchaToken" value="" />
-<div class="drag-section-wrap">
-<div class="drag-section">
-<div class="drag-img js-drag-img">
-<img class="js-jigsaw drag-img__jigsaw">
-<div class="drag-img__mask js-drag-img-mask infinite-loading"></div>
-</div>
-
-<div class="drag-bar">
-<span class="drag-bar__tip js-drag-bar-tip">拖动左边滑块完成上方拼图</span>
-<div class="drag-bar__mask js-drag-bar-mask"></div>
-<div id="drag-btn" class="drag-bar__btn"></div>
-</div>
-</div>
-</div>
-    </div>
-                                              <div class="form-group mbl  email_mobile_msg">
-                    <label class="control-label required" for="sms_code">短信验证码</label>
-                    <div class="controls cd-row">
-                        <div class="col-xs-6">
-                            <input type="text" maxlength="6" class="form-control input-lg" id="sms_code" name="sms_code" placeholder="填写短信验证码" data-url="/edu_cloud/sms_check/sms_registration" onkeydown="if(event.keyCode==13) return false;">
-                            <p class="help-block"> </p>
+                        <div class="form-group mbl">
+                            <label class="control-label required" for="register_mobile">手机号码</label>
+                            <div class="controls">
+                                <input type="tel" id="register_mobile" name="verifiedMobile"  class="form-control input-lg" data-url="/register/mobile/check" placeholder="填写你常用的手机号码作为登录帐号" >
+                                <p class="help-block"></p>
+                            </div>
                         </div>
-                        <div class="col-xs-6">
-                            <a href="javascript:;" class="btn btn-default sms-send-btn js-sms-send-btn disabled" data-sms-url="/edu_cloud/sms_send_registration">
-                                <span id="js-time-left"></span>
-                                <span id="js-fetch-btn-text">获取验证码</span>
-                            </a>
+
+                        <div class="form-group mbl">
+                            <label class="control-label required" for="register_nickname">用户名</label>
+                            <div class="controls">
+                                <input type="text" id="register_nickname" name="nickname"  class="form-control input-lg" data-url="/register/nickname/check" placeholder="中、英文均可，长度5到10位" >
+                                <p class="help-block"></p>
+                            </div>
                         </div>
-                    </div>
-                </div>
+
+                        <div class="form-group mbl">
+                            <label class="control-label required" for="register_password">密码</label>
+                            <div class="controls">
+                                <input type="password" id="register_password" name="password"  class="form-control input-lg cd-text-sm" placeholder="6-16位，必须包含英文、数字，区分大小写" >
+                                <p class="help-block"></p>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group mbl">
+                            <label class="control-label required" for="register_password">确认密码</label>
+                            <div class="controls">
+                                <input type="password" id="register_password1" name="password_confirm"  class="form-control input-lg cd-text-sm" placeholder="确认密码" >
+                                <span class="erroragree"></span>
+                                <p class="help-block"></p>
+                            </div>
+
+                        </div>
+
+
+                        <!--<div class="form-group cd-mb32 js-drag-jigsaw hidden">-->
+                            <!--<label class=" control-label  required ">验证码</label>-->
+                            <!--<input type="hidden" name="dragCaptchaToken" value="" />-->
+
+                            <!--<div class="drag-section-wrap">-->
+                                <!--<div class="drag-section">-->
+                                    <!--<div class="drag-img js-drag-img">-->
+                                        <!--<img class="js-jigsaw drag-img__jigsaw">-->
+                                        <!--<div class="drag-img__mask js-drag-img-mask infinite-loading"></div>-->
+                                    <!--</div>-->
+
+                                    <!--&lt;!&ndash;<div class="drag-bar">&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<span class="drag-bar__tip js-drag-bar-tip">拖动左边滑块完成上方拼图</span>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<div class="drag-bar__mask js-drag-bar-mask"></div>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<div id="drag-btn" class="drag-bar__btn"></div>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+
+
+                        <div class="form-group mbl  email_mobile_msg">
+                            <label class="control-label required" for="sms_code">验证码</label>
+                            <div class="controls cd-row">
+                                <div class="col-xs-6">
+                                <input type="text" maxlength="6" class="form-control input-lg" id="sms_code" name="sms_code" placeholder="填写验证码" data-url="/edu_cloud/sms_check/sms_registration" ">
+                                <p class="help-block"> </p>
+                                </div>
+                                <div class="col-xs-6">
+                                    <a href="javascript:;" class="btn btn-default sms-send-btn js-sms-send-btn disabled" data-sms-url="/edu_cloud/sms_send_registration">
+                                        <span id="js-time-left"></span>
+                                        <span id="js-fetch-btn-text">获取验证码</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
             
                     
-            <div class="form-group mbl">
-                <div class="controls">
-                    <button type="submit" id="register-btn" data-submiting-text="正在提交..." class="btn btn-primary btn-lg btn-block">注册</button>
-                </div>
-            </div>
-
-                                    <div class="form-group mbl">
-                    <div class="controls">
-                        <input type="checkbox" name="agree_policy" checked="checked"> 我已阅读并同意
-                        <a href="/userterms" target="_blank">《用户服务协议》</a>
-                        和
-                        <a href="/privacyPolicy" target="_blank">《隐私政策》</a>
-                    </div>
-                </div>
-            
-  <input type="hidden" id="password_level" value="middle">
-            <input type="hidden" name="captcha_enabled" value="1" />
-            <input type="hidden" name="_csrf_token" value="ydJyFtsx2iimTyzf4iQUT8gNTJJfIBH7wQ2JsfFDo7M">
-            <input type="hidden" name="registerVisitId" value="">
-        </form>
-
-                            <div class="social-login">
-
-    <span>
-      
-<a href="/login/bind/qq?_target_path=/&amp;inviteCode=" class="social-icon social-qq">
-<i class="es-icon es-icon-qq"></i>
-</a>
-
-<a href="/login/bind/weixinweb?_target_path=/&amp;inviteCode=" class="social-icon social-weixin">
-<i class="es-icon es-icon-weixin"></i>
-</a>
-
-
-
-    </span>
-                <div class="line"></div>
-            </div>
+                        <div class="form-group mbl">
+                            <div class="controls">
+                                <button type="submit" id="register-btn" data-submiting-text="正在提交..." class="btn btn-primary btn-lg btn-block">注册</button>
                             </div>
-</div>
-</div>
+                        </div>
 
-  
-      
+                        <div class="form-group mbl">
+                            <div class="controls">
+                                <input type="checkbox" name="agree_policy" checked="checked">
+                                我已阅读并同意
+                                <a href="/userterms" target="_blank">《用户服务协议》</a>
+                                和
+                                <a href="/privacyPolicy" target="_blank">《隐私政策》</a>
+                            </div>
+                        </div>
+            
+                            <!--<input type="hidden" id="password_level" value="middle">-->
+                            <!--<input type="hidden" name="captcha_enabled" value="1" />-->
+                            <!--<input type="hidden" name="_csrf_token" value="ydJyFtsx2iimTyzf4iQUT8gNTJJfIBH7wQ2JsfFDo7M">-->
+                            <!--<input type="hidden" name="registerVisitId" value="">-->
+                    </form>
+
+            </div>
+  </div>
+</div>
 
     <div class="sgg_bot">
         <div class="sgg_bot1">
@@ -178,7 +255,7 @@
                     <ul>
                         <li><b>新手入门</b></li>
                         <li><a href="register.html">新用户注册</a></li>
-                        <li><a href="login.html">用户登录</a></li>
+                        <li><a href="../../project9.20/page/login.html">用户登录</a></li>
                         <li><a href="#">找回密码</a></li>
                     </ul>
                     <ul>
