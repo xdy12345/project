@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../css/main.css" rel="stylesheet"/>
+    <link href="../css/main-v2.css" rel="stylesheet"/>
+    <link href="../css/header.css" rel="stylesheet"/>
+    <link href="../css/footer.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/order.css">
+</head>
+<body>
+
+
+<div class="es-wrap">
+
+    <header class="header">
+        <div class="relative h-con">
+            <div class="logo-con absolute">
+                <a href="#" class="logo relative" id="logo">
+                    <img src="../img/logo-green1.png">
+                </a>
+            </div>
+            <div class="slogan">
+                <div class="slogan-t"></div>
+                <div class="slogan-t"></div>
+            </div>
+            <div class="header-search">
+                <form action="#" method="get" id="searchForm">
+                    <div class="header-search-input-wrap">
+                        <input type="text" class="js-header-search header-search-input" placeholder="搜索课程" value="" name="q">
+                        <span class="header-search-icon"></span>
+                    </div>
+                </form>
+            </div>
+            <div class="main-width relative main-width-q">
+                <nav class="float-right">
+                    <ul class="nav-list">
+                        <li><a href="home.html" class="active">首页</a></li>
+                        <li class="relative">
+                            <a class=" nav-course" href="course1.html">全部课程</a>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="q-btn-con bg-icon" onclick="headerToggle()"></div>
+                <!--登录后显示-->
+                <div class="login-after absolute">
+                    <p style="right: -70px; color: #7d7f7f; top: -15px; height: 60px; padding-top: 20px;  text-align: center;">
+                        <span></span>
+                        <a href="login.html">登录</a>
+                        <span>/</span>
+                        <a href="register.html">注册</a>
+                    </p>
+                </div>
+                <!--end 登录后-->
+            </div>
+        </div>
+    </header>
+<!--中间部分-->
+    <div id="content-container" class="container">
+        <div class="shop-page">
+            <div class="shop-page-img">
+                <img src="../images/course1-01.png">
+            </div>
+            <div class="shop-page-title">
+                <h1>Java NIO</h1>
+            </div>
+            <div class="shop-page-desc">
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NIO是Java 1.4版本开始引入的一个新IO API，支持面向缓冲区、基于通道的IO操作，以更加高效的方式进行文件读写。如今应用NIO的场景越来越多，众多框架如Tomcat、Jetty等都或多或少使用了NIO技术，掌握NIO技术已经不是一个Java程序员的加分技能，而是一个必备技能。<br>
+
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本套视频教程内容丰富，讲解透彻，由浅入深，循序渐进，每个技术点既有理论讲解，又有配套实践案例，真正的理论与实践相结合。教程内容涵盖：阻塞和非阻塞IO、Channel通道、Buffer缓冲区、Selector选择器、Pipe管道、FileLock文件锁，以及Path、Files、异步FileChannel和Charset字符编码等，并通过一个多人聊天室的综合案例，把所有的NIO知识点做了实践应用。</p>
+
+            </div>
+            <button class="shop-page-but">删除</button> <button class="shop-page-but">购买</button>
+            <div class="col-md-9" style="height: 462px;">
+                <iframe src="" frameborder="0" width="100%" height="100%" id="view"></iframe>
+            </div>
+        </div>
+            </div>
+
+<!--底部-->
+    <div class="sgg_bot">
+        <div class="sgg_bot1">
+            <div class="sgg_bot1topbig">
+                <div class="sgg_bot1top">
+                    <div class="sgg_bottopimg"><img src="../img/bot1.png" />业界大牛亲自授课</div>
+                    <div class="sgg_bottopimg"><img src="../img/bot2.png" />前沿技术实时更新</div>
+                    <div class="sgg_bottopimg sgg_bottopimg3"><img src="../img/bot3.png" />足不出户学编程</div>
+                </div>
+            </div>
+            <div class="sgg_botcenter">
+                <div class="sgg_botleft">
+                    <ul>
+                        <li><b>新手入门</b></li>
+                        <li><a href="register.html">新用户注册</a></li>
+                        <li><a href="login.html">用户登录</a></li>
+                        <li><a href="#">找回密码</a></li>
+                    </ul>
+                    <ul>
+                        <li><b>关于我们</b></li>
+                        <li><a href="#" target="_blank">名师团队</a></li>
+                        <li><a href="#" target="_blank">视频下载</a></li>
+                        <li><a href="#" target="_blank">合作企业</a></li>
+                    </ul>
+                    <ul>
+                        <li><b>联系我们</b></li>
+                        <li><a href="#" target="_blank">工作机会</a></li>
+                        <li><a href="#" target="_blank">招贤纳师</a></li>
+                        <li><a href="#" target="_blank">联系方式</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sgg_botbotbg">
+        <div class="sgg_botbot">
+        </div>
+    </div>
+</div>
+</body>
+</html>
