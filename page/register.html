@@ -74,7 +74,7 @@
 
             $.validator.addMethod("isMobile", function(value, element) {
                 var length = value.length;
-                var mobile = /^(13[0-9]{9})|(18[0-9]{9})|(14[0-9]{9})|(17[0-9]{9})|(15[0-9]{9})$/;
+                var mobile = /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/;
                 return this.optional(element) || (length == 11 && mobile.test(value));
             }, "请正确填写您的手机号码");
 
@@ -135,7 +135,7 @@
   <div id="content-container" class="container">
         <div class="es-section login-section">
             <div class="logon-tab clearfix">
-                <a href="../../project9.20/page/login.html">登录帐号</a>
+                <a href="login.html">登录帐号</a>
                 <a class="active">注册帐号</a>
             </div>
             <div class="login-main">

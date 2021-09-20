@@ -1,6 +1,6 @@
 {
   "course": [{"videoName": "Java",
-    "clicks": 12 ,
+    "clicks": 120 ,
     "description": "这个Java视频",
     "price": "150",
     "videoPath": "https://www.baidu.com/",
@@ -9,9 +9,6 @@
   "otherVideo": [{"videoName": "Java_course_1", "videoPath": "https://www.baidu.com","videoTime": "3:05"},
                  {"videoName": "Java_course_2", "videoPath": "https://www.baidu.com","videoTime": "3:05"},
                  {"videoName": "Java_course_3", "videoPath": "https://www.baidu.com","videoTime": "3:05"},
-                 {"videoName": "Java_course_4", "videoPath": "https://www.baidu.com","videoTime": "3:05"},
-                 {"videoName": "Java_course_4", "videoPath": "https://www.baidu.com","videoTime": "3:05"},
-                 {"videoName": "Java_course_4", "videoPath": "https://www.baidu.com","videoTime": "3:05"},
                  {"videoName": "Java_course_4", "videoPath": "https://www.baidu.com","videoTime": "3:05"},
                  {"videoName": "Java_course_4", "videoPath": "https://www.baidu.com","videoTime": "3:05"},
                  {"videoName": "Java_course_4", "videoPath": "https://www.baidu.com","videoTime": "3:05"}],

@@ -14,7 +14,7 @@
     {"secondTypeId": 4,"secondTypeName": "js"},
     {"secondTypeId": 5,"secondTypeName": "vue"},
     {"secondTypeId": 6,"secondTypeName": "jquery"}],
-  "context": [{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02","videoPath": "/","click": 45,"price": "免费"}
+  "context": [{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02.png","videoPath": "/","click": 45,"price": "免费"}
   ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02.png","videoPath": "/","click": 45,"price": "免费"}
   ,{"videoId": 23456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02.png","videoPath": "/","click": 45,"price": "免费"}
   ,{"videoId": 123456,"videoName": "爬虫零基础入门到精通","picturePath": "../images/course1-02.png","videoPath": "/","click": 45,"price": "免费"}
