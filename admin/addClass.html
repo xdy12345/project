@@ -6,9 +6,9 @@
     <title></title>
     <link rel="stylesheet" href="css/bootstrap.css"/>
     <link rel="stylesheet" href="css/addBook.css"/>
-    <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
-    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script src="js/vue.js"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
     <script type="text/javascript" src="js/ajaxfileupload.js"></script>
 </head>
 <script type="text/javascript">
@@ -39,78 +39,51 @@
 
 <div id="addAll">
     <div id="nav">
-        <p>用户管理>新增用户</p>
+        <p>课程管理>新增课程</p>
     </div>
 
     <div id="table">
-        <form id="myform" action="successful.html">
+        <form id="myform" onsubmit="submitNo(event)">
             <table>
                 <tr>
-                    <td class="one">用户名称</td>
-                    <td><input type="text" name="pName" class="two"></td>
-                </tr>
-                <!--错误提示-->
-                <tr class="three">
-                    <td class="four"></td>
-                    <td><span id="pnameerr"></span></td>
+                    <td class="one">课程名称</td>
+                    <td><input type="text" name="pName" class="two" v-model="video_name" ></td>
                 </tr>
                 <tr>
-                    <td class="one">用户介绍</td>
-                    <td><input type="text" name="pContent" class="two"></td>
-                </tr>
-                <!--错误提示-->
-                <tr class="three">
-                    <td class="four"></td>
-                    <td><span id="pcontenterr"></span></td>
+                    <td class="one">课程介绍</td>
+                    <td><input type="text" name="pContent" class="two" v-model="description"></td>
                 </tr>
                 <tr>
-                    <td class="one">定价</td>
-                    <td><input type="number" name="pPrice" class="two"></td>
+                    <td class="one">课程时长</td>
+                    <td><input type="text" name="pNumber" class="two" v-model="time"></td>
                 </tr>
-                <!--错误提示-->
-                <tr class="three">
-                    <td class="four"></td>
-                    <td><span id="priceerr"></span></td>
-                </tr>
-
                 <tr>
-                    <td class="three">用户图片</td>
-                    <td><br>
-                        <div id="imgDiv" style="display:block; width: 80px; height: 80px; solid-color: aqua">123</div>
-                        <br><br><br><br>
-                        <input type="file" id="pimage" name="pimage" onchange="fileChange()">
-                        <span id="imgName"></span><br>
-
-                    </td>
+                    <td class="one">上传时间</td>
+                    <td><input type="text" name="pNumber" class="two" v-model="load_time"></td>
                 </tr>
-                <tr class="three">
-                    <td class="four"></td>
-                    <td><span></span></td>
-                </tr>
-
                 <tr>
-                    <td class="one">用户数量</td>
-                    <td><input type="number" name="pNumber" class="two"></td>
+                    <td class="one">点击量</td>
+                    <td><input type="text" name="pNumber" class="two" v-model="click"></td>
                 </tr>
-                <!--错误提示-->
-                <tr class="three">
-                    <td class="four"></td>
-                    <td><span id="numerr"></span></td>
-                </tr>
-
-
                 <tr>
-                    <td class="one">类别</td>
-                    <td>
-                        <select name="typeId">
-
-                        </select>
-                    </td>
+                    <td class="one">视频路径</td>
+                    <td><input type="text" name="pNumber" class="two" v-model="video_path"></td>
                 </tr>
-                <!--错误提示-->
-                <tr class="three">
-                    <td class="four"></td>
-                    <td><span></span></td>
+                <tr>
+                    <td class="one">图片路径</td>
+                    <td><input type="text" name="pNumber" class="two" v-model="picture_path"></td>
+                </tr>
+                <tr>
+                    <td class="one">用户id</td>
+                    <td><input type="text" name="pNumber" class="two" v-model="user_id"></td>
+                </tr>
+                <tr>
+                    <td class="one">类型id</td>
+                    <td><input type="text" name="pNumber" class="two" v-model="type_id"></td>
+                </tr>
+                <tr>
+                    <td class="one">价格</td>
+                    <td><input type="text" name="pNumber" class="two" v-model="price"></td>
                 </tr>
 
                 <tr>
@@ -124,7 +97,7 @@
                                 // window.location = "/prod/split.action?page=" + ispage;
                                 //两种风格跳转
                                 // window.location = "manageUser.html" ;
-                                window.location = "addClass.html" ;
+                                window.location = "manageClass.html" ;
                             }
                         </script>
                     </td>
@@ -135,5 +108,42 @@
 </div>
 
 </body>
-
+<script>
+    let vm = new Vue({
+        el:"#addAll",
+        data:{
+            video_id:0,
+            video_name:"666",
+            description:"",
+            time:"",
+            load_time:"",
+            click:0,
+            video_path:"",
+            picture_path:"",
+            user_id:0,
+            type_id:0,
+            price:""
+        },
+    })
+ //表单的异步提交
+ function submitNo(e){
+     e.preventDefault()
+     console.log(vm.cName)
+     $.ajax({
+         url:"http://localhost:3000/addClass",
+         type: "post",
+         dataType:"json",
+         data:{
+             // obj:{"cName":vm.cName,"cid":vm.cid,"cPrice":vm.cPrice,"cNo":vm.cNo}
+             obj:{"video_id":vm.video_id,"video_name":vm.video_name,"description":vm.description,
+                 "time":vm.time,"load_time":vm.load_time,"click":vm.click,"video_path":vm.video_path,"picture_path":vm.picture_path,"user_id":vm.user_id,
+                 "type_id":vm.type_id,"cNo":vm.price
+             }
+         },
+         success:function (){
+             window.location.href="manageClass.html"
+         }
+     })
+ }
+</script>
 </html>

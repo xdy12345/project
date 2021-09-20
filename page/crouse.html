@@ -4,6 +4,54 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="../css/crouse.css">
+    <script src="../js/jquery-3.3.1.js"></script>
+    <script src="http://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="../js/vue.js"></script>
+    <script>
+        $(function () {
+            var app = new Vue({
+                el:".es-wrap",
+                data:{
+                    videoName:"",
+                    clicks:0,
+                    price:"",
+                    description:"",
+                    videoPath:"",
+                    picturePath:"",
+                    contentss:[],
+                    hotVideo:[],
+                    searchName:""
+                },
+                methods:{
+                    getCourse:function () {//回车搜索课程
+
+                    },
+                    collection:function () {//点击收藏
+                        
+                    }
+                },
+                mounted:function () {
+                    axios.get("http://localhost:3000/course")
+                    .then(resp => {
+                        this.videoName=resp.data[0].videoName
+                        this.price=resp.data[0].price
+                        this.description=resp.data[0].description
+                        this.videoPath=resp.data[0].videoPath
+                        this.picturePath=resp.data[0].picturePath
+                        this.clicks=resp.data[0].clicks
+                    }).catch(function () {})
+                    axios.get("http://localhost:3000/otherVideo")
+                        .then(resp => {
+                            this.contentss=resp.data
+                        }).catch(function () {})
+                    axios.get("http://localhost:3000/hotVideo")
+                        .then(resp => {
+                            this.hotVideo=resp.data
+                        }).catch(function () {})
+                }
+            })
+        })
+    </script>
 </head>
 <body class="es-main-default es-nav-default ">
 <div class="es-wrap">
@@ -21,7 +69,7 @@
             <div class="header-search">
                 <form action=" " method="get" id="searchForm">
                     <div class="header-search-input-wrap">
-                        <input type="text" @keyup.enter="getCourse" v-model="courseName" class="js-header-search header-search-input" placeholder="搜索课程">
+                        <input type="text" @keyup.enter="getCourse" v-model="searchName"  class="js-header-search header-search-input" placeholder="搜索课程">
                         <span class="header-search-icon"></span>
                     </div>
                 </form>
@@ -47,186 +95,109 @@
         </div>
     </header>
     <div class="cd-container">
-        <div class="product-breadcrumb"><a href="home.html">首页</a> / 爬虫零基础入门到精通</div>
+        <div class="product-breadcrumb"><a href="home.html">首页</a> / {{videoName}}</div>
         <div class="product-detail clearfix">
             <div class="product-detail__left detail-left pull-left">
                 <div class="detail-left__img"><img
-                        src="../img/SavedPictures/img_3.png" alt="" width="500" height="260"></div>
+                        :src="picturePath" alt="" width="500" height="260"></div>
                 <ul class="detail-left__text clearfix">
                     <li class="pull-left"><i class="es-icon es-icon-friends mrs"></i> <span>
-                收藏人数 45
+                播放量 {{clicks}}
                 </span></li>
                     <li class="pull-right">
-                        <div data-v-21077432="" class="es-share top js-es-share" type="courseSet"><span
-                                data-v-21077432="" data-toggle="dropdown"
-                                class="dropdown-toggle detail-left__text-share"><i data-v-21077432=""
-                                                                                   class="es-icon es-icon-share"></i> 分享
-                </span>
-                            <div data-v-21077432="" class="dropdown-menu js-social-share-params">
-                                <a data-v-21077432="" href="javascript:;" data-cmd="weixin" class="js-social-share">
-                                    <i data-v-21077432="" class="es-icon es-icon-weixin"></i>
-                                </a>
-                            </div>
-                            <div data-v-21077432="" tabindex="-1" role="dialog" aria-hidden="true"
-                                 class="modal fade weixin-share-modal">
-                                <div data-v-21077432="" class="modal-dialog modal-sm">
-                                    <div data-v-21077432="" class="modal-content">
-                                        <div data-v-21077432="" class="modal-header">
-                                            <button data-v-21077432="" type="button" data-dismiss="modal" class="close">
-                                                <span data-v-21077432="" aria-hidden="true">×</span></button>
-                                            <h4 data-v-21077432="" class="modal-title">分享到微信朋友圈</h4></div>
-                                        <div data-v-21077432="" class="modal-body"><p data-v-21077432=""
-                                                                                      class="weixin-share-qrcode text-center">
-                                            <img data-v-21077432=""
-                                                 src="/common/qrcode?text=https%3A%2F%2Fwww.gulixueyuan.com%2Fgoods%2Fshow%2F552">
-                                        </p>
-                                            <p data-v-21077432="" class="text-muted text-center"><small
-                                                    data-v-21077432="">打开微信，点击底部的“发现”，<br>使用 “扫一扫”
-                                                即可将网页分享到我的朋友圈。</small></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <span class="detail-hover-span"><i class="es-icon es-icon-favoriteoutline mrs"></i>收藏</span>
+                        <span class="detail-hover-span" style="cursor: pointer" @click="collection">
+                            <i class="es-icon es-icon-favoriteoutline mrs"></i>收藏</span>
                     </li>
                 </ul>
             </div>
             <div class="product-detail__right detail-right pull-right">
-                <div class="detail-right__box"><p class="detail-right__title">爬虫零基础入门到精通</p>
-                    <p class="detail-right__subtitle">爬虫零基础入门到精通</p>
+                <div class="detail-right__box"><p class="detail-right__title">{{videoName}}</p>
+                    <p class="detail-right__subtitle">{{videoName}}</p>
                     <div class="detail-right__price">
                         <div class="detail-right__price__free">
                             价格
-                            <span class="free">免费</span>
+                            <span class="free">{{price}}</span>
                         </div>
-                    </div>
-                    <div class="detail-right__validity validity clearfix"><span
-                            class="validity-title pull-left">学习有效期</span> <span
-                            class="validity-content pull-left"><span>长期有效</span></span>
                     </div>
                 </div>
                 <div data-v-e7cf56f6="">
                     <div data-v-e7cf56f6="" class="clearfix">
                         <span data-v-e7cf56f6="">
                             <span
-                                    data-v-e7cf56f6=""><a data-v-e7cf56f6="" @click=" "
-                                    class="goods-btn-hover pull-right product-detail__btn">免费加入</a>
+                                    data-v-e7cf56f6=""><a data-v-e7cf56f6="" href="#info-left-2"
+                                    class="goods-btn-hover pull-right product-detail__btn">开始学习</a>
                             </span>
                         </span>
                     </div>
                 </div>
             </div>
-        </div>
+        </div><!--照片-->
         <div class="product-info clearfix">
             <div class="product-info__left info-left pull-left">
-                <ul class="info-left__nav">
-                    <li class="active"><a href="">商品介绍</a></li>
-                    <li class=""><a href="">学习目录</a></li>
-                    <li class=""><a href="">学员评价</a></li>
+                <ul class="info-left__nav" id="info-left">
+                    <li class="active"><a href="#info-left">商品介绍</a></li>
+                    <li class=""><a href="#info-left-2">学习目录</a></li>
                 </ul>
                 <div class="info-left__content">
                     <div id="info-left-1" class="content-item js-content-item"><h3 class="content-item__title">商品介绍</h3>
-                        <div class="description-content" style="padding-left: 14px; padding-top: 10px;"><p><strong>谷粉技术交流群 </strong>
-                        </p>
-                            <p>
-                                <strong>与万千谷粉一起学习，点击加入：<a href=""
-                                                          target="_blank"
-                                                          rel="noreferrer noopener"></a></strong>
-                            </p>
-                            <p>课程介绍</p>
+                        <div class="description-content" style="padding-left: 14px; padding-top: 10px;">
+                            <p>{{description}}</p>
                         </div>
-                    </div>
+                    </div><!--商品介绍-->
                     <div id="info-left-2" class="content-item js-content-item"><h3 class="content-item__title">学习目录</h3>
-                        <div class="course-tasks-content">
+                        <div class="course-tasks-content" >
                             <div data-url="/course/453/task/list/render/default" class="js-tasks-show goods-task-list">
-                                <div class="course-detail-content js-course-detail-content">
-                                    <div class="js-infinite-item-template hidden"></div>
-                                    <div class="hidden js-hidden-course-info">
-                                    </div>
-                                    <div class="hidden js-hidden-current-task-id"></div>
-                                    <div class="hidden js-hidden-cached-data"></div>
-                                    <div class="hidden js-hidden-current-timestamp">1631014206</div>
-                                    <ul class="task-list task-list-md task-list-hover infinite-container">
+                                <div class="course-detail-content js-course-detail-content" >
+
+                                    <ul class="task-list task-list-md task-list-hover infinite-container" >
                                         <li class="task-item task-content mouse-control infinite-item color-gray"
-                                            display-if="true">
-                                            <a display-if="true" class="title" href="#modal" data-toggle="modal"
+                                            display-if="true" v-for="(item,index) in contentss">
+                                            <a display-if="true" class="title" :href="item.videoPath" data-toggle="modal"
                                                data-url="/course/453/task/20176/preview" style="margin-top:-6px">
-                                                <span display-if="1" class="label label-success mr10">免费</span>
-                                                课时 1 : 01-尚硅谷-Flink CDC-课程介绍</a>
-                                            <span class="right-menu color-gray"><tmp hide-if="false">03:24</tmp>
-                                                <i class="es-icon es-icon-video" data-toggle="tooltip"
-                                                   data-placement="top" title="" data-original-title="视频任务"
-                                                   data-container="body"></i></span>
+                                                <span display-if="1" class="label label-success mr10">{{index+1}}</span>
+                                                {{item.videoName}}</a>
                                             <span class="right-menu mouse-enter">
-                                                <a class="btn btn-primary" href="#modal" data-toggle="modal"
+                                                <a class="btn btn-primary" :href="item.videoPath" data-toggle="modal"
                                                    data-url="/course/453/task/20176/preview"
-                                                   style="margin-top:-6px">预览</a>
+                                                   style="margin-top:-6px">{{item.videoTime}}</a>
                                             </span>
                                         </li>
                                     </ul>
                                     <div class="js-down-loading-more" style="min-height: 1px"></div>
+
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div id="info-left-3" class="info-left-reviews content-item js-content-item reviews">
-                        <h3 class="content-item__title">学员评价</h3>
-                        <div>
-                            <div class="description-content" style="padding-left: 14px; padding-top: 10px;">
-                                暂无评价哦~
-                            </div>
-                            <div class="reviews">
-                                <div class="learn-more"></div>
-                            </div>
-                        </div>
-                    </div>
+                    </div><!--学习目录-->
                 </div>
             </div>
             <div class="product-info__right pull-right">
-                <div class="info-right-qr info-right-box">
-                    <div class="title">关注微信</div>
-                    <div class="qr-info">
-                        <div class="qr-info__img"><img
-                                src="https://www.gulixueyuan.com/files/default/2020/11-26/15010622cbd9085927.jpg"
-                                width="160" height="160"
-                                alt=""></div>
-                        <div class="qr-info__introduce"><p></p>
-                            <p>关注微信，接收新视频发布动态</p></div>
-                    </div>
-                </div>
                 <div class="info-right-learn info-right-box">
                     <div class="title">猜你想学</div>
                     <div class="learn-info">
                         <div>
-                            <ul>
-                                <li v-for="">
-                                    <div class="learn-info-item learn clearfix">
-                                        <div class="learn-img pull-left"><img
-                                                src="https://www.gulixueyuan.com/files/course/2021/08-31/143233132fb2765257.png"
-                                                alt=""></div>
-                                        <div class="learn-text pull-right"><p class="learn-text__title">Python爬虫零基础入门到精通</p>
-                                            <p class="text-overflow learn-text__p"><span><span class="learn-text__price price">0.00</span></span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                            <div class="learn-more"><a target="_blank" href="/course/explore">查看更多
+                            <div class="learn-info-item learn clearfix" v-for="item in hotVideo">
+                                <div class="learn-img pull-left"><a href="crouse.html"><img
+                                        :src="item.picturePath"
+                                        alt=""></a>
+                                </div>
+                                <div class="learn-text pull-right"><p class="learn-text__title">
+                                    {{item.videoName}}</p>
+                                    <p class="text-overflow learn-text__p"><span>
+                                        <span class="learn-text__price price">{{item.price}}</span>
+                                    </span></p>
+                                </div>
+                            </div>
+                            <div class="learn-more"><a target="_blank" href="course1.html">查看更多
                                 <i class="es-icon es-icon-chevronright"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div><!--猜你想学-->
         </div>
         <div class="back-to-top-pc" style="display: none;"><i class="es-icon es-icon-sticky"></i></div>
     </div>
-    <div class="hidden js-hidden-i18n">
-    </div>
-    <div class="hidden js-hidden-activity-metas">
-    </div>
-    <div class="hidden js-hidden-current-timestamp">1631014204</div>
 </div>
 <div class="sgg_bot">
     <div class="sgg_bot1">

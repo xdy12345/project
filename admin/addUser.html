@@ -1,16 +1,13 @@
-
-
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="UTF-8">
     <title></title>
     <link rel="stylesheet" href="css/bootstrap.css" />
     <link rel="stylesheet" href="css/addBook.css" />
-    <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
-    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script src="js/vue.js"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
     <script type="text/javascript" src="js/ajaxfileupload.js"></script>
 </head>
 <script type="text/javascript">
@@ -39,86 +36,52 @@
 </script>
 <body>
 <!--取出上一个页面上带来的page的值-->
-
 <div id="addAll">
     <div id="nav">
         <p>用户管理>新增用户</p>
     </div>
 
     <div id="table">
-        <form  id="myform" action="successful.html">
+        <form  id="myform" action="successful.html" onsubmit="submitNo(event)">
             <table>
                 <tr>
-                    <td class="one">用户名称</td>
-                    <td><input type="text" name="pName" class="two"></td>
+                    <td class="one">登录账号</td>
+                    <td><input type="text" name="pName" class="two" v-bind:value="user_log_id"></td>
                 </tr>
-                <!--错误提示-->
-                <tr class="three">
-                    <td class="four"></td>
-                    <td><span id="pnameerr"></span></td>
-                </tr>
+                <tr></tr>
                 <tr>
-                    <td class="one">用户介绍</td>
-                    <td><input type="text" name="pContent" class="two"></td>
+                    <td class="one">密码</td>
+                    <td><input type="text" name="pContent" class="two" v-bind:value="user_password"></td>
                 </tr>
-                <!--错误提示-->
-                <tr class="three">
-                    <td class="four"></td>
-                    <td><span id="pcontenterr"></span></td>
-                </tr>
+                <tr></tr>
                 <tr>
-                    <td class="one">定价</td>
-                    <td><input type="number" name="pPrice" class="two"></td>
+                    <td class="one">邮箱</td>
+                    <td><input type="text" name="pPrice" class="two" v-bind:value="user_email"></td>
                 </tr>
-                <!--错误提示-->
-                <tr class="three">
-                    <td class="four"></td>
-                    <td><span id="priceerr"></span></td>
-                </tr>
-
+                <tr></tr>
                 <tr>
-                    <td class="three">用户图片</td>
-                    <td> <br><div id="imgDiv" style="display:block; width: 40px; height: 50px;"></div><br><br><br><br>
-                        <input type="file" id="pimage" name="pimage" onchange="fileChange()" >
-                        <span id="imgName" ></span><br>
-
-                    </td>
+                    <td class="one">昵称</td>
+                    <td><input type="text" name="pPrice" class="two" v-bind:value="user_name"></td>
                 </tr>
-                <tr class="three">
-                    <td class="four"></td>
-                    <td><span></span></td>
-                </tr>
-
+                <tr></tr>
                 <tr>
-                    <td class="one">用户数量</td>
-                    <td><input type="number" name="pNumber" class="two"></td>
+                    <td class="one">头像地址</td>
+                    <td><input type="text" name="pPrice" class="two" v-bind:value="user_header"></td>
                 </tr>
-                <!--错误提示-->
-                <tr class="three">
-                    <td class="four"></td>
-                    <td><span id="numerr"></span></td>
-                </tr>
-
-
+                <tr></tr>
                 <tr>
-                    <td class="one">类别</td>
-                    <td>
-                        <select name="typeId" >
-                            <option>1</option>
-                            <option>1</option>
-                            <option>1</option>
-                        </select>
-                    </td>
+                    <td class="one">性别</td>
+                    <td><input type="text" name="pPrice" class="two" v-bind:value="user_sex"></td>
                 </tr>
-                <!--错误提示-->
-                <tr class="three">
-                    <td class="four"></td>
-                    <td><span></span></td>
+                <tr></tr>
+                <tr>
+                    <td class="one">登录状态</td>
+                    <td><input type="text" name="pNumber" class="two" v-bind:value="state"></td>
                 </tr>
-
+                <tr></tr>
                 <tr>
                     <td>
-                        <input type="submit" value="提交" class="btn btn-success">
+                        <input type="submit" value="提交" class="btn btn-success" >
                     </td>
                     <td>
                         <input type="reset" value="取消" class="btn btn-default" onclick="myclose()">
@@ -127,7 +90,7 @@
                                 // window.location="/prod/split.action?page="+ispage;
                                 //两种风格跳转
                                 // window.location="manageClass.html";
-                                window.location="addUser.html";
+                                window.location="manageUser.html";
 
                             }
                         </script>
@@ -137,7 +100,40 @@
         </form>
     </div>
 </div>
-
 </body>
+<script>
+    let vm =new Vue({
+        el:"#addAll",
+        data:{
+            user_id:0,
+            user_log_id:0,
+            user_password:"",
+            user_email:"",
+            user_name:"",
+            user_header:"",
+            user_sex:"",
+            state:"在线"
 
+        }
+    })
+    function submitNo(e){
+        e.preventDefault()
+        console.log(vm.cName)
+        $.ajax({
+            url:"http://localhost:3000/addClass",
+            type: "post",
+            dataType:"json",
+            data:{
+                // obj:{"cName":vm.cName,"cid":vm.cid,"cPrice":vm.cPrice,"cNo":vm.cNo}
+                obj:{"user_id":vm.user_id, "user_log_id":vm.user_log_id, "user_password":vm.user_password,
+                    "user_email":vm.user_email, "user_name":vm.user_name, "user_header":vm.user_header,
+                    "user_sex":vm.user_sex, "state":vm.state
+                }
+            },
+            success:function (){
+                window.location.href="manageClass.html"
+            }
+        })
+    }
+</script>
 </html>

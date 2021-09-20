@@ -1,0 +1,21 @@
+{
+  "course": [{"videoName": "Java",
+    "clicks": 120 ,
+    "description": "这个Java视频",
+    "price": "150",
+    "videoPath": "https://www.baidu.com/",
+    "picturePath": "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fnimg.ws.126.net%2F%3Furl%3Dhttp%253A%252F%252Fdingyue.ws.126.net%252F2021%252F0617%252Fde8f9117j00quu8jl004yc000u001hcc.jpg%26thumbnail%3D650x2147483647%26quality%3D80%26type%3Djpg&refer=http%3A%2F%2Fnimg.ws.126.net&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1634452552&t=bc6d62e958154aeba47837ab22a2fff7"
+  }],
+  "otherVideo": [{"videoName": "Java_course_1", "videoPath": "https://www.baidu.com","videoTime": "3:05"},
+                 {"videoName": "Java_course_2", "videoPath": "https://www.baidu.com","videoTime": "3:05"},
+                 {"videoName": "Java_course_3", "videoPath": "https://www.baidu.com","videoTime": "3:05"},
+                 {"videoName": "Java_course_4", "videoPath": "https://www.baidu.com","videoTime": "3:05"},
+                 {"videoName": "Java_course_4", "videoPath": "https://www.baidu.com","videoTime": "3:05"},
+                 {"videoName": "Java_course_4", "videoPath": "https://www.baidu.com","videoTime": "3:05"}],
+  "hotVideo": [ {"videoName": "前端1", "picturePath": "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fnimg.ws.126.net%2F%3Furl%3Dhttp%253A%252F%252Fdingyue.ws.126.net%252F2021%252F0617%252Fde8f9117j00quu8jl004yc000u001hcc.jpg%26thumbnail%3D650x2147483647%26quality%3D80%26type%3Djpg&refer=http%3A%2F%2Fnimg.ws.126.net&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1634452552&t=bc6d62e958154aeba47837ab22a2fff7", "price": "免费"},
+                {"videoName": "前端1", "picturePath": "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fnimg.ws.126.net%2F%3Furl%3Dhttp%253A%252F%252Fdingyue.ws.126.net%252F2021%252F0617%252Fde8f9117j00quu8jl004yc000u001hcc.jpg%26thumbnail%3D650x2147483647%26quality%3D80%26type%3Djpg&refer=http%3A%2F%2Fnimg.ws.126.net&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1634452552&t=bc6d62e958154aeba47837ab22a2fff7", "price": "免费"},
+                {"videoName": "前端1", "picturePath": "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fnimg.ws.126.net%2F%3Furl%3Dhttp%253A%252F%252Fdingyue.ws.126.net%252F2021%252F0617%252Fde8f9117j00quu8jl004yc000u001hcc.jpg%26thumbnail%3D650x2147483647%26quality%3D80%26type%3Djpg&refer=http%3A%2F%2Fnimg.ws.126.net&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1634452552&t=bc6d62e958154aeba47837ab22a2fff7", "price": "免费"},
+                {"videoName": "前端1", "picturePath": "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fnimg.ws.126.net%2F%3Furl%3Dhttp%253A%252F%252Fdingyue.ws.126.net%252F2021%252F0617%252Fde8f9117j00quu8jl004yc000u001hcc.jpg%26thumbnail%3D650x2147483647%26quality%3D80%26type%3Djpg&refer=http%3A%2F%2Fnimg.ws.126.net&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1634452552&t=bc6d62e958154aeba47837ab22a2fff7", "price": "免费"},
+                {"videoName": "前端1", "picturePath": "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fnimg.ws.126.net%2F%3Furl%3Dhttp%253A%252F%252Fdingyue.ws.126.net%252F2021%252F0617%252Fde8f9117j00quu8jl004yc000u001hcc.jpg%26thumbnail%3D650x2147483647%26quality%3D80%26type%3Djpg&refer=http%3A%2F%2Fnimg.ws.126.net&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1634452552&t=bc6d62e958154aeba47837ab22a2fff7", "price": "免费"}]
+
+}
