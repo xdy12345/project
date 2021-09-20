@@ -169,6 +169,7 @@
     //编辑按钮 需要带参数跳转
     function edit(userid){
         //和updateUser使用一个全局变量 manage负责修改 update负责读取
+        sessionStorage.setItem("User_id",userid)
         User_id=userid;
         alert(User_id)
         window.location.href="updateUser.html"
