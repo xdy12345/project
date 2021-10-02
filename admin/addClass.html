@@ -9,6 +9,7 @@
     <script src="js/vue.js"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="../js/url.js"></script>
+    <script type="text/javascript" src="js/fileUp.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
     <script type="text/javascript" src="js/ajaxfileupload.js"></script>
 </head>
@@ -44,7 +45,7 @@
     </div>
 
     <div id="table">
-        <form id="myform" onsubmit="submitNo(event)">
+        <form id="myform" onsubmit="submitNo(event)" enctype="multipart/form-data">
             <table>
                 <tr>
                     <td class="one">课程名称</td>
@@ -67,8 +68,13 @@
                     <td><input type="text" name="pNumber" class="two" v-model="click"></td>
                 </tr>
                 <tr>
-                    <td class="one">视频路径</td>
-                    <td><input type="text" name="pNumber" class="two" v-model="video_path"></td>
+                    <td class="one">上传视频</td>
+                    <td><input style="display:inline;" class="btn btn-default" id="img" type="file" name="upfile" multiple="multiple"></input>
+                    <input class="btn btn-default" type="button" value="上传" name="up" onclick="doUpload()">
+                    <input type="text" id="fileNameList" style="display:none;"></input>
+                    <input type="hidden" name="test"></input>
+                    </td>
+<!--                    <td><input type="file" name="videNamer" class="two" v-model="video_path"></td>-->
                 </tr>
                 <tr>
                     <td class="one">图片路径</td>
