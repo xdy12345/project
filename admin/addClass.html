@@ -10,32 +10,10 @@
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="../js/url.js"></script>
     <script type="text/javascript" src="js/fileUp.js"></script>
+    <script type="text/javascript" src="js/picture.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
     <script type="text/javascript" src="js/ajaxfileupload.js"></script>
 </head>
-<script type="text/javascript">
-    function fileChange() {
-        $.ajaxFileUpload({
-            url: "/prod/ajaxImg.action",
-            secureuri: false,
-            fileElementId: 'pimage',
-            dataType: "json",
-            success: function (obj) {
-                //清空div
-                $("#imgDiv").empty();
-                //创建一个图片的标签
-                var imgObj = $("<img>");
-                alert(obj.imgurl);
-                imgObj.attr("src", "/image_big/" + obj.imgurl);
-                imgObj.attr("width", "100px");
-                imgObj.attr("height", "100px");
-                //将图片追加到imgDiv
-                $("#imgDiv").append(imgObj);
-            }
-        });
-
-    }
-</script>
 <body>
 <!--取出上一个页面上带来的page的值-->
 
@@ -45,6 +23,29 @@
     </div>
 
     <div id="table">
+        <div class="progress">
+            <div style="background-color: blue;padding: 5px 0px 0px 0px;width: 0%"></div>
+        </div>
+        <form id="uploadForm" style="display:block; width: auto">
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp视频<input style="display:inline;" class="btn btn-default" id="img" type="file" name="upfile" multiple="multiple"></input>
+            <input class="btn btn-default" type="button" value="上传" name="up" onclick="doUploadForm()">
+
+        </form>
+        <form id="uploadForm1" style="display:block; width: auto">
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            视频封面<input style="display:inline;" class="btn btn-default"  type="file" name="upfile" multiple="multiple"></input>
+            <input class="btn btn-default" type="button" value="上传" name="up" onclick="doUploadPicture()">
+
+        </form>
         <form id="myform" onsubmit="submitNo(event)" enctype="multipart/form-data">
             <table>
                 <tr>
@@ -67,17 +68,10 @@
                     <td class="one">点击量</td>
                     <td><input type="text" name="pNumber" class="two" v-model="click"></td>
                 </tr>
+                <td class="one">视频路径</td>
+                <td><input type="text" name="filePath" class="two" v-model="video_path"></td>
                 <tr>
-                    <td class="one">上传视频</td>
-                    <td><input style="display:inline;" class="btn btn-default" id="img" type="file" name="upfile" multiple="multiple"></input>
-                    <input class="btn btn-default" type="button" value="上传" name="up" onclick="doUpload()">
-                    <input type="text" id="fileNameList" style="display:none;"></input>
-                    <input type="hidden" name="test"></input>
-                    </td>
-<!--                    <td><input type="file" name="videNamer" class="two" v-model="video_path"></td>-->
-                </tr>
-                <tr>
-                    <td class="one">图片路径</td>
+                    <td class="one">封面路径</td>
                     <td><input type="text" name="pNumber" class="two" v-model="picture_path"></td>
                 </tr>
                 <tr>
@@ -85,8 +79,12 @@
                     <td><input type="text" name="pNumber" class="two" v-model="user_id"></td>
                 </tr>
                 <tr>
-                    <td class="one">类型id</td>
+                    <td class="one">类型1</td>
                     <td><input type="text" name="pNumber" class="two" v-model="type_id"></td>
+                </tr>
+                <tr>
+                    <td class="one">类型2</td>
+                    <td><input type="text" name="pNumber" class="two" v-model="type_id2"></td>
                 </tr>
                 <tr>
                     <td class="one">价格</td>
@@ -100,7 +98,7 @@
                     <td>
                         <input type="reset" value="取消" class="btn btn-default" onclick="myclose()">
                         <script type="text/javascript">
-                            function myclose(ispage) {
+                            function myclose() {
                                 // window.location = "/prod/split.action?page=" + ispage;
                                 //两种风格跳转
                                 // window.location = "manageUser.html" ;
@@ -111,6 +109,7 @@
                 </tr>
             </table>
         </form>
+
     </div>
 </div>
 
@@ -119,17 +118,18 @@
     let vm = new Vue({
         el:"#addAll",
         data:{
-            video_id:0,
-            video_name:"666",
-            description:"",
-            time:"",
-            load_time:"",
-            click:0,
-            video_path:"",
-            picture_path:"",
-            user_id:0,
-            type_id:0,
-            price:""
+            video_id:1,
+            video_name:"java零基础",
+            description:"适合java零基础的学生学习",
+            time:"02:01:58",
+            load_time:"02:15:35",
+            click:10000,
+            video_path:"baidu.com",
+            picture_path:"4399.com",
+            user_id:98,
+            type_id:34,
+            type_id2:0,
+            price:"100元"
         },
         mounted:function (){
             //接受用户上传时的用户id
@@ -142,20 +142,31 @@
  //表单的异步提交
  function submitNo(e){
      e.preventDefault()
-     console.log(vm.cName)
      $.ajax({
-         url:"http://localhost:3000/addClass",
+         url:"http://localhost:8080//addVideo",
          type: "post",
          dataType:"json",
          data:{
-             // obj:{"cName":vm.cName,"cid":vm.cid,"cPrice":vm.cPrice,"cNo":vm.cNo}
-             obj:{"video_id":vm.video_id,"video_name":vm.video_name,"description":vm.description,
-                 "time":vm.time,"load_time":vm.load_time,"click":vm.click,"video_path":vm.video_path,"picture_path":vm.picture_path,"user_id":vm.user_id,
-                 "type_id":vm.type_id,"cNo":vm.price
-             }
+             "videoId":vm.video_id,
+             "videoName":vm.video_name,
+             "videoDescription":vm.description,
+             "videoTime":vm.time,
+             "videoUpdateTime":vm.load_time,
+             "videoClick":vm.click,
+             "videoPath":vm.video_path,
+             "videoPicturePath":vm.picture_path,
+             "userId":vm.user_id,
+             "videoFirsttypeId":vm.type_id,
+             "videoPrice":vm.price,
+             "videoSecondtypeId":vm.type_id2
          },
          success:function (){
-             window.location.href="manageClass.html"
+             alert("成功")
+             // window.location.href="manageClass.html"
+         },
+         error:function (req){
+             alert("失败")
+             // console.log(req)
          }
      })
  }

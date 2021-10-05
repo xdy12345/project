@@ -38,11 +38,18 @@
     //获取用户信息
     let getUser=function (){
         $.ajax({
-            url: "http://localhost:3000/user",
-            type: "get",
+            url: "http://localhost:8080//selectAllUser",
+            type: "post",
             dataType: "json",
             success: function (req) {
-                vm.clazzs = req
+                vm.clazzs = req.list
+                vm.pages=req.pages
+                vm.pageNum=req.pageNum
+                vm.prePage=req.prePage
+                vm.nextPage=req.nextPage
+            },
+            error:function (req){
+                console.log(req)
             }
         })
     }
@@ -73,18 +80,22 @@
         else{
             //发送ajax请求  jQuery的方式发送
             $.ajax({
-                url:"/prod/ajaxSplit.action",
+                url:"http://localhost:8080//ajaxSplitUser",
                 // data:{"page":page},
-                data:{"page":page},
+                data:{"pageNum":page},
                 type:"post",
                 dataType:"json",
                 success: function (req){
-
+                    vm.clazzs = req.list
+                    vm.pages=req.pages
+                    vm.pageNum=req.pageNum
+                    vm.prePage=req.prePage
+                    vm.nextPage=req.nextPage
                 },
                 error:function (){
                     alert("成功请求"+page)
-                    getUser()
-                    getPage()
+                    // getUser()
+                    // getPage()
                 }
 
 
@@ -97,54 +108,58 @@
         //目标 单击删除按钮 触发ajax请求 先发送一个删除的请求 再发送一个查询的请求 展示界面
         $.ajax({
             // url:"/prod/delete.action?pid="+pid+"&pageNum"+pageNum,
-            url:"/prod/delete.action",
-            data:{"nowpid":pid},
+            url:"http://localhost:8080/deleteSingleUser",
+            data:{"userId":pid},
             type:"post",
             dataType:"json",
-            success:function (){
-                //删除完毕之后重写获取数据 现在前端需要再次获取数据 有后端之后 无需再次请求 直接获取数据即可
-                getPage()
-                getClazz()
+            success:function (req){
+                //删除完毕之后重写获取数据 现在前段需要再次获取数据 有后端之后 无需再次请求 直接获取数据即可
+                vm.clazzs = req.list
+                vm.pages=req.pages
+                vm.pageNum=req.pageNum
+                vm.prePage=req.prePage
+                vm.nextPage=req.nextPage
             },
-            error:function (){
-                window.location.href="manageUser.html";
-            }
         });
     }
-    //批量删除用户
-    function deleteAll(){
+    //批量删除的操作
+    let deleteAll=function (){
         //得到所有选中复选框的对象,根据其长度判断是否有选中商品
         var input = $("input[name='ck']:checked")
         var pid=""
-        var str=""
+        var str=new Array();
         if (input.length==0){
-            alert("请先勾选要删除的用户！")
+            alert("请先勾选要删除的课程！")
         }else {
             $.each(input,function (){
                 alert(input.val())
                 pid=$(this).val()
                 if (pid!=null){
-                    str+=pid+","
+                    str.push(pid)
                 }
             })
-            alert("您确定要删除"+str+"条用户吗？")
+            var userIds = str.toString();
+            alert("您确定要删除"+str+"条课程吗？")
             $.ajax({
-                url:"",
+                url:"http://localhost:8080/deleteAlluser",
                 type:"post",
                 dataType:"json",
                 data:{
-                    "Cids":str
+                    "userIds":userIds
                 },
-                success:function (){
-
+                success:function (req){
+                    vm.clazzs = req.list
+                    vm.pages=req.pages
+                    vm.pageNum=req.pageNum
+                    vm.prePage=req.prePage
+                    vm.nextPage=req.nextPage
                 },
                 error: function (){
                     alert(str)
-                    window.location.href="manageUser.html"
+                    window.location.href="manageClass.html"
                 }
             })
         }
-
     }
     //按照用户名搜索用户
     function findUser(e){
@@ -153,23 +168,26 @@
         var val = $("input[name='Username']").val();
         alert(val)
         $.ajax({
-            url:"",
-            type:"get",
+            url:"http://localhost:8080/selectByuserName",
+            type:"post",
             dataType:"json",
-            data:{"Username":val},
-            success:function (){
-
+            data:{"userName":val},
+            success:function (req){
+                vm.clazzs = req.list
+                vm.pages=req.pages
+                vm.pageNum=req.pageNum
+                vm.prePage=req.prePage
+                vm.nextPage=req.nextPage
             },
             error:function (){
                 alert("查找成功！")
-                getUser()
             }
         })
     }
     //编辑按钮 需要带参数跳转
     function edit(userid){
         //和updateUser使用一个全局变量 manage负责修改 update负责读取
-        sessionStorage.setItem("User_id",userid)
+        sessionStorage.setItem("userId",userid)
         User_id=userid;
         alert(User_id)
         window.location.href="updateUser.html"
@@ -190,10 +208,6 @@
     <div id="table">
         <div id="top">
             <input type="checkbox" id="all" onclick="allClick()" style="margin-left: 50px">&nbsp;&nbsp;全选&nbsp&nbsp&nbsp
-            <a href="addUser.html">
-                <input type="button" class="btn btn-warning" id="btn3"
-                       value="新增用户">
-            </a>
             <input type="button" class="btn btn-warning" id="btn2" name="delall"
                    value="批量删除" v-on:click="deleteAll()">
         </div>
@@ -212,18 +226,18 @@
                     <th>编辑</th>
                 </tr>
                 <tr v-for="clazz in clazzs">
-                    <td valign="center" align="center"><input  v-bind:value="clazz.user_id" type="checkbox" name="ck" id="ck" onclick="ckClick()"></td>
-                    <td>{{clazz.user_log_id}}</td>
-                    <td>{{clazz.user_password}}</td>
-                    <td>{{clazz.user_email}}</td>
-                    <td>{{clazz.user_name}}</td>
-                    <td>{{clazz.user_header}}</td>
-                    <td>{{clazz.user_sex}}</td>
+                    <td valign="center" align="center"><input  v-bind:value="clazz.userId" type="checkbox" name="ck" id="ck" onclick="ckClick()"></td>
+                    <td>{{clazz.userLogId}}</td>
+                    <td>{{clazz.userPassword}}</td>
+                    <td>{{clazz.userEmail}}</td>
+                    <td>{{clazz.userName}}</td>
+                    <td>{{clazz.userHeader}}</td>
+                    <td>{{clazz.userSex}}</td>
                     <td>{{clazz.state}}</td>
                     <td>
-                        <button name="edit" type="button" class="btn btn-info" v-on:click="edit(clazz.user_id)" >编辑
+                        <button name="edit" type="button" class="btn btn-info" v-on:click="edit(clazz.userId)" >编辑
                         </button>
-                        <button type="button" class="btn btn-warning" id="mydel" name="mydel" v-on:click="deleteSingle(clazz.user_id)">删除
+                        <button type="button" class="btn btn-warning" id="mydel" name="mydel" v-on:click="deleteSingle(clazz.userId)">删除
                         </button>
                     </td>
                 </tr>
@@ -231,29 +245,29 @@
             <!--分页栏-->
 <!--            需要分页的信息-->
             <div id="bottom" >
-                <div v-for="page in pages">
+                <div >
                     <nav aria-label="..." style="text-align:center;">
                         <ul class="pagination">
                             <li>
-                                <a aria-label="Previous" v-on:click="ajaxsplit(page.prePage)">
+                                <a aria-label="Previous" v-on:click="ajaxsplit(prePage)">
                                     <span aria-hidden="true">«</span>
                                 </a>
                             </li>
                             <li >
-                                <a v-for="index of len" v-bind:style="Mycolor(index,page.pageNum)" v-on:click="ajaxsplit(index)">
+                                <a v-for="index of pages" v-bind:style="Mycolor(index,pageNum)" v-on:click="ajaxsplit(index)">
                                     <span aria-hidden="true" >{{index}}</span>
                                 </a>
                             </li>
                             <li>
 
-                                <a name="next" href="#" aria-label="Next" v-on:click="ajaxsplit(page.nextPage)">
+                                <a name="next" href="#" aria-label="Next" v-on:click="ajaxsplit(nextPage)">
                                     <span aria-hidden="true" >»</span>
                                 </a>
                             </li>
-                            <li style=" margin-left:150px;color: #0e90d2;height: 35px; line-height: 35px;">总共&nbsp;&nbsp;&nbsp;{{page.totalPage}}<font
+                            <li style=" margin-left:150px;color: #0e90d2;height: 35px; line-height: 35px;">总共&nbsp;&nbsp;&nbsp;{{pages}}<font
                                     style="color:orange;"></font>&nbsp;&nbsp;&nbsp;页&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                                当前&nbsp;{{page.pageNum}}&nbsp;&nbsp;<font
+                                当前&nbsp;{{pageNum}}&nbsp;&nbsp;<font
                                         style="color:orange;"></font>&nbsp;&nbsp;&nbsp;页&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                             </li>
@@ -267,26 +281,26 @@
 </div>
 </body>
 <script type="text/javascript">
-    //单个删除的jquery实现
-    $("button[name='mydel']").click(function () {
-        alert("确定删除吗？");
-        $(this).parent().parent("tr").remove();
-    });
-    //批量删除
-    $("input[name='delall']").click(function () {
-        var list = $("input[name='ck']:checked");
-        console.log(list)
-        //console.log($("input[name='ck']:checked").parent().parent().remove());
-        if (list.length > 0) {
-            list.each(function () {
-                // console.log(list)
-                console.log($(this).parent().parent("tr").remove());
-
-            })
-        } else {
-            alert("请选择要删除的数据")
-        }
-    });
+    // //单个删除的jquery实现
+    // $("button[name='mydel']").click(function () {
+    //     alert("确定删除吗？");
+    //     $(this).parent().parent("tr").remove();
+    // });
+    // //批量删除
+    // $("input[name='delall']").click(function () {
+    //     var list = $("input[name='ck']:checked");
+    //     console.log(list)
+    //     //console.log($("input[name='ck']:checked").parent().parent().remove());
+    //     if (list.length > 0) {
+    //         list.each(function () {
+    //             // console.log(list)
+    //             console.log($(this).parent().parent("tr").remove());
+    //
+    //         })
+    //     } else {
+    //         alert("请选择要删除的数据")
+    //     }
+    // });
 
 
 </script>
@@ -304,17 +318,17 @@
     let vm = new Vue({
         el: "#brall",
         data: {
-            len:0, //一次分页的总页数
-            pages:[],//一次分页的所有数据
+            pages:0,
+            pageNum:0,
+            prePage:0,
+            nextPage:0,
             clazzs: [],
             backgroundColor:"backgroundColor:#AEEBFF",
             backgroundColor2:"backgroundColor:white"
         },
         mounted: function () {
-            //获取课程信息
+            //获取用户信息
             getUser()
-            //获取分页信息
-            getPage()
 
         },
     })

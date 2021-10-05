@@ -1,9 +1,9 @@
-function doUploadForm(){
+function doUploadPicture(){
     var val = $("input[name='up']").val();
     if (val==null||val==""){
         alert("请先选择视频！")
     }
-    var upfile = new FormData($("#uploadForm")[0]);
+    var upfile = new FormData($("#uploadForm1")[0]);
     console.log(upfile)
     // var type = $("#img").val().substring($("#img").val().lastIndexOf("."));
     // if(type==".jpg"||type==".jpeg"||type==".JPG"||type==".JPEG"||type==".png"||type==".PNG"){
@@ -35,8 +35,8 @@ function doUploadForm(){
         },
         success: function(result){
             var s = JSON.stringify(result);
-            alert("上传成功视频所在服务器服务器的地址"+s)
-            vm.video_path=s;
+            alert("上传成功图片所在服务器服务器的地址"+s)
+            vm.picture_path=s;
             // console.log("上传成功~~");
 
         },

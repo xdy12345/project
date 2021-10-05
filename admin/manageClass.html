@@ -38,11 +38,15 @@
     //获取课程信息
     let getClazz=function (){
         $.ajax({
-            url: "http://localhost:3000/class",
-            type: "get",
+            url: "http://localhost:8080/getClass",
+            type: "post",
             dataType: "json",
             success: function (req) {
-                vm.clazzs = req
+                vm.clazzs = req.list
+                vm.pages=req.pages
+                vm.pageNum=req.pageNum
+                vm.prePage=req.prePage
+                vm.nextPage=req.nextPage
                 console.log(req)
             }
         })
@@ -65,7 +69,6 @@
     }
     //翻页的ajax请求
     let ajaxsplit=function (page) {
-        alert("成功请求"+page)
         //解决点击前一页 或者点击下一页 点到头的问题
         console.log(page)
         if (page==0){
@@ -74,17 +77,23 @@
         else{
             //发送ajax请求  jQuery的方式发送
             $.ajax({
-                url:"/prod/ajaxSplit.action",
+                url:"http://localhost:8080//ajaxSplitVideo",
                 // data:{"page":page},
-                data:{"page":page},
+                data:{"pageNum":page},
                 type:"post",
                 dataType:"json",
                 success: function (req){
+                    console.log(req)
+                    alert("成功")
+                    vm.clazzs = req.list
+                    vm.pages=req.pages
+                    vm.pageNum=req.pageNum
+                    vm.prePage=req.prePage
+                    vm.nextPage=req.nextPage
                 },
                 error:function (){
-                    alert("成功请求"+page)
-                    getUser()
-                    getPage()
+                    alert("失败")
+
                 }
 
 
@@ -97,14 +106,17 @@
         //目标 单击删除按钮 触发ajax请求 先发送一个删除的请求 再发送一个查询的请求 展示界面
         $.ajax({
             // url:"/prod/delete.action?pid="+pid+"&pageNum"+pageNum,
-            url:"/prod/delete.action",
-            data:{"nowpid":pid},
+            url:"http://localhost:8080/deleteSingleVideo",
+            data:{"videoId":pid},
             type:"post",
             dataType:"json",
-            success:function (){
+            success:function (req){
                 //删除完毕之后重写获取数据 现在前段需要再次获取数据 有后端之后 无需再次请求 直接获取数据即可
-                getPage()
-                getClazz()
+                vm.clazzs = req.list
+                vm.pages=req.pages
+                vm.pageNum=req.pageNum
+                vm.prePage=req.prePage
+                vm.nextPage=req.nextPage
             },
         });
     }
@@ -113,7 +125,7 @@
         //得到所有选中复选框的对象,根据其长度判断是否有选中商品
         var input = $("input[name='ck']:checked")
         var pid=""
-        var str=""
+        var str=new Array();
         if (input.length==0){
             alert("请先勾选要删除的课程！")
         }else {
@@ -121,19 +133,24 @@
                 alert(input.val())
                 pid=$(this).val()
                 if (pid!=null){
-                    str+=pid+","
+                    str.push(pid)
                 }
             })
+            var videoIds = str.toString();
             alert("您确定要删除"+str+"条课程吗？")
             $.ajax({
-                url:"",
+                url:"http://localhost:8080/deleteAllvideo",
                 type:"post",
                 dataType:"json",
                 data:{
-                    "Cids":str
+                    "videoIds":videoIds
                 },
-                success:function (){
-
+                success:function (req){
+                    vm.clazzs = req.list
+                    vm.pages=req.pages
+                    vm.pageNum=req.pageNum
+                    vm.prePage=req.prePage
+                    vm.nextPage=req.nextPage
                 },
                 error: function (){
                     alert(str)
@@ -149,25 +166,33 @@
         var val = $("input[name='ClassName']").val();
         alert(val)
         $.ajax({
-            url:"",
-            type:"get",
+            url:"http://localhost:8080//selectByname",
+            type:"post",
             dataType:"json",
-            data:{"ClassName":val},
-            success:function (){
-
+            data:{"videoName":val},
+            success:function (req){
+                vm.clazzs = req.list
+                vm.pages=req.pages
+                vm.pageNum=req.pageNum
+                vm.prePage=req.prePage
+                vm.nextPage=req.nextPage
             },
             error:function (){
-                alert("查找成功！")
-                getClazz()
+                // alert("查找成功！")
+                // getClazz()
             }
         })
     }
     //编辑按钮需要带参数跳转
     function edit(video_id){
-        sessionStorage.setItem("Class_id",video_id)
+
+        sessionStorage.setItem("videoId",video_id)
+        // Class_id=video_id
+
         // Class_id=video_id
         // alert(Class_id)
-        window.location.href="updateClass.html?class="+video_id
+        // window.location.href="updateClass.html?class="+video_id
+        window.location.href="updateClass.html"
     }
 </script>
 <body>
@@ -205,26 +230,28 @@
                     <th>视频地址</th>
                     <th>封面地址</th>
                     <th>用户id</th>
-                    <th>类型</th>
+                    <th>类型1</th>
+                    <th>类型2</th>
                     <th>价格</th>
                     <th>操作</th>
                 </tr>
                 <tr v-for="clazz in clazzs">
-                    <td valign="center" align="center"><input v-bind:value="clazz.video_id" type="checkbox" name="ck" id="ck" onclick="ckClick()"></td>
-                    <td>{{clazz.video_name}}</td>
-                    <td>{{clazz.description}}</td>
-                    <td>{{clazz.time}}</td>
-                    <td>{{clazz.load_time}}</td>
-                    <td>{{clazz.click}}</td>
-                    <td>{{clazz.video_path}}</td>
-                    <td>{{clazz.picture_path}}</td>
-                    <td>{{clazz.user_id}}</td>
-                    <td>{{clazz.type_id}}</td>
-                    <td>{{clazz.price}}</td>
+                    <td valign="center" align="center"><input v-bind:value="clazz.videoId" type="checkbox" name="ck" id="ck" onclick="ckClick()"></td>
+                    <td>{{clazz.videoName}}</td>
+                    <td>{{clazz.videoDescription}}</td>
+                    <td>{{clazz.videoTime}}</td>
+                    <td>{{clazz.videoUpdateTime}}</td>
+                    <td>{{clazz.videoClick}}</td>
+                    <td>{{clazz.videoPath}}</td>
+                    <td>{{clazz.videoPicturePath}}</td>
+                    <td>{{clazz.userId}}</td>
+                    <td>{{clazz.videoFirsttypeId}}</td>
+                    <td>{{clazz.videoSecondtypeId}}</td>
+                    <td>{{clazz.videoPrice}}</td>
                     <td>
-                        <button type="button" class="btn btn-info" v-on:click="edit(clazz.video_id)">编辑
+                        <button type="button" class="btn btn-info" v-on:click="edit(clazz.videoId)">编辑
                         </button>
-                        <button type="button" class="btn btn-warning" id="mydel" name="mydel" v-on:click="deleteSingle(clazz.video_id)">删除
+                        <button type="button" class="btn btn-warning" id="mydel" name="mydel" v-on:click="deleteSingle(clazz.videoId)">删除
                         </button>
                     </td>
                 </tr>
@@ -232,29 +259,29 @@
             <!--分页栏-->
             <!--需要分页的信息-->
             <div id="bottom" >
-                <div v-for="page in pages">
+                <div>
                     <nav aria-label="..." style="text-align:center;">
                         <ul class="pagination">
                             <li>
-                                <a aria-label="Previous" v-on:click="ajaxsplit(page.prePage)">
+                                <a aria-label="Previous" v-on:click="ajaxsplit(prePage)">
                                     <span aria-hidden="true">«</span>
                                 </a>
                             </li>
                             <li >
-                                <a v-for="index of len" v-bind:style="Mycolor(index,page.pageNum)" v-on:click="ajaxsplit(index)">
+                                <a v-for="index of pages" v-bind:style="Mycolor(index,pageNum)" v-on:click="ajaxsplit(index)">
                                     <span aria-hidden="true" >{{index}}</span>
                                 </a>
                             </li>
                             <li>
 
-                                <a name="next" href="#" aria-label="Next" v-on:click="ajaxsplit(page.nextPage)">
+                                <a name="next" href="#" aria-label="Next" v-on:click="ajaxsplit(nextPage)">
                                     <span aria-hidden="true" >»</span>
                                 </a>
                             </li>
-                            <li style=" margin-left:150px;color: #0e90d2;height: 35px; line-height: 35px;">总共&nbsp;&nbsp;&nbsp;{{page.totalPage}}<font
+                            <li style=" margin-left:150px;color: #0e90d2;height: 35px; line-height: 35px;">总共&nbsp;&nbsp;&nbsp;{{pages}}<font
                                     style="color:orange;"></font>&nbsp;&nbsp;&nbsp;页&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                                当前&nbsp;{{page.pageNum}}&nbsp;&nbsp;<font
+                                当前&nbsp;{{pageNum}}&nbsp;&nbsp;<font
                                         style="color:orange;"></font>&nbsp;&nbsp;&nbsp;页&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                             </li>
@@ -281,8 +308,10 @@
     let vm = new Vue({
         el: "#brall",
         data: {
-            len:0, //一次分页的总页数
-            pages:[],//一次分页的所有数据
+            pages:0,
+            pageNum:0,
+            prePage:0,
+            nextPage:0,
             clazzs: [],
             backgroundColor:"backgroundColor:#AEEBFF",
             backgroundColor2:"backgroundColor:white"
@@ -304,7 +333,7 @@
             //     }
             // })
             //获取分页信息
-            getPage()
+            // getPage()
 
         },
     })

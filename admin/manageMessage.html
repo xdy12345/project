@@ -37,11 +37,16 @@
     //获取留言信息
     let getMessage=function (){
         $.ajax({
-            url: "http://localhost:3000/message",
+            url: "http://localhost:8080/querryAll",
             type: "get",
             dataType: "json",
             success: function (req) {
-                vm.clazzs = req
+                vm.clazzs = req.list
+                vm.pages=req.pages
+                vm.pageNum=req.pageNum
+                vm.prePage=req.prePage
+                vm.nextPage=req.nextPage
+
             }
         })
     }
@@ -53,6 +58,7 @@
             dataType: "json",
             success: function (req) {
                 vm.pages = req
+                console.log(vm.pages)
                 //想办法获取总页数
                 console.log(req[0].totalPage)
                 // var s = JSON.stringify(req[0].totalPage)
@@ -72,38 +78,47 @@
         else{
             //发送ajax请求  jQuery的方式发送
             $.ajax({
-                url:"/prod/ajaxSplit.action",
+                url:"http://localhost:8080/ajaxSplit",
                 // data:{"page":page},
-                data:{"page":page},
+                data:{"pageNum":page},
                 type:"post",
                 dataType:"json",
                 success: function (req){
-
+                    alert("请求成功")
+                    vm.clazzs = req.list
+                    vm.pages=req.pages
+                    vm.pageNum=req.pageNum
+                    vm.prePage=req.prePage
+                    vm.nextPage=req.nextPage
                 },
                 error:function (){
                     alert("成功请求"+page)
-                    getMessage()
-                    getPage()
+
                 }
 
 
             });
         }
     }
+
     //单个删除操作
     let deleteSingle=function (pid){
         alert("删除按钮点击成功"+pid)
         //目标 单击删除按钮 触发ajax请求 先发送一个删除的请求 再发送一个查询的请求 展示界面
         $.ajax({
             // url:"/prod/delete.action?pid="+pid+"&pageNum"+pageNum,
-            url:"/prod/delete.action",
-            data:{"nowpid":pid},
+            url:"http://localhost:8080//deleteSingle",
+            data:{"commentId":pid},
             type:"post",
             dataType:"json",
-            success:function (){
+            success:function (req){
+                alert("删除成功")
                 //删除完毕之后重写获取数据 现在前端需要再次获取数据 有后端之后 无需再次请求 直接获取数据即可
-                getPage()
-                getClazz()
+                vm.clazzs = req.list
+                vm.pages=req.pages
+                vm.pageNum=req.pageNum
+                vm.prePage=req.prePage
+                vm.nextPage=req.nextPage
             },
             error:function (){
                 window.location.href="manageMessage.html";
@@ -115,58 +130,66 @@
         //得到所有选中复选框的对象,根据其长度判断是否有选中商品
         var input = $("input[name='ck']:checked")
         var pid=""
-        var str=""
+        var stringify=new Array();
+
         if (input.length==0){
             alert("请先勾选要删除的留言！")
         }else {
             $.each(input,function (){
                 pid=$(this).val()
                 if (pid!=null){
-                    str+=pid+","
+                    stringify.push(pid)
                 }
             })
-            alert("您确定要删除"+str+"条留言吗？")
+            console.log(stringify)
+            var stringify1 = stringify.toString();
+            alert("您确定要删除"+stringify+"条留言吗？")
             $.ajax({
-                url:"",
+                url:"http://localhost:8080//deleteAll",
                 type:"post",
                 dataType:"json",
-                data:{
-                    "Cids":str
+                data:{"stringify1":stringify1},
+                // data:{
+                //     "commentIds":[str]
+                // },
+                success:function (req){
+                        alert("删除成功")
+                    vm.clazzs = req.list
+                    vm.pages=req.pages
+                    vm.pageNum=req.pageNum
+                    vm.prePage=req.prePage
+                    vm.nextPage=req.nextPage
                 },
-                success:function (){
-
-                },
-                error: function (){
-                    alert(str)
-                    window.location.href="manageMessage.html"
+                error: function (req){
+                    alert(req)
+                    // window.location.href="manageMessage.html"
                 }
             })
         }
 
     }
-    //按照视频名搜索留言
+    //按照视频id名搜索留言
     function findMessage(e){
         //阻止表单提交事件 Ajax异步提交
         e.preventDefault()
         var val = $("input[name='Videoname']").val();
         alert(val)
         $.ajax({
-            url:"",
-            type:"get",
+            url:"http://localhost:8080//querryvideoId",
+            type:"post",
             dataType:"json",
-            data:{"Videoname":val},
-            success:function (){
-
+            data:{"Videoid":val},
+            success:function (req){
+                vm.clazzs = req.list
+                vm.pages=req.pages
+                vm.pageNum=req.pageNum
+                vm.prePage=req.prePage
+                vm.nextPage=req.nextPage
             },
             error:function (){
-                alert("查找成功！")
-                getMessage()
+                alert("查找失败")
             }
         })
-    }
-    //编辑按钮 需要带参数跳转
-    function edit(){
-        window.location.href="updateUser.html"
     }
 </script>
 <body>
@@ -199,13 +222,13 @@
                     <th>编辑</th>
                 </tr>
                 <tr v-for="clazz in clazzs">
-                    <td valign="center" align="center"><input v-bind:value="clazz.comment_id" type="checkbox" name="ck" id="ck" onclick="ckClick()"></td>
-                    <td>{{clazz.context}}</td>
-                    <td>{{clazz.user_name}}</td>
-                    <td>{{clazz.video_name}}</td>
-                    <td>{{clazz.load_time}}</td>
+                    <td valign="center" align="center"><input v-bind:value="clazz.commentId" type="checkbox" name="ck" id="ck" onclick="ckClick()"></td>
+                    <td>{{clazz.commentContext}}</td>
+                    <td>{{clazz.userId}}</td>
+                    <td>{{clazz.videoId}}</td>
+                    <td>{{clazz.commentUpdateTime}}</td>
                     <td>
-                        <button type="button" class="btn btn-warning" id="mydel" name="mydel" v-on:click="deleteSingle(clazz.comment_id)">删除
+                        <button type="button" class="btn btn-warning" id="mydel" name="mydel" v-on:click="deleteSingle(clazz.commentId)">删除
                         </button>
                     </td>
                 </tr>
@@ -213,29 +236,29 @@
             <!--分页栏-->
             <!--            需要分页的信息-->
             <div id="bottom" >
-                <div v-for="page in pages">
+                <div>
                     <nav aria-label="..." style="text-align:center;">
                         <ul class="pagination">
                             <li>
-                                <a aria-label="Previous" v-on:click="ajaxsplit(page.prePage)">
+                                <a aria-label="Previous" v-on:click="ajaxsplit(prePage)">
                                     <span aria-hidden="true">«</span>
                                 </a>
                             </li>
                             <li >
-                                <a v-for="index of len" v-bind:style="Mycolor(index,page.pageNum)" v-on:click="ajaxsplit(index)">
+                                <a v-for="index of pages" v-bind:style="Mycolor(index,pageNum)" v-on:click="ajaxsplit(index)">
                                     <span aria-hidden="true" >{{index}}</span>
                                 </a>
                             </li>
                             <li>
 
-                                <a name="next" href="#" aria-label="Next" v-on:click="ajaxsplit(page.nextPage)">
+                                <a name="next" href="#" aria-label="Next" v-on:click="ajaxsplit(nextPage)">
                                     <span aria-hidden="true" >»</span>
                                 </a>
                             </li>
-                            <li style=" margin-left:150px;color: #0e90d2;height: 35px; line-height: 35px;">总共&nbsp;&nbsp;&nbsp;{{page.totalPage}}<font
+                            <li style=" margin-left:150px;color: #0e90d2;height: 35px; line-height: 35px;">总共&nbsp;&nbsp;&nbsp;{{pages}}<font
                                     style="color:orange;"></font>&nbsp;&nbsp;&nbsp;页&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                                当前&nbsp;{{page.pageNum}}&nbsp;&nbsp;<font
+                                当前&nbsp;{{pageNum}}&nbsp;&nbsp;<font
                                         style="color:orange;"></font>&nbsp;&nbsp;&nbsp;页&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                             </li>
@@ -286,8 +309,10 @@
     let vm = new Vue({
         el: "#brall",
         data: {
-            len:0, //一次分页的总页数
-            pages:[],//一次分页的所有数据
+            pages:0, //一次分页的总页数
+            pageNum:0,
+            prePage:0,
+            nextPage:0,
             clazzs: [],
             backgroundColor:"backgroundColor:#AEEBFF",
             backgroundColor2:"backgroundColor:white"
@@ -295,8 +320,8 @@
         mounted: function () {
             //获取课程信息
             getMessage()
-            //获取分页信息
-            getPage()
+            // //获取分页信息
+            // getPage()
 
         },
     })

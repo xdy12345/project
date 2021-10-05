@@ -10,30 +10,6 @@
     <script type="text/javascript" src="js/bootstrap.js"></script>
     <script type="text/javascript" src="js/ajaxfileupload.js"></script>
 </head>
-<script type="text/javascript">
-    //表单验证 取决于列表存储的数据
-    function fileChange(){
-        $.ajaxFileUpload({
-            url:"/prod/ajaxImg.action",
-            secureuri: false,
-            fileElementId: 'pimage',
-            dataType:"json",
-            success:function (obj) {
-                //清空div
-                $("#imgDiv").empty();
-                //创建一个图片的标签
-                var imgObj = $("<img>");
-                alert(obj.imgurl);
-                imgObj.attr("src","/image_big/"+obj.imgurl);
-                imgObj.attr("width","100px");
-                imgObj.attr("height","100px");
-                //将图片追加到imgDiv
-                $("#imgDiv").append(imgObj);
-            }
-        });
-
-    }
-</script>
 <body>
 <!--取出上一个页面上带来的page的值-->
 <div id="addAll">

@@ -12,29 +12,6 @@
     <script type="text/javascript" src="js/bootstrap.js"></script>
     <script type="text/javascript" src="js/ajaxfileupload.js"></script>
 </head>
-<script type="text/javascript">
-    function fileChange() {
-        $.ajaxFileUpload({
-            url: "/prod/ajaxImg.action",
-            secureuri: false,
-            fileElementId: 'pimage',
-            dataType: "json",
-            success: function (obj) {
-                //清空div
-                $("#imgDiv").empty();
-                //创建一个图片的标签
-                var imgObj = $("<img>");
-                alert(obj.imgurl);
-                imgObj.attr("src", "/image_big/" + obj.imgurl);
-                imgObj.attr("width", "100px");
-                imgObj.attr("height", "100px");
-                //将图片追加到imgDiv
-                $("#imgDiv").append(imgObj);
-            }
-        });
-
-    }
-</script>
 <body>
 <!--取出上一个页面上带来的page的值-->
 
@@ -116,24 +93,25 @@
             state:"在线"
         },
         mounted:function (){
-            alert(sessionStorage.getItem("User_id"))
+            alert(sessionStorage.getItem("userId"))
+            var item = sessionStorage.getItem("userId");
             $.ajax({
-                url: "http://localhost:3000/editUser",
-                type: "get",
+                url: "http://localhost:8080//editUser",
+                type: "post",
                 //根据userid回显数据
-                data:{"User_id":User_id},
+                data:{"userId":item},
                 // data:{"vide_id":User_id},
                 dataType: "json",
                 success: function (req) {
                     //接收数据 数组
-                        vm.user_id=req[0].user_id
-                        vm.user_log_id=req[0].user_log_id
-                        vm.user_password=req[0].user_password
-                        vm.user_email=req[0].user_email
-                        vm.user_name=req[0].user_name
-                        vm.user_header=req[0].user_header
-                        vm.user_sex=req[0].user_sex
-                        vm.state=req[0].state
+                        vm.user_id=req.userId
+                        vm.user_log_id=req.userLogId
+                        vm.user_password=req.userPassword
+                        vm.user_email=req.userEmail
+                        vm.user_name=req.userName
+                        vm.user_header=req.userHeader
+                        vm.user_sex=req.userSex
+                        vm.state=req.state
                 }
             })
 
@@ -142,19 +120,27 @@
     //表单的异步提交
     function submitNo(e){
         e.preventDefault()
-        console.log(vm.cName)
         $.ajax({
-            url:"http://localhost:3000/updateUser",
+            url:"http://localhost:8080/updateUser",
             type: "post",
-            dataType:"json",
+            dataType:"text",
             data:{
                 // obj:{"cName":vm.cName,"cid":vm.cid,"cPrice":vm.cPrice,"cNo":vm.cNo}
-                obj:{"user_id":vm.user_id, "user_log_id":vm.user_log_id, "user_password":vm.user_password,
-                    "user_email":vm.user_email, "user_name":vm.user_name, "user_header":vm.user_header, "user_sex":vm.user_sex,
-                    "state":vm.state}
+                "userId":vm.user_id,
+                "userLogId":vm.user_log_id,
+                "userPassword":vm.user_password,
+                "userEmail":vm.user_email,
+                "userName":vm.user_name,
+                "userHeader":vm.user_header,
+                "userSex":vm.user_sex,
+                "state":vm.state
             },
             success:function (){
+                alert("成功")
                 window.location.href="manageUser.html"
+            },
+            error:function (){
+                alert("失败")
             }
         })
     }

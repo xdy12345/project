@@ -11,29 +11,6 @@
     <script type="text/javascript" src="js/bootstrap.js"></script>
     <script type="text/javascript" src="js/ajaxfileupload.js"></script>
 </head>
-<script type="text/javascript">
-    function fileChange() {
-        $.ajaxFileUpload({
-            url: "/prod/ajaxImg.action",
-            secureuri: false,
-            fileElementId: 'pimage',
-            dataType: "json",
-            success: function (obj) {
-                //清空div
-                $("#imgDiv").empty();
-                //创建一个图片的标签
-                var imgObj = $("<img>");
-                alert(obj.imgurl);
-                imgObj.attr("src", "/image_big/" + obj.imgurl);
-                imgObj.attr("width", "100px");
-                imgObj.attr("height", "100px");
-                //将图片追加到imgDiv
-                $("#imgDiv").append(imgObj);
-            }
-        });
-
-    }
-</script>
 <body>
 <div id="addAll">
     <div id="nav">
@@ -78,8 +55,12 @@
                     <td><input v-model="user_id" type="text" name="pPrice" class="two" v-bind:value="user_id"></td>
                 </tr>
                 <tr>
-                    <td class="one">所属类</td>
+                    <td class="one">类型1</td>
                     <td><input v-model="type_id" type="text" name="pPrice" class="two" v-bind:value="type_id"></td>
+                </tr>
+                <tr>
+                    <td class="one">类型2</td>
+                    <td><input v-model="type_id2" type="text" name="pPrice" class="two" v-bind:value="type_id2"></td>
                 </tr>
                 <tr>
                     <td class="one">价格</td>
@@ -121,32 +102,38 @@
             picture_path:"4399.com",
             user_id:98,
             type_id:34,
+            type_id2:0,
             price:"100元"
         },
         mounted:function (){
-            alert(sessionStorage.getItem("Class_id"))
+            var videoId = sessionStorage.getItem("videoId");
             $.ajax({
-                url: "http://localhost:3000/editClass",
-                type: "get",
+                url: "http://localhost:8080//edit",
+                type: "post",
                 //数据回显
-                // data:{"videp_id":Class_id},
+                data:{"videoId":videoId},
                 dataType: "json",
                 success: function (req) {
                     //接收数据 数组
-                        vm.video_id=req[0].video_id
-                        vm.video_name=req[0].video_name
-                        vm.description=req[0].description
-                        vm.time=req[0].time
-                        vm.load_time=req[0].load_time
-                        vm.click=req[0].click
-                        vm.video_path=req[0].video_path
-                        vm.picture_path=req[0].picture_path
-                        vm.user_id=req[0].user_id
-                        vm.type_id=req[0].type_id
-                        vm.price=req[0].price
-                        console.log(req[0].price)
+                        vm.video_id=req.videoId
+                        vm.video_name=req.videoName
+                        vm.description=req.videoDescription
+                        vm.time=req.videoTime
+                        vm.load_time=req.videoUpdateTime
+                        vm.click=req.videoClick
+                        vm.video_path=req.videoPath
+                        vm.picture_path=req.videoPicturePath
+                        vm.user_id=req.userId
+                        vm.type_id=req.videoFirsttypeId
+                        vm.price=req.videoPrice
+                        vm.type_id2=req.videoSecondtypeId
                         console.log(req)
+                },
+                error:function (req){
+                    alert("失败")
+                    console.log(req)
                 }
+
             })
 
         }
@@ -154,19 +141,38 @@
     //表单的异步提交
     function submitNo(e){
         e.preventDefault()
-        console.log(vm.cName)
+        // console.log(vm.cName)
+        // var video = new Object();
+        // var video={"videoId":vm.video_id,"videoName":vm.video_name,"videoDescription":vm.description,
+        //     "videoTime":vm.time,"videoUpdateTime":vm.load_time,"videoClick":vm.click,"videoPath":vm.video_path,"videoPicturePath":vm.picture_path,"userId":vm.user_id,
+        //     "videoFirstttypeId":vm.type_id,"videoPrice":vm.price
+        // }
+        // var s = JSON.stringify(video);
         $.ajax({
-            url:"http://localhost:3000/updateClass",
+            url:"http://localhost:8080/submit",
             type: "post",
-            dataType:"json",
+            dataType:"text",
             data:{
-                // obj:{"cName":vm.cName,"cid":vm.cid,"cPrice":vm.cPrice,"cNo":vm.cNo}
-                obj:{"video_id":vm.video_id,"video_name":vm.video_name,"description":vm.description,
-                    "time":vm.time,"load_time":vm.load_time,"click":vm.click,"video_path":vm.video_path,"picture_path":vm.picture_path,"user_id":vm.user_id,
-                    "type_id":vm.type_id,"cNo":vm.price
-                }
+                "videoId":vm.video_id,
+                "videoName":vm.video_name,
+                "videoDescription":vm.description,
+                 "videoTime":vm.time,
+                 "videoUpdateTime":vm.load_time,
+                 "videoClick":vm.click,
+                 "videoPath":vm.video_path,
+                 "videoPicturePath":vm.picture_path,
+                 "userId":vm.user_id,
+                 "videoFirsttypeId":vm.type_id,
+                 "videoPrice":vm.price,
+                 "videoSecondtypeId":vm.type_id2
+
             },
-            success:function (){
+            success:function (req){
+                alert(req)
+                window.location.href="manageClass.html"
+            },
+            error:function (req){
+                alert(req)
                 window.location.href="manageClass.html"
             }
         })
