@@ -127,9 +127,9 @@
             video_path:"baidu.com",
             picture_path:"4399.com",
             user_id:98,
-            type_id:34,
-            type_id2:0,
-            price:"100元"
+            type_id:2,
+            type_id2:5,
+            price:100
         },
         mounted:function (){
             //接受用户上传时的用户id
@@ -145,7 +145,7 @@
      $.ajax({
          url:"http://localhost:8080//addVideo",
          type: "post",
-         dataType:"json",
+         dataType:"text",
          data:{
              "videoId":vm.video_id,
              "videoName":vm.video_name,
@@ -161,8 +161,8 @@
              "videoSecondtypeId":vm.type_id2
          },
          success:function (){
-             alert("成功")
-             // window.location.href="manageClass.html"
+             // alert("成功")
+             window.location.href="manageClass.html"
          },
          error:function (req){
              alert("失败")

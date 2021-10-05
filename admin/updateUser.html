@@ -93,7 +93,7 @@
             state:"在线"
         },
         mounted:function (){
-            alert(sessionStorage.getItem("userId"))
+            // alert(sessionStorage.getItem("userId"))
             var item = sessionStorage.getItem("userId");
             $.ajax({
                 url: "http://localhost:8080//editUser",
@@ -136,7 +136,7 @@
                 "state":vm.state
             },
             success:function (){
-                alert("成功")
+                // alert("成功")
                 window.location.href="manageUser.html"
             },
             error:function (){

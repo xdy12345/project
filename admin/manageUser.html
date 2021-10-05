@@ -93,7 +93,7 @@
                     vm.nextPage=req.nextPage
                 },
                 error:function (){
-                    alert("成功请求"+page)
+                    alert("失败")
                     // getUser()
                     // getPage()
                 }
@@ -104,7 +104,8 @@
     }
     //单个删除操作
     let deleteSingle=function (pid){
-        alert("删除按钮点击成功"+pid)
+        // alert("删除按钮点击成功"+pid)
+        alert("删除成功！")
         //目标 单击删除按钮 触发ajax请求 先发送一个删除的请求 再发送一个查询的请求 展示界面
         $.ajax({
             // url:"/prod/delete.action?pid="+pid+"&pageNum"+pageNum,
@@ -132,7 +133,7 @@
             alert("请先勾选要删除的课程！")
         }else {
             $.each(input,function (){
-                alert(input.val())
+                // alert(input.val())
                 pid=$(this).val()
                 if (pid!=null){
                     str.push(pid)
@@ -155,8 +156,7 @@
                     vm.nextPage=req.nextPage
                 },
                 error: function (){
-                    alert(str)
-                    window.location.href="manageClass.html"
+                    alert("失败")
                 }
             })
         }
@@ -166,7 +166,7 @@
         //阻止表单提交事件 Ajax异步提交
         e.preventDefault()
         var val = $("input[name='Username']").val();
-        alert(val)
+        // alert(val)
         $.ajax({
             url:"http://localhost:8080/selectByuserName",
             type:"post",
@@ -180,7 +180,7 @@
                 vm.nextPage=req.nextPage
             },
             error:function (){
-                alert("查找成功！")
+                alert("查找失败！")
             }
         })
     }
@@ -189,7 +189,7 @@
         //和updateUser使用一个全局变量 manage负责修改 update负责读取
         sessionStorage.setItem("userId",userid)
         User_id=userid;
-        alert(User_id)
+        // alert(User_id)
         window.location.href="updateUser.html"
     }
 </script>
@@ -280,30 +280,7 @@
     </div>
 </div>
 </body>
-<script type="text/javascript">
-    // //单个删除的jquery实现
-    // $("button[name='mydel']").click(function () {
-    //     alert("确定删除吗？");
-    //     $(this).parent().parent("tr").remove();
-    // });
-    // //批量删除
-    // $("input[name='delall']").click(function () {
-    //     var list = $("input[name='ck']:checked");
-    //     console.log(list)
-    //     //console.log($("input[name='ck']:checked").parent().parent().remove());
-    //     if (list.length > 0) {
-    //         list.each(function () {
-    //             // console.log(list)
-    //             console.log($(this).parent().parent("tr").remove());
-    //
-    //         })
-    //     } else {
-    //         alert("请选择要删除的数据")
-    //     }
-    // });
 
-
-</script>
 <script >
     //当前页加深
     function Mycolor(i,b){

@@ -43,11 +43,11 @@
                     <td><input v-model="click" type="text" name="pPrice" class="two" v-bind:value="click"></td>
                 </tr>
                 <tr>
-                    <td class="one">视频存放路径</td>
+                    <td class="one">视频路径</td>
                     <td><input v-model="video_path" type="text" name="pPrice" class="two" v-bind:value="video_path"></td>
                 </tr>
                 <tr>
-                    <td class="one">封面存放路径</td>
+                    <td class="one">封面路径</td>
                     <td><input v-model="picture_path" type="text" name="pPrice" class="two" v-bind:value="picture_path"></td>
                 </tr>
                 <tr>
@@ -130,7 +130,7 @@
                         console.log(req)
                 },
                 error:function (req){
-                    alert("失败")
+                    // alert("失败")
                     console.log(req)
                 }
 
@@ -141,13 +141,6 @@
     //表单的异步提交
     function submitNo(e){
         e.preventDefault()
-        // console.log(vm.cName)
-        // var video = new Object();
-        // var video={"videoId":vm.video_id,"videoName":vm.video_name,"videoDescription":vm.description,
-        //     "videoTime":vm.time,"videoUpdateTime":vm.load_time,"videoClick":vm.click,"videoPath":vm.video_path,"videoPicturePath":vm.picture_path,"userId":vm.user_id,
-        //     "videoFirstttypeId":vm.type_id,"videoPrice":vm.price
-        // }
-        // var s = JSON.stringify(video);
         $.ajax({
             url:"http://localhost:8080/submit",
             type: "post",
@@ -164,15 +157,14 @@
                  "userId":vm.user_id,
                  "videoFirsttypeId":vm.type_id,
                  "videoPrice":vm.price,
-                 "videoSecondtypeId":vm.type_id2
-
+                 "videoSecondtypeId":vm.type_id2,
             },
             success:function (req){
-                alert(req)
+                // alert(req)
                 window.location.href="manageClass.html"
             },
             error:function (req){
-                alert(req)
+                // alert(req)
                 window.location.href="manageClass.html"
             }
         })

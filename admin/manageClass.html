@@ -37,9 +37,14 @@
     }
     //获取课程信息
     let getClazz=function (){
+        var pageNum=sessionStorage.getItem("pageNum");
+        if (pageNum==null){
+            pageNum=1
+        }
         $.ajax({
-            url: "http://localhost:8080/getClass",
+            url: "http://localhost:8080/ajaxSplitVideo",
             type: "post",
+            data: {"pageNum":pageNum},
             dataType: "json",
             success: function (req) {
                 vm.clazzs = req.list
@@ -84,7 +89,7 @@
                 dataType:"json",
                 success: function (req){
                     console.log(req)
-                    alert("成功")
+                    // alert("成功")
                     vm.clazzs = req.list
                     vm.pages=req.pages
                     vm.pageNum=req.pageNum
@@ -102,7 +107,8 @@
     }
     //单个删除操作
     let deleteSingle=function (pid){
-        alert("删除按钮点击成功"+pid)
+        alert("删除成功！")
+        // alert("删除按钮点击成功"+pid)
         //目标 单击删除按钮 触发ajax请求 先发送一个删除的请求 再发送一个查询的请求 展示界面
         $.ajax({
             // url:"/prod/delete.action?pid="+pid+"&pageNum"+pageNum,
@@ -164,7 +170,7 @@
         //阻止表单提交事件 Ajax异步提交
         e.preventDefault()
         var val = $("input[name='ClassName']").val();
-        alert(val)
+        // alert(val)
         $.ajax({
             url:"http://localhost:8080//selectByname",
             type:"post",
@@ -184,9 +190,10 @@
         })
     }
     //编辑按钮需要带参数跳转
-    function edit(video_id){
+    function edit(video_id,pageNum){
 
         sessionStorage.setItem("videoId",video_id)
+        sessionStorage.setItem("pageNum",pageNum)
         // Class_id=video_id
 
         // Class_id=video_id
@@ -249,7 +256,7 @@
                     <td>{{clazz.videoSecondtypeId}}</td>
                     <td>{{clazz.videoPrice}}</td>
                     <td>
-                        <button type="button" class="btn btn-info" v-on:click="edit(clazz.videoId)">编辑
+                        <button type="button" class="btn btn-info" v-on:click="edit(clazz.videoId,pageNum)">编辑
                         </button>
                         <button type="button" class="btn btn-warning" id="mydel" name="mydel" v-on:click="deleteSingle(clazz.videoId)">删除
                         </button>

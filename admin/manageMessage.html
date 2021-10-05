@@ -103,7 +103,8 @@
 
     //单个删除操作
     let deleteSingle=function (pid){
-        alert("删除按钮点击成功"+pid)
+        // alert("删除按钮点击成功"+pid)
+        alert("删除成功！")
         //目标 单击删除按钮 触发ajax请求 先发送一个删除的请求 再发送一个查询的请求 展示界面
         $.ajax({
             // url:"/prod/delete.action?pid="+pid+"&pageNum"+pageNum,
@@ -112,7 +113,7 @@
             type:"post",
             dataType:"json",
             success:function (req){
-                alert("删除成功")
+                // alert("删除成功")
                 //删除完毕之后重写获取数据 现在前端需要再次获取数据 有后端之后 无需再次请求 直接获取数据即可
                 vm.clazzs = req.list
                 vm.pages=req.pages
@@ -153,7 +154,7 @@
                 //     "commentIds":[str]
                 // },
                 success:function (req){
-                        alert("删除成功")
+                        // alert("删除成功")
                     vm.clazzs = req.list
                     vm.pages=req.pages
                     vm.pageNum=req.pageNum
@@ -173,7 +174,7 @@
         //阻止表单提交事件 Ajax异步提交
         e.preventDefault()
         var val = $("input[name='Videoname']").val();
-        alert(val)
+        // alert(val)
         $.ajax({
             url:"http://localhost:8080//querryvideoId",
             type:"post",
@@ -199,7 +200,7 @@
     </div>
     <div id="condition" style="text-align: center">
         <form id="myform" onsubmit="findMessage(event)">
-            视频名称：<input name="Videoname" id="pname">&nbsp;&nbsp;&nbsp;
+            视频Id：<input name="Videoname" id="pname">&nbsp;&nbsp;&nbsp;
             <input type="submit" value="查找">
         </form>
     </div>
