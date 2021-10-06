@@ -34,10 +34,10 @@
                     <td class="one">时长</td>
                     <td><input v-model="time" type="text" name="pPrice" class="two" v-bind:value="time"></td>
                 </tr>
-                <tr>
-                    <td class="one">上传时间</td>
-                    <td><input v-model="load_time" type="textr" name="pPrice" class="two" v-bind:value="load_time"></td>
-                </tr>
+<!--                <tr>-->
+<!--                    <td class="one">上传时间</td>-->
+<!--                    <td><input v-model="load_time" type="textr" name="pPrice" class="two" v-bind:value="load_time"></td>-->
+<!--                </tr>-->
                 <tr>
                     <td class="one">点击量</td>
                     <td><input v-model="click" type="text" name="pPrice" class="two" v-bind:value="click"></td>
@@ -150,7 +150,7 @@
                 "videoName":vm.video_name,
                 "videoDescription":vm.description,
                  "videoTime":vm.time,
-                 "videoUpdateTime":vm.load_time,
+                 // "videoUpdateTime":vm.load_time,
                  "videoClick":vm.click,
                  "videoPath":vm.video_path,
                  "videoPicturePath":vm.picture_path,

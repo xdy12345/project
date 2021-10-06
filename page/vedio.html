@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../css/bootstrap.css" rel="stylesheet"/>
+    <link href="../css/vedio.css" rel="stylesheet"/>
+    <link href="../css/header.css" rel="stylesheet"/>
+    <link href="../css/footer.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../css/login.css">
+    <script src="../js/jquery-3.3.1.js"></script>
+    <script src="../js/vue.js"></script>
+    <script src="../js/url.js"></script>
+</head>
+<body>
+
+<!--页面的大盒子-->
+<div class="es-wrap" id="es-wrap">
+
+    <header class="header">
+        <div class="relative h-con">
+            <div class="logo-con absolute">
+                <a href="#" class="logo relative" id="logo">
+                    <img src="../img/logo-green1.png">
+                </a>
+            </div>
+            <div class="slogan">
+                <div class="slogan-t"></div>
+                <div class="slogan-t"></div>
+            </div>
+            <div class="header-search">
+                <form action="#" method="get" id="searchForm">
+                    <div class="header-search-input-wrap">
+                        <input type="text" class="js-header-search header-search-input" placeholder="搜索课程" value="" name="q">
+                        <span class="header-search-icon"></span>
+                    </div>
+                </form>
+            </div>
+
+            <div class="main-width relative main-width-q">
+                <nav class="float-right">
+                    <ul class="nav-list">
+                        <li><a href="home.html" class="active">首页</a></li>
+                        <li class="relative">
+                            <a class=" nav-course" href="course1.html">全部课程</a>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="q-btn-con bg-icon" onclick="headerToggle()"></div>
+
+                <!--登录后显示-->
+                <div class="login-after absolute">
+                    <p style="right: -70px; color: #7d7f7f; top: -15px; height: 60px; padding-top: 20px;  text-align: center;">
+                        <span></span>
+                        <a href="login.html">登录</a>
+                        <span>/</span>
+                        <a href="register.html">注册</a>
+                    </p>
+                </div>
+                <!--end 登录后-->
+
+            </div>
+        </div>
+    </header>
+    <div class="body" id="body">
+<!--        视频播放-->
+        <div class="left">
+            <div class="title" id="title">
+                {{description}}
+            </div>
+            <video class="player" controls name="video" id="video">
+                <source src="video//bird.mp4" type="video/mp4" id="source">
+            </video>
+        </div>
+<!--        右侧推荐栏-->
+        <div class="right" id="right">
+            <div class="recommend-list">
+                <div class="recom-title">相关推荐</div>
+                <ul class="recom-list" id="classinformation" v-for="classs in clazzs">
+                    <li>
+                        <div class="common-img">
+<!--                            <img v-bind:src="picture" v-model="picture">-->
+                            <img v-bind:src="classs.videoPicturePath">
+                        </div>
+                        <div class="small-titie">
+                            <a class="small-title" v-bind:href="['crouse.html?Param_video_id='+classs.videoId]" target="_blank" >{{classs.videoName}}</a>
+                        </div>
+                        <div class="intro">
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+<!--        评论区-->
+        <div class="comment-send">
+            <h3 class="h3"> 发表评价</h3>
+            <textarea id="commentSend" rows="5" class="form-control" style="margin: 0px 20px 0px 25px; width: 804px; height: 71px;"></textarea>
+            <button id="submit" class="comment-send-button"  onclick="sendComment()">发表评论</button>
+        </div>
+
+        <div class="comment-list" id="commentList" v-for="comment in comments">
+            <div class="comment comment-top">
+                <span class="comment-avatar">
+                    <img src="../images/course1-04.png" alt="avatar">
+                </span>
+                <div class="comment-content" >
+                    <p class="comment-content-name">{{comment.userId}}</p>
+                    <p class="comment-content-article">{{comment.commentContext}}</p>
+                    <p class="comment-content-footer">
+                        <span class="comment-content-footer-timestamp">{{comment.commentUpdateTime}}</span>
+                    </p>
+                </div>
+                <div class="cls"></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!--底部盒子-->
+<div class="sgg_bot">
+    <div class="sgg_bot1">
+        <div class="sgg_bot1topbig">
+            <div class="sgg_bot1top">
+                <div class="sgg_bottopimg"><img src="../img/bot1.png" />业界大牛亲自授课</div>
+                <div class="sgg_bottopimg"><img src="../img/bot2.png" />前沿技术实时更新</div>
+                <div class="sgg_bottopimg sgg_bottopimg3"><img src="../img/bot3.png" />足不出户学编程</div>
+            </div>
+        </div>
+        <div class="sgg_botcenter">
+            <div class="sgg_botleft">
+                <ul>
+                    <li><b>新手入门</b></li>
+                    <li><a href="register.html">新用户注册</a></li>
+                    <li><a href="login.html">用户登录</a></li>
+                    <li><a href="#">找回密码</a></li>
+                </ul>
+                <ul>
+                    <li><b>关于我们</b></li>
+                    <li><a href="#" target="_blank">名师团队</a></li>
+                    <li><a href="#" target="_blank">视频下载</a></li>
+                    <li><a href="#" target="_blank">合作企业</a></li>
+                </ul>
+                <ul>
+                    <li><b>联系我们</b></li>
+                    <li><a href="#" target="_blank">工作机会</a></li>
+                    <li><a href="#" target="_blank">招贤纳师</a></li>
+                    <li><a href="#" target="_blank">联系方式</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="sgg_botbotbg">
+    <div class="sgg_botbot">
+
+    </div>
+</div>
+
+
+</div>
+
+</body>
+<script>
+
+    let vm = new Vue({
+        el:"#es-wrap",
+        data:{
+            description:"java零基础",
+            source:"",
+            // picture:'../img/bot1.png',
+            rightDescription:"123",
+            clazzs:[],
+            comments:[],
+
+        },
+        mounted:function (){
+
+            //获取上个页面传递过来的视频Id
+            let req = GetRequest();
+            let videoId=req['videoId'];
+            //ajax请求数据渲染页面
+            $.ajax({
+                url:"http://localhost:8080/showVideo",
+                type:"post",
+                data: {"videoId":23},
+                dataType:"json",
+                success:function (req){
+                    alert("成功")
+                    let element=$(`<div><video class="player" controls name="video" id="video">
+                <source src="${req.videoPath.substring(1,req.videoPath.length-1)}" type="video/mp4" id="source">
+            </video></div>`)
+                    vm.source=req.videoPath.substring(1,req.videoPath.length-1)
+                    $("#video").remove()
+                    $("#title").append(element)
+                },
+                error:function (){
+                    alert("失败")
+                }
+
+            })
+            $.ajax({
+                url:"http://localhost:8080//recommend",
+                type: "post",
+                dataType: "json",
+                success:function (req){
+                    vm.clazzs=req.list
+                    console.log(req)
+                    alert("成功")
+                },
+                error:function (){
+                    alert("失败")
+                }
+            })
+            $.ajax({
+                url:"http://localhost:8080//CommentShow",
+                type:"post",
+                data:{
+                    "videoId":23
+                },
+                dataType:"json",
+                success:function (req){
+                    vm.comments=req.list
+                }
+            })
+        }
+    })
+
+    //发表评论
+    function sendComment(){
+        var comment = $("#commentSend").val()
+        var date = new Date()
+        var hours = date.getHours()
+        var minutes = date.getMinutes()
+        var seconds = date.getSeconds()
+        var commentUpdateTime=hours+":"+minutes+":"+seconds
+        alert(commentUpdateTime)
+        //获取上个页面传递过来的视频Id
+        // let req = GetRequest();
+        // let videoId=req['videoId'];
+        $.ajax({
+            url:"http://localhost:8080//commentSubmit",
+            type:"post",
+            data: {
+                "commentContext": comment,
+                "videoId":23,
+                "userId":5,
+            },
+            dataType:"json",
+            success:function (req){
+                //成功的话回调评论 本次请求的返回值是评论列表
+                vm.comments=req.list
+            },
+            error:function (){
+                alert("失败")
+            }
+
+        })
+    }
+</script>
+</html>
